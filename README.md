@@ -6,10 +6,10 @@ O software consiste em um sistema desktop que contém alguns CRUDs como: de clie
 
 ##Desenvolvedores
 ***
-..*Anderson Sergio Oyama
+  * Anderson Sergio Oyama
 
-..*Chen Po Hsiang		
+  * Chen Po Hsiang		
 
-..*Juliano Cézar Chagas Tavares
+  * Juliano Cézar Chagas Tavares
 
-..*Rafael Cortez Sanches		
+  * Rafael Cortez Sanches		
