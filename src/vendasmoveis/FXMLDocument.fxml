@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="242.0" prefWidth="345.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vendasmoveis.FXMLDocumentController">
+   <children>
+      <TextField fx:id="textFieldLogin" layoutX="17.0" layoutY="122.0" onAction="#apagarLogin" onMouseClicked="#apagarLogin" prefHeight="25.0" prefWidth="314.0" text="Login" />
+      <TextField fx:id="textFieldSenha" layoutX="17.0" layoutY="162.0" onAction="#apagarSenha" prefHeight="25.0" prefWidth="314.0" text="Senha" />
+      <Button fx:id="buttonLogar" layoutX="284.0" layoutY="206.0" mnemonicParsing="false" onAction="#logarAction" text="Logar" />
+      <Button fx:id="buttonCancelar" layoutX="17.0" layoutY="206.0" mnemonicParsing="false" onAction="#cancelarAction" text="Cancelar" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="79.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+         <image>
+            <Image url="@../../imagens/redebras-topo.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="buttonFrequencia" layoutX="115.0" layoutY="206.0" mnemonicParsing="false" text="Consultar Frequencia" />
+      <Label fx:id="label" layoutX="-55.0" layoutY="-163.0" text="" />
+   </children>
+</AnchorPane>

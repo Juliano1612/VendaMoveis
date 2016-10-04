@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/09/2016 15:49:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Controle.Parcela" table="Parcela" catalog="Vendas" optimistic-lock="version">
+        <id name="parcelaId" type="string">
+            <column name="parcela_ID" length="60" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="vendas" class="Controle.Vendas" fetch="select">
+            <column name="venda_ID" length="60" />
+        </many-to-one>
+        <property name="parcela" type="java.lang.Integer">
+            <column name="parcela" />
+        </property>
+        <property name="parcelaPaga" type="java.lang.Integer">
+            <column name="parcela_paga" />
+        </property>
+        <property name="valorTotal" type="java.lang.Float">
+            <column name="valor_total" precision="12" scale="0" />
+        </property>
+        <property name="totalPago" type="java.lang.Float">
+            <column name="total_pago" precision="12" scale="0" />
+        </property>
+        <property name="juros" type="java.lang.Float">
+            <column name="juros" precision="12" scale="0" />
+        </property>
+        <property name="dataParcela" type="date">
+            <column name="data_parcela" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>
