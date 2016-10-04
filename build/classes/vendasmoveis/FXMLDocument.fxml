@@ -13,7 +13,7 @@
       <TextField fx:id="textFieldSenha" layoutX="17.0" layoutY="162.0" onAction="#apagarSenha" prefHeight="25.0" prefWidth="314.0" text="Senha" />
       <Button fx:id="buttonLogar" layoutX="284.0" layoutY="206.0" mnemonicParsing="false" onAction="#logarAction" text="Logar" />
       <Button fx:id="buttonCancelar" layoutX="17.0" layoutY="206.0" mnemonicParsing="false" onAction="#cancelarAction" text="Cancelar" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="79.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="79.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" smooth="false">
          <image>
             <Image url="@../../imagens/redebras-topo.jpg" />
          </image>

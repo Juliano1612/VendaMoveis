@@ -7,6 +7,7 @@ package vendasmoveis;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,10 +29,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void logarAction(ActionEvent event) {
         System.out.println("O botão Logar foi acionado");
+
     }
     @FXML
     void cancelarAction(ActionEvent event){
-        System.out.println("Cancelar foi executado");
+        Platform.exit();
     }
     @FXML
     void apagarLogin(ActionEvent event){
