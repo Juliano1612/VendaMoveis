@@ -1,5 +1,5 @@
 package Controle;
-// Generated 30/09/2016 15:49:28 by Hibernate Tools 4.3.1
+// Generated 07/10/2016 17:26:32 by Hibernate Tools 4.3.1
 
 
 

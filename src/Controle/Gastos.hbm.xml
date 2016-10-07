@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07/10/2016 17:26:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Controle.Gastos" table="Gastos" catalog="Vendas" optimistic-lock="version">
+        <id name="idGasto" type="string">
+            <column name="idGasto" length="60" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomeGasto" type="string">
+            <column name="nomeGasto" length="60" />
+        </property>
+        <property name="valor" type="java.lang.Float">
+            <column name="valor" precision="12" scale="0" />
+        </property>
+        <property name="data" type="string">
+            <column name="data" length="6" />
+        </property>
+    </class>
+</hibernate-mapping>
