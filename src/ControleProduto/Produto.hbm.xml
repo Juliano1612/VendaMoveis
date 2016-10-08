@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07/10/2016 23:55:48 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="Vendas" name="Controle.Produto" optimistic-lock="version" table="Produto">
+    <id name="prodId" type="string">
+      <column length="60" name="prod_ID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nomeProd" type="string">
+      <column length="80" name="Nome_prod" not-null="true"/>
+    </property>
+    <property name="quantidadeEstoque" type="int">
+      <column name="Quantidade_estoque" not-null="true"/>
+    </property>
+    <property name="descricao" type="string">
+      <column name="Descricao"/>
+    </property>
+    <property name="precoVenda" type="java.lang.Float">
+      <column name="preco_venda" precision="12" scale="0"/>
+    </property>
+    <property name="precoCusto" type="java.lang.Float">
+      <column name="preco_custo" precision="12" scale="0"/>
+    </property>
+    <property name="altura" type="java.lang.Float">
+      <column name="altura" precision="12" scale="0"/>
+    </property>
+    <property name="largura" type="java.lang.Float">
+      <column name="largura" precision="12" scale="0"/>
+    </property>
+    <property name="profundidade" type="java.lang.Float">
+      <column name="profundidade" precision="12" scale="0"/>
+    </property>
+    <property name="marca" type="string">
+      <column length="45" name="marca"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="prodVendas" table="Prod_Venda">
+      <key>
+        <column length="60" name="prod_ID"/>
+      </key>
+      <one-to-many class="Controle.ProdVenda"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="pedidoEstoques" table="PedidoEstoque">
+      <key>
+        <column length="60" name="prod_ID"/>
+      </key>
+      <one-to-many class="ControleEstoque.PedidoEstoque"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="imagemProdutos" table="Imagem_Produto">
+      <key>
+        <column length="60" name="prod_ID"/>
+      </key>
+      <one-to-many class="Controle.ImagemProduto"/>
+    </set>
+  </class>
+</hibernate-mapping>
