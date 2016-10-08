@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: rgb(219,219,219, 1.0);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="TelaGerente.FXMLGrudProdutoController">
+   <children>
+      <TabPane layoutY="14.0" prefHeight="600.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Cadastrar">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="TextFieldIdProduto" editable="false" layoutX="529.0" layoutY="22.0" />
+                        <Text layoutX="428.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID do produto:">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="428.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do produto:">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="TextFieldNomeProduto" layoutX="563.0" layoutY="58.0" prefHeight="25.0" prefWidth="417.0" />
+                        <Text layoutX="428.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marca:">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="TextFieldMarcaProduto" layoutX="482.0" layoutY="91.0" />
+                        <Text layoutX="646.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantidade:">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="TextFieldQuantidadeProduto" layoutX="740.0" layoutY="90.0" />
+                        <TextArea fx:id="TextAreaDescricaoCadastro" layoutX="14.0" layoutY="317.0" prefHeight="200.0" prefWidth="973.0" />
+                        <Text layoutX="14.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição:">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Text>
+                        <Pagination layoutX="14.0" layoutY="14.0" maxPageIndicatorCount="15" prefHeight="250.0" prefWidth="400.0" style="-fx-background-image: teste;">
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </Pagination>
+                        <Button layoutX="14.0" layoutY="252.0" mnemonicParsing="false" text="Carregar Imagem" />
+                        <Button fx:id="ButtonSalvarProduto" layoutX="935.0" layoutY="530.0" mnemonicParsing="false" onAction="#ButtonActionSalvar" text="Salvar" />
+                        <Button fx:id="ButtonCancelarCadastroProduto" layoutX="858.0" layoutY="530.0" mnemonicParsing="false" onAction="#ButtonActionCancelarProdutoCadastro" text="Cancelar" />
+                        <TextField fx:id="TextFieldPrecodeCusto" layoutX="548.0" layoutY="126.0" />
+                        <Text layoutX="428.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço de custo:">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="707.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço de venda:">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="TextFieldPrecodeVenda" layoutX="824.0" layoutY="125.0" />
+                        <Text layoutX="428.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Largura:">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="TextFieldLarguraProdutoCadastro" alignment="BASELINE_RIGHT" layoutX="490.0" layoutY="159.0" minWidth="10.0" prefHeight="25.0" prefWidth="89.0" />
+                        <Text layoutX="586.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Altura:">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="FieldTextAlturaProdutoCadastro" layoutX="638.0" layoutY="159.0" prefHeight="25.0" prefWidth="115.0" />
+                        <TextField fx:id="FieldTextProfundidadeProdutoCadastro1" layoutX="867.0" layoutY="158.0" prefHeight="25.0" prefWidth="120.0" />
+                        <Text layoutX="761.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profundidade:">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Consultar">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

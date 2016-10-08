@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07/10/2016 22:36:48 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Controle.Faltas" table="Faltas" catalog="Vendas" optimistic-lock="version">
+        <id name="idFaltas" type="string">
+            <column name="idFaltas" length="60" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="funcionario" class="Controle.Funcionario" fetch="select">
+            <column name="id_func" length="60" />
+        </many-to-one>
+        <property name="justificativaFlag" type="java.lang.Integer">
+            <column name="justificativaFlag" />
+        </property>
+        <property name="justificativatextual" type="string">
+            <column name="justificativatextual" length="60" />
+        </property>
+        <property name="datafalta" type="date">
+            <column name="datafalta" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>
