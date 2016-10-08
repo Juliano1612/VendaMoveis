@@ -1,5 +1,5 @@
 package Controle;
-// Generated 30/09/2016 15:49:28 by Hibernate Tools 4.3.1
+// Generated 07/10/2016 23:11:34 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -33,6 +33,7 @@ public class Funcionario  implements java.io.Serializable {
      private String telefone;
      private Integer status;
      private Set vendases = new HashSet(0);
+     private Set faltases = new HashSet(0);
      private Set acessos = new HashSet(0);
 
     public Funcionario() {
@@ -45,7 +46,7 @@ public class Funcionario  implements java.io.Serializable {
         this.cpf = cpf;
         this.endereco = endereco;
     }
-    public Funcionario(String idFunc, String nome, String cpf, String rg, Date dataNascimento, String estadoCivil, String nomeConjuge, String endereco, String numero, String complemento, String cidade, String estado, String cargo, Date dataContratacao, Integer nivelAcesso, String sexo, String bairro, String cep, String telefone, Integer status, Set vendases, Set acessos) {
+    public Funcionario(String idFunc, String nome, String cpf, String rg, Date dataNascimento, String estadoCivil, String nomeConjuge, String endereco, String numero, String complemento, String cidade, String estado, String cargo, Date dataContratacao, Integer nivelAcesso, String sexo, String bairro, String cep, String telefone, Integer status, Set vendases, Set faltases, Set acessos) {
        this.idFunc = idFunc;
        this.nome = nome;
        this.cpf = cpf;
@@ -67,6 +68,7 @@ public class Funcionario  implements java.io.Serializable {
        this.telefone = telefone;
        this.status = status;
        this.vendases = vendases;
+       this.faltases = faltases;
        this.acessos = acessos;
     }
    
@@ -216,6 +218,13 @@ public class Funcionario  implements java.io.Serializable {
     
     public void setVendases(Set vendases) {
         this.vendases = vendases;
+    }
+    public Set getFaltases() {
+        return this.faltases;
+    }
+    
+    public void setFaltases(Set faltases) {
+        this.faltases = faltases;
     }
     public Set getAcessos() {
         return this.acessos;

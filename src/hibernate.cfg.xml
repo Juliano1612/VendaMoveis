@@ -9,12 +9,15 @@
     <property name="hibernate.connection.password">sistema975</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <mapping resource="Controle/Cliente.hbm.xml"/>
-    <mapping resource="Controle/Acesso.hbm.xml"/>
-    <mapping resource="Controle/Funcionario.hbm.xml"/>
-    <mapping resource="Controle/ProdVenda.hbm.xml"/>
-    <mapping resource="Controle/ImagemProduto.hbm.xml"/>
-    <mapping resource="Controle/Parcela.hbm.xml"/>
+    <mapping resource="Controle/Faltas.hbm.xml"/>
     <mapping resource="Controle/Vendas.hbm.xml"/>
     <mapping resource="Controle/Produto.hbm.xml"/>
+    <mapping resource="Controle/Gastos.hbm.xml"/>
+    <mapping resource="Controle/Acesso.hbm.xml"/>
+    <mapping resource="Controle/Parcela.hbm.xml"/>
+    <mapping resource="Controle/PedidoEstoque.hbm.xml"/>
+    <mapping resource="Controle/ProdVenda.hbm.xml"/>
+    <mapping resource="Controle/Funcionario.hbm.xml"/>
+    <mapping resource="Controle/ImagemProduto.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

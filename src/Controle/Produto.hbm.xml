@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 30/09/2016 15:49:29 by Hibernate Tools 4.3.1 -->
+<!-- Generated 07/10/2016 23:11:35 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Controle.Produto" table="Produto" catalog="Vendas" optimistic-lock="version">
         <id name="prodId" type="string">
@@ -40,6 +40,12 @@
                 <column name="prod_ID" length="60" />
             </key>
             <one-to-many class="Controle.ProdVenda" />
+        </set>
+        <set name="pedidoEstoques" table="PedidoEstoque" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="prod_ID" length="60" />
+            </key>
+            <one-to-many class="Controle.PedidoEstoque" />
         </set>
         <set name="imagemProdutos" table="Imagem_Produto" inverse="true" lazy="true" fetch="select">
             <key>
