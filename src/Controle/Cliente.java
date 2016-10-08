@@ -1,5 +1,5 @@
 package Controle;
-// Generated 07/10/2016 22:36:47 by Hibernate Tools 4.3.1
+// Generated 07/10/2016 23:11:34 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
