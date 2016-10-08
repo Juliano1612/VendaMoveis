@@ -1,5 +1,8 @@
-package Controle;
+package ControleDeAcesso;
 // Generated 07/10/2016 23:11:34 by Hibernate Tools 4.3.1
+
+import Controle.Funcionario;
+
 
 
 

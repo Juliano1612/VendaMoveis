@@ -13,7 +13,7 @@
     <mapping resource="Controle/Vendas.hbm.xml"/>
     <mapping resource="Controle/Produto.hbm.xml"/>
     <mapping resource="Controle/Gastos.hbm.xml"/>
-    <mapping resource="Controle/Acesso.hbm.xml"/>
+    <mapping resource="ControleDeAcesso/Acesso.hbm.xml"/>
     <mapping resource="Controle/Parcela.hbm.xml"/>
     <mapping resource="Controle/PedidoEstoque.hbm.xml"/>
     <mapping resource="Controle/ProdVenda.hbm.xml"/>
