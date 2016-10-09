@@ -6,6 +6,7 @@ import Util.HibernateUtil;
 //import apresentacao.JFrameTelaGerente;
 //import apresentacao.JFrameTelaVendedor;
 //import GerenciamentoDeFuncionarios.Funcionario;
+import Controle.Funcionario;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -43,7 +44,7 @@ public class ControlaAcesso {
         }
     }
 
-/*    public Funcionario identificaUsuario(String login, String senha) {
+    public Funcionario identificaUsuario(String login, String senha) {
 
         if ((login.equals("admin")) && (senha.equals("123"))) {
             return null;
@@ -66,15 +67,15 @@ public class ControlaAcesso {
         }
         return null;
     }
-*/
-/*    public void criarAcesso(String login, Funcionario funcionario, String senha) {
+
+    public void criarAcesso(String login, Funcionario funcionario, String senha) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         Acesso acesso = new Acesso(login, funcionario, senha);
         s.save(acesso);
         s.getTransaction().commit();
     }
-*/
+
     public void consultaAcessos() {
         ArrayList<Acesso> listaAcessos = getListaAcessos();
         for (Acesso a : listaAcessos) {
