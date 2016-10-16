@@ -5,6 +5,8 @@
  */
 package projetovenda;
 
+import ControleDeAcesso.JFrameTelaLogin;
+
 /**
  *
  * @author ander
@@ -16,6 +18,7 @@ public class ProjetoVenda {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        JFrameTelaLogin jFrameTelaLogin = new JFrameTelaLogin();
     }
     
 }
