@@ -23,12 +23,7 @@ import org.hibernate.Session;
  */
 public class ControlaFuncionario {
 
-    public boolean persisteFuncionario(Funcionario funcionario, String numero, String cidade, String complemento, String endereco, String estado) {
-        funcionario.setNumero(numero);
-        funcionario.setCidade(cidade);
-        funcionario.setComplemento(complemento);
-        funcionario.setEndereco(endereco);
-        funcionario.setEstado(estado);
+    public boolean persisteFuncionario(Funcionario funcionario) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         try {
