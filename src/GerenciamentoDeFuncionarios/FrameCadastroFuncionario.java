@@ -25,25 +25,13 @@ import javax.swing.JOptionPane;
 public class FrameCadastroFuncionario extends javax.swing.JFrame {
     
     private Funcionario funcionario;
-
-    /**
-     * Construtor para alterar cadastro
-     */
-    public FrameCadastroFuncionario(Funcionario func) {
-        initComponents();
-        funcionario = func;
-        jButtonSalvar.setVisible(false);
-        exibeDados();
-        this.setVisible(true);
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-    }
     
     /**
       * Construtor para criar novo cadastro
       */
-        private FrameCadastroFuncionario() {
+        public FrameCadastroFuncionario() {
         initComponents();
+        funcionario = new Funcionario();
         jButtonSalvar.setVisible(true);
         jButtonAlterarDados.setVisible(false);
         this.setVisible(true);
@@ -51,6 +39,19 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.permiteAlterar(true, true);
     }
+        
+        public FrameCadastroFuncionario(Funcionario funcionario)
+        {
+            initComponents();
+            this.funcionario = funcionario;
+            exibeDados();
+            jButtonSalvar.setVisible(true);
+            jButtonAlterarDados.setVisible(false);
+            this.setVisible(true);
+            this.setResizable(false);
+            this.setLocationRelativeTo(null);
+            this.permiteAlterar(true, false);
+        }
     
     /**
      * Função que atualiza atributo "funcionario" da classe, com base no que foi
@@ -65,6 +66,7 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
         funcionario.setCidade(jTextFieldCidade.getText());
         funcionario.setComplemento(jTextFieldComplemento.getText());
         funcionario.setCpf(jTextFieldCPF.getText());
+        funcionario.setIdFunc(jTextFieldCPF.getText());
         funcionario.setEndereco(jTextFieldEndereco.getText());
         funcionario.setEstado(jTextFieldEstado.getText());
         funcionario.setEstadoCivil(jTextFieldEstadoCivil.getText());
@@ -473,7 +475,7 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
-
+        UpdateFuncionarioFromFields();
         //verificar nome conjuge
         boolean persistiu = new ControlaFuncionario().persisteFuncionario(funcionario);
         if(persistiu){
