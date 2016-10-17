@@ -46,7 +46,7 @@ public class ControlaFalta {
         return falta;
     }
 
-    public ArrayList<Faltas> getListaFaltas() {
+    public ArrayList<Faltas> getListaFaltas(String id_func) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         ArrayList<Faltas> listaFaltas = (ArrayList<Faltas>) s.createQuery("From Faltas").list();
@@ -57,14 +57,21 @@ public class ControlaFalta {
                 return o1.getDatafalta().compareTo(o2.getDatafalta());
             }
         });
+        
+        for(Faltas f : listaFaltas)
+        {
+            if(f.getFuncionario().getIdFunc() != id_func)
+                listaFaltas.remove(f);
+        }
+        
         return listaFaltas;
     }
 
-    public boolean faltaCadastrada(String cpf_funcionario, Date data) {
-        ArrayList<Faltas> listaFaltas = getListaFaltas();
+    public boolean faltaCadastrada(String id_func, Date data) {
+        ArrayList<Faltas> listaFaltas = getListaFaltas(id_func);
         HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
         for (Faltas f : listaFaltas) {
-            if (f.getFuncionario().getCpf().equals(cpf_funcionario) && f.getDatafalta().equals(data)) {
+            if (f.getFuncionario().getIdFunc().equals(id_func) && f.getDatafalta().equals(data)) {
                 JOptionPane.showMessageDialog(null, "Ja ha falta cadastrada nesse dia para esse funcionario!");
                 HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
                 return true;
