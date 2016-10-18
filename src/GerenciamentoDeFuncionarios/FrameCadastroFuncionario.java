@@ -6,6 +6,8 @@
 package GerenciamentoDeFuncionarios;
 
 import Controle.Funcionario;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,11 +27,43 @@ import javax.swing.JOptionPane;
 public class FrameCadastroFuncionario extends javax.swing.JFrame {
     
     private Funcionario funcionario;
+
+    enum EstadoCivil
+    {
+        SOLTEIRO("Solteiro(a)"), CASADO("Casado(a)");
+        
+        String grafia;
+        EstadoCivil(String grafia)
+        {
+            this.grafia = grafia;
+        }
+        
+        String getGrafia()
+        {
+            return grafia;
+        }
+    }
+
+    enum Sexo
+    {
+        MASCULINO("Masculino"), FEMININO("Feminino");
+        
+        String grafia;
+        Sexo(String grafia)
+        {
+            this.grafia = grafia;
+        }
+        
+        String getGrafia()
+        {
+            return grafia;
+        }
+    }
     
     /**
       * Construtor para criar novo cadastro
       */
-        public FrameCadastroFuncionario() {
+    public FrameCadastroFuncionario() {
         initComponents();
         funcionario = new Funcionario();
         jButtonSalvar.setVisible(true);
@@ -38,20 +72,39 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.permiteAlterar(true, true);
+        ComboBoxesSetup();
     }
         
-        public FrameCadastroFuncionario(Funcionario funcionario)
-        {
-            initComponents();
-            this.funcionario = funcionario;
-            exibeDados();
-            jButtonSalvar.setVisible(true);
-            jButtonAlterarDados.setVisible(false);
-            this.setVisible(true);
-            this.setResizable(false);
-            this.setLocationRelativeTo(null);
-            this.permiteAlterar(true, false);
+    /*
+        Construtor para editar cadastro existente
+    */
+    public FrameCadastroFuncionario(Funcionario funcionario)
+    {
+        initComponents();
+        this.funcionario = funcionario;
+        jButtonSalvar.setVisible(true);
+        jButtonAlterarDados.setVisible(false);
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.permiteAlterar(true, false);
+        ComboBoxesSetup();
+        exibeDados();
         }
+        
+    /*
+        Configura as ComboBoxes de Estado Civil e Sexo
+    */
+    public void ComboBoxesSetup()
+    {
+        this.jComboBoxEstadoCivil.setModel(new DefaultComboBoxModel(EstadoCivil.values()));
+        this.jComboBoxEstadoCivil.setEditable(false);
+        this.jComboBoxEstadoCivil.setSelectedItem(EstadoCivil.SOLTEIRO);
+        this.jTextFieldNomeConjuge.setEnabled(false);
+        
+        this.jComboBoxSexo.setModel(new DefaultComboBoxModel(Sexo.values()));
+        this.jComboBoxSexo.setEditable(false);
+    }
     
     /**
      * Função que atualiza atributo "funcionario" da classe, com base no que foi
@@ -69,20 +122,38 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
         funcionario.setIdFunc(jTextFieldCPF.getText());
         funcionario.setEndereco(jTextFieldEndereco.getText());
         funcionario.setEstado(jTextFieldEstado.getText());
-        funcionario.setEstadoCivil(jTextFieldEstadoCivil.getText());
-        funcionario.setNomeConjuge(jTextFieldNomeConjuge.getText());
+        
+        if(jComboBoxEstadoCivil.getSelectedItem().toString() == "CASADO")
+        {
+            funcionario.setEstadoCivil("Casado(a)");
+            funcionario.setNomeConjuge(jTextFieldNomeConjuge.getText());            
+        }
+        else
+        {
+            funcionario.setEstadoCivil("Solteiro(a)");
+        }
+        
+        if(jComboBoxSexo.getSelectedItem().toString() == "MASCULINO")
+        {
+            funcionario.setSexo("Masculino");
+        }
+        else
+        {
+            funcionario.setSexo("Feminino");
+        }
+
         funcionario.setNumero(jTextFieldNumero.getText());
         funcionario.setRg(jTextFieldRG.getText());
-        funcionario.setSexo(jTextFieldSexo.getText());
         funcionario.setTelefone(jTextFieldTelefone.getText());
-        //TODO: DATA DE CONTRATACAO E DE NASCIMENTO PRECISAM PERSISTIR
+        funcionario.setDataContratacao(this.jDateContrChooser.getDate());
+        funcionario.setDataNascimento(this.jDateNascChooser.getDate());
     }
     /**
      * Método para exibir dados de funcionário existente nos campos jTextField
      */
     public void exibeDados(){
-        jFormattedTextFieldDataContratacao.setText(funcionario.getDataContratacao().toString());
-        jFormattedTextFieldDataNascimento.setText(funcionario.getDataNascimento().toString());
+        jDateContrChooser.setDate(funcionario.getDataContratacao());
+        jDateNascChooser.setDate(funcionario.getDataNascimento());
         jTextFieldBairro.setText(funcionario.getBairro());
         jTextFieldCEP.setText(funcionario.getCep());
         jTextFieldNumero.setText(funcionario.getNumero());
@@ -92,11 +163,28 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
         jTextFieldComplemento.setText(funcionario.getComplemento());
         jTextFieldEndereco.setText(funcionario.getEndereco());
         jTextFieldEstado.setText(funcionario.getEstado());
-        jTextFieldEstadoCivil.setText(funcionario.getEstadoCivil());
+        
+        if(funcionario.getEstadoCivil() == "Solteiro(a)")
+        {
+            this.jComboBoxEstadoCivil.setSelectedItem(EstadoCivil.SOLTEIRO);
+            this.jTextFieldNomeConjuge.setEnabled(false);
+        }
+        else
+        {
+            this.jComboBoxEstadoCivil.setSelectedItem(EstadoCivil.CASADO);
+            this.jTextFieldNomeConjuge.setEnabled(true);
+            jTextFieldNomeConjuge.setText(funcionario.getNomeConjuge());
+        }
+        
         jTextFieldNomeCompleto.setText(funcionario.getNome());
-        jTextFieldNomeConjuge.setText(funcionario.getNomeConjuge());
+ 
         jTextFieldRG.setText(funcionario.getRg());
-        jTextFieldSexo.setText(funcionario.getSexo());
+        
+        if(funcionario.getSexo() == "Masculino")
+            this.jComboBoxSexo.setSelectedItem(Sexo.MASCULINO);
+        else
+            this.jComboBoxSexo.setSelectedItem(Sexo.FEMININO);
+        
         jTextFieldTelefone.setText(funcionario.getTelefone());
     }
     
@@ -112,20 +200,18 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
         jTextFieldComplemento.setEditable(permissao);
         jTextFieldEndereco.setEditable(permissao);
         jTextFieldEstado.setEditable(permissao);
-        //estado civil precisa exibir a combobox
-        //se casado então precisa editar conjuge
         jTextFieldNomeConjuge.setEditable(permissao);
         jTextFieldTelefone.setEditable(permissao);
         if(all)
         {
             jTextFieldNomeCompleto.setEditable(permissao);
             jTextFieldCPF.setEditable(permissao);
-            jTextFieldEstadoCivil.setEditable(permissao);
+            jComboBoxEstadoCivil.setEditable(permissao);
             jTextFieldRG.setEditable(permissao);
-            jTextFieldSexo.setEditable(permissao);
+            jComboBoxSexo.setEditable(permissao);
             jTextFieldCargo.setEditable(permissao);
-            jFormattedTextFieldDataContratacao.setEditable(permissao);
-            jFormattedTextFieldDataNascimento.setEditable(permissao);
+            jDateContrChooser.setEnabled(permissao);
+            jDateNascChooser.setEnabled(permissao);
         }
     }
     /**
@@ -153,10 +239,8 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
         jLabelEndereco = new javax.swing.JLabel();
         jLabelCPF = new javax.swing.JLabel();
         jLabelDataNascimento = new javax.swing.JLabel();
-        jFormattedTextFieldDataContratacao = new javax.swing.JFormattedTextField();
         jLabelCargo = new javax.swing.JLabel();
         jLabelSexo = new javax.swing.JLabel();
-        jFormattedTextFieldDataNascimento = new javax.swing.JFormattedTextField();
         jLabelNomeConjuge = new javax.swing.JLabel();
         jLabelComplemento = new javax.swing.JLabel();
         jLabelEstado = new javax.swing.JLabel();
@@ -169,12 +253,14 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
         jTextFieldNomeConjuge = new javax.swing.JTextField();
         jTextFieldCEP = new javax.swing.JTextField();
         jTextFieldEstado = new javax.swing.JTextField();
-        jTextFieldEstadoCivil = new javax.swing.JTextField();
         jTextFieldCargo = new javax.swing.JTextField();
-        jTextFieldSexo = new javax.swing.JTextField();
         jButtonAlterarDados = new javax.swing.JButton();
         jButtonVoltar = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
+        jDateContrChooser = new com.toedter.calendar.JDateChooser();
+        jDateNascChooser = new com.toedter.calendar.JDateChooser();
+        jComboBoxEstadoCivil = new javax.swing.JComboBox<>();
+        jComboBoxSexo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -220,25 +306,9 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
 
         jLabelDataNascimento.setText("Data de Nascimento");
 
-        jFormattedTextFieldDataContratacao.setEditable(false);
-        jFormattedTextFieldDataContratacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        jFormattedTextFieldDataContratacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldDataContratacaoActionPerformed(evt);
-            }
-        });
-
         jLabelCargo.setText("Cargo");
 
         jLabelSexo.setText("Sexo");
-
-        jFormattedTextFieldDataNascimento.setEditable(false);
-        jFormattedTextFieldDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        jFormattedTextFieldDataNascimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldDataNascimentoActionPerformed(evt);
-            }
-        });
 
         jLabelNomeConjuge.setText("Nome Cônjuge");
 
@@ -265,11 +335,7 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
 
         jTextFieldEstado.setEditable(false);
 
-        jTextFieldEstadoCivil.setEditable(false);
-
         jTextFieldCargo.setEditable(false);
-
-        jTextFieldSexo.setEditable(false);
 
         jButtonAlterarDados.setText("Alterar Dados");
         jButtonAlterarDados.addActionListener(new java.awt.event.ActionListener() {
@@ -291,6 +357,15 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
                 jButtonSalvarActionPerformed(evt);
             }
         });
+
+        jComboBoxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEstadoCivilActionPerformed(evt);
+            }
+        });
+
+        jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -320,8 +395,9 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
                                 .addComponent(jTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabelDataContratacao)
-                                .addGap(18, 18, 18)
-                                .addComponent(jFormattedTextFieldDataContratacao, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateContrChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextFieldCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -330,27 +406,26 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelCabecalho)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextFieldSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabelDataNascimento)
+                                        .addComponent(jComboBoxSexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jFormattedTextFieldDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jLabelDataNascimento)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jDateNascChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(15, 15, 15))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jComboBoxEstadoCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jTextFieldEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabelNomeConjuge))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabelEstado)))
+                                            .addComponent(jLabelEstado, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabelNomeConjuge, javax.swing.GroupLayout.Alignment.TRAILING))
                                         .addGap(6, 6, 6))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                                         .addComponent(jLabelComplemento)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,59 +456,62 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jLabelCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNomeCompleto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelRG))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCPF))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEndereco))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNumero)
-                    .addComponent(jTextFieldComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelComplemento)
-                    .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelBairro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCidade)
-                    .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEstado)
-                    .addComponent(jTextFieldCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCEP))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldEstadoCivil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabelEstadoCivil)
-                        .addComponent(jTextFieldNomeConjuge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelNomeConjuge)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTelefone)
-                    .addComponent(jTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldDataContratacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDataContratacao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelSexo)
-                    .addComponent(jLabelCargo)
-                    .addComponent(jFormattedTextFieldDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDataNascimento))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelNomeCompleto))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelRG))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelCPF))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelEndereco))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelNumero)
+                                    .addComponent(jTextFieldComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelComplemento)
+                                    .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelBairro))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelCidade)
+                                    .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelEstado)
+                                    .addComponent(jTextFieldCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelCEP))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabelEstadoCivil)
+                                    .addComponent(jTextFieldNomeConjuge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelNomeConjuge)
+                                    .addComponent(jComboBoxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabelTelefone)
+                                    .addComponent(jTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelDataContratacao)))
+                            .addComponent(jDateContrChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelSexo)
+                            .addComponent(jLabelCargo)
+                            .addComponent(jLabelDataNascimento)
+                            .addComponent(jComboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jDateNascChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAlterarDados)
                     .addComponent(jButtonVoltar)
@@ -451,14 +529,6 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
     private void jTextFieldNomeCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeCompletoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeCompletoActionPerformed
-
-    private void jFormattedTextFieldDataContratacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataContratacaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldDataContratacaoActionPerformed
-
-    private void jFormattedTextFieldDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataNascimentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldDataNascimentoActionPerformed
 
     private void jButtonAlterarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarDadosActionPerformed
         // TODO add your handling code here:
@@ -488,6 +558,17 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao salvar alterações!");
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jComboBoxEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoCivilActionPerformed
+        boolean enableconjuge;
+
+        if(jComboBoxEstadoCivil.getSelectedItem() == EstadoCivil.CASADO)
+            enableconjuge = true;
+        else
+            enableconjuge = false;
+        
+        this.jTextFieldNomeConjuge.setEnabled(enableconjuge);
+    }//GEN-LAST:event_jComboBoxEstadoCivilActionPerformed
 
     /**
      * @param args the command line arguments
@@ -528,8 +609,10 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAlterarDados;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonVoltar;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataContratacao;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataNascimento;
+    private javax.swing.JComboBox<String> jComboBoxEstadoCivil;
+    private javax.swing.JComboBox<String> jComboBoxSexo;
+    private com.toedter.calendar.JDateChooser jDateContrChooser;
+    private com.toedter.calendar.JDateChooser jDateNascChooser;
     private javax.swing.JLabel jLabelBairro;
     private javax.swing.JLabel jLabelCEP;
     private javax.swing.JLabel jLabelCPF;
@@ -556,12 +639,10 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldComplemento;
     private javax.swing.JTextField jTextFieldEndereco;
     private javax.swing.JTextField jTextFieldEstado;
-    private javax.swing.JTextField jTextFieldEstadoCivil;
     private javax.swing.JTextField jTextFieldNomeCompleto;
     private javax.swing.JTextField jTextFieldNomeConjuge;
     private javax.swing.JTextField jTextFieldNumero;
     private javax.swing.JTextField jTextFieldRG;
-    private javax.swing.JTextField jTextFieldSexo;
     private javax.swing.JTextField jTextFieldTelefone;
     // End of variables declaration//GEN-END:variables
 }

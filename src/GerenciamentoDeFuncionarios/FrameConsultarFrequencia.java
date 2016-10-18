@@ -27,6 +27,10 @@ public class FrameConsultarFrequencia extends javax.swing.JFrame {
         initComponents();
     }
     
+    /*
+        Esse frame deve ser construído passando-se por parâmetro o funcionário
+    a ter sua frequência consultada
+    */
     public FrameConsultarFrequencia(Funcionario funcionario) {
         initComponents();
         this.funcionario = funcionario;
@@ -35,7 +39,21 @@ public class FrameConsultarFrequencia extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
-        public void exibeDados(){
+    /*
+        Esse método habilita a tela de consulta de frequência para edição. O
+    ideal é que só o gerente tenha acesso aos botões de cadastrar falta e
+    justificar falta, os quais podem ser habilitados e desabilitados pelo método
+    */
+    public void FaltasEditMode(boolean enable)
+    {
+        this.jButton1.setVisible(enable);
+        this.jButton2.setVisible(enable);
+    }
+    
+    /*
+        Método para exibir dados do funcionário nos campos
+    */
+    public void exibeDados(){
         jTextFieldDataContr.setText(funcionario.getDataContratacao().toString());
         jTextFieldDataNasc.setText(funcionario.getDataNascimento().toString());
         jTextFieldNumero.setText(funcionario.getNumero());
@@ -51,7 +69,10 @@ public class FrameConsultarFrequencia extends javax.swing.JFrame {
         jTextFieldRG.setText(funcionario.getRg());
         jTextFieldID.setText(funcionario.getIdFunc());
     }
-        
+    
+    /*
+        Obtém as faltas do controle de persistência e as exibe em uma lista
+    */
     public void FetchFaltas()
     {
         faltas = new ControlaFalta().getListaFaltas(funcionario.getIdFunc());

@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author rafael
+ * 
+ * Frame para registrar uma falta para um funcionário específico, deve ser
+ * chamado a partir do FrameConsultarFrequencia
  */
 public class FrameRegistraFalta extends javax.swing.JFrame {
 

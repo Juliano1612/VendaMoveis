@@ -18,6 +18,8 @@ import org.hibernate.Session;
 /**
  *
  * @author rafael
+ * Classe para controlar operacoes de dados e persistência sobre entidade
+ * FALTA
  */
 public class ControlaFalta {
 

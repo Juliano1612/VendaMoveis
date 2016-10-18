@@ -11,6 +11,11 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author rafael
+ * 
+ * Pequeno formulário para inserir um pequeno texto justificando uma falta de
+ * funcionário. Deve ser chamado a partir do FrameConsultarFrequencia
+ * 
+ * TODO: Permitir editar e apagar a justificativa
  */
 public class FrameJustificaFalta extends javax.swing.JFrame {
 

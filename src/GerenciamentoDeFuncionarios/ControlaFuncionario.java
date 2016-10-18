@@ -16,10 +16,10 @@ import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
 /**
- * Classe para controlar operacoes de dados sobre entidade FUNCIONARIO
  * @author rafael
  * 
- * Bugs a corrigir:
+ * Classe para controlar operacoes de dados e persistência sobre entidade
+ * FUNCIONARIO
  */
 public class ControlaFuncionario {
 
@@ -49,6 +49,34 @@ public class ControlaFuncionario {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         ArrayList<Funcionario> listaFuncionarios = (ArrayList<Funcionario>) s.createQuery("From Funcionario").list();
+        s.getTransaction().commit();
+        Collections.sort(listaFuncionarios, new Comparator<Funcionario>() {
+            @Override
+            public int compare(Funcionario o1, Funcionario o2) {
+                return o1.getNome().compareTo(o2.getNome());
+            }
+        });
+        return listaFuncionarios;
+    }
+    
+    public ArrayList<Funcionario> getListaFuncionariosAtivos() {
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        ArrayList<Funcionario> listaFuncionarios = (ArrayList<Funcionario>) s.createQuery("From Funcionario Where status = 1").list();
+        s.getTransaction().commit();
+        Collections.sort(listaFuncionarios, new Comparator<Funcionario>() {
+            @Override
+            public int compare(Funcionario o1, Funcionario o2) {
+                return o1.getNome().compareTo(o2.getNome());
+            }
+        });
+        return listaFuncionarios;
+    }
+        
+    public ArrayList<Funcionario> getListaFuncionariosInativos() {
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        ArrayList<Funcionario> listaFuncionarios = (ArrayList<Funcionario>) s.createQuery("From Funcionario Where status = 0").list();
         s.getTransaction().commit();
         Collections.sort(listaFuncionarios, new Comparator<Funcionario>() {
             @Override
