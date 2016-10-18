@@ -5,7 +5,6 @@
  */
 package GerenciamentoDeFuncionarios;
 
-import Controle.Funcionario;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;

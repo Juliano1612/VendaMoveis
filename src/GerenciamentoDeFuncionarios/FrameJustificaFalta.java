@@ -5,7 +5,6 @@
  */
 package GerenciamentoDeFuncionarios;
 
-import Controle.Faltas;
 import javax.swing.JOptionPane;
 
 /**
