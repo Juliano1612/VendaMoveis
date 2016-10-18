@@ -5,23 +5,31 @@
  */
 package GerenciamentoDeFuncionarios;
 
-import GerenciamentoDeFuncionarios.Funcionario;
+import Controle.Funcionario;
 import GerenciamentoDeFuncionarios.ControlaFuncionario;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
 
 /**
  *
  * @author rafael
+ * 
+ * Essa classe controla um frame para acessar uma lista dos funcionários
+ * cadastrados. Caso seja criada com o construtor sem parâmetros, todos os
+ * funcionários do sistema serão listados para consulta. Há um construtor de
+ * parâmetro booleano para exibir somente funcionários ativos ou somente aqueles
+ * que foram desligados.
  */
 public class FrameListaFuncionario extends javax.swing.JFrame {
     
     ArrayList <Funcionario> funcionarios;
+    boolean ativos;
 
     /**
      * Creates new form FrameListaFuncionario
@@ -31,6 +39,24 @@ public class FrameListaFuncionario extends javax.swing.JFrame {
         FetchFuncionarios();
     }
     
+    /*
+        ativos = true: Cria uma lista com todos os funcionários ativos da
+    empresa. Eles podem ter seu cadastro e faltas consultados, bem como podem
+    ser desligados por um botão
+    
+        ativos = false: Cria uma lista com os funcionários desligados. Como
+    acima, mas o botão de desligamento é revertido para um botão de reativação,
+    que pode mudar o status do funcionário para ativo
+    */
+    public FrameListaFuncionario(boolean ativos) {
+        initComponents();
+        this.ativos = ativos;
+        FetchFuncionarios(ativos);
+    }
+    
+    /*
+        Obtém uma lista com todos os funcionários e a exibe no frame
+    */
     public void FetchFuncionarios()
     {
         funcionarios = new ControlaFuncionario().getListaFuncionarios();
@@ -42,7 +68,38 @@ public class FrameListaFuncionario extends javax.swing.JFrame {
         }
 
         this.jList1.setListData(nomes_func);
+        this.jButtonLigDes.setVisible(false);
     }
+    
+    /*
+        Obtém lista de funcionários ativos ou inativos, conforme o valor do
+    parâmetro, exibindo a lista resultante no frame
+    */
+    public void FetchFuncionarios(boolean ativos)
+    {
+        if(ativos)
+            funcionarios = new ControlaFuncionario().getListaFuncionariosAtivos();
+        else
+            funcionarios = new ControlaFuncionario().getListaFuncionariosInativos();
+            
+        Vector <String> nomes_func = new Vector();
+        
+        for(Funcionario f : funcionarios)
+        {
+            nomes_func.add(f.getNome());
+        }
+
+        this.jList1.setListData(nomes_func);
+        
+        if(ativos)
+            this.jButtonLigDes.setText("Desligar");
+        else
+            this.jButtonLigDes.setText("Reativar");
+        
+        this.jButtonLigDes.setVisible(true);
+    }
+        
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,6 +117,7 @@ public class FrameListaFuncionario extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButtonLigDes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,12 +144,19 @@ public class FrameListaFuncionario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        jLabel1.setText("Selecione um funcionário para editar/consultar cadastro:");
+        jLabel1.setText("Selecione um funcionário:");
 
         jButton3.setText("Consultar Faltas");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButtonLigDes.setText("DLFUNC");
+        jButtonLigDes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLigDesActionPerformed(evt);
             }
         });
 
@@ -101,17 +166,20 @@ public class FrameListaFuncionario extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(55, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jButton2)
-                .addGap(112, 112, 112)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(48, 48, 48))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(0, 382, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(80, 80, 80)
+                        .addComponent(jButtonLigDes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(68, 68, 68)
+                        .addComponent(jButton1)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,9 +189,10 @@ public class FrameListaFuncionario extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton1)
+                    .addComponent(jButtonLigDes)
+                    .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -153,7 +222,7 @@ public class FrameListaFuncionario extends javax.swing.JFrame {
         if(indice != -1)
         {
             Funcionario fetchfun = this.funcionarios.get(indice);
-            FrameCadastroFuncionario framecadastro = new FrameCadastroFuncionario(fetchfun);
+            JFrame framecadastro = new FrameCadastroFuncionario(fetchfun);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -170,6 +239,39 @@ public class FrameListaFuncionario extends javax.swing.JFrame {
             JFrame framefaltas = new FrameConsultarFrequencia(fetchfun);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButtonLigDesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLigDesActionPerformed
+        int indice = jList1.getSelectedIndex();
+        if(indice == -1)
+            return;
+        
+        Funcionario fetchfun = this.funcionarios.get(indice);
+        
+        if(ativos)
+        {
+            fetchfun.setStatus(0);
+        }
+        else
+        {
+            fetchfun.setStatus(1);
+        }
+        
+        boolean persistiu = new ControlaFuncionario().persisteFuncionario(fetchfun);
+        if(persistiu){
+            if(ativos)
+            {
+                JOptionPane.showMessageDialog(null, "Funcionario Desligado!");
+                this.FetchFuncionarios(true);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Funcionario Reativado!");
+                this.FetchFuncionarios(false);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao salvar alterações!");
+        }
+    }//GEN-LAST:event_jButtonLigDesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,6 +312,7 @@ public class FrameListaFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonLigDes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;

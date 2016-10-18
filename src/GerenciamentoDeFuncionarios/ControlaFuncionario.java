@@ -5,7 +5,7 @@
  */
 package GerenciamentoDeFuncionarios;
 
-import GerenciamentoDeFuncionarios.Funcionario;
+import Controle.Funcionario;
 import Util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,10 +16,10 @@ import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
 /**
- * Classe para controlar operacoes de dados sobre entidade FUNCIONARIO
  * @author rafael
  * 
- * Bugs a corrigir:
+ * Classe para controlar operacoes de dados e persistência sobre entidade
+ * FUNCIONARIO
  */
 public class ControlaFuncionario {
 
@@ -36,10 +36,10 @@ public class ControlaFuncionario {
         }
     }
 
-    public Funcionario criarFuncionario(String idFunc, String nome, String cpf, String rg, Date dataNascimento, String estadoCivil, String nomeConjuge, String endereco, String numero, String complemento, String cidade, String estado, String cargo, Date dataContratacao, Integer nivelAcesso, String sexo, String bairro, String cep, String telefone, Integer status) {
+    public Funcionario criarFuncionario(String idFunc, String nome, String cpf, String rg, Date dataNascimento, String estadoCivil, String nomeConjuge, String endereco, String numero, String complemento, String cidade, String estado, String cargo, Date dataContratacao, Integer nivelAcesso, String sexo, String bairro, String cep, String telefone, Integer status, Set vendases, Set faltases, Set acessos) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Funcionario funcionario = new Funcionario(idFunc, nome, cpf, rg, dataNascimento, estadoCivil, nomeConjuge, endereco, numero, complemento, cidade, estado, cargo, dataContratacao, nivelAcesso, sexo, bairro, cep, telefone, status);
+        Funcionario funcionario = new Funcionario(idFunc, nome, cpf, rg, dataNascimento, estadoCivil, nomeConjuge, endereco, numero, complemento, cidade, estado, cargo, dataContratacao, nivelAcesso, sexo, bairro, cep, telefone, status, vendases, faltases, acessos);
         s.save(funcionario);
         s.getTransaction().commit();
         return funcionario;
@@ -49,6 +49,34 @@ public class ControlaFuncionario {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         ArrayList<Funcionario> listaFuncionarios = (ArrayList<Funcionario>) s.createQuery("From Funcionario").list();
+        s.getTransaction().commit();
+        Collections.sort(listaFuncionarios, new Comparator<Funcionario>() {
+            @Override
+            public int compare(Funcionario o1, Funcionario o2) {
+                return o1.getNome().compareTo(o2.getNome());
+            }
+        });
+        return listaFuncionarios;
+    }
+    
+    public ArrayList<Funcionario> getListaFuncionariosAtivos() {
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        ArrayList<Funcionario> listaFuncionarios = (ArrayList<Funcionario>) s.createQuery("From Funcionario Where status = 1").list();
+        s.getTransaction().commit();
+        Collections.sort(listaFuncionarios, new Comparator<Funcionario>() {
+            @Override
+            public int compare(Funcionario o1, Funcionario o2) {
+                return o1.getNome().compareTo(o2.getNome());
+            }
+        });
+        return listaFuncionarios;
+    }
+        
+    public ArrayList<Funcionario> getListaFuncionariosInativos() {
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        ArrayList<Funcionario> listaFuncionarios = (ArrayList<Funcionario>) s.createQuery("From Funcionario Where status = 0").list();
         s.getTransaction().commit();
         Collections.sort(listaFuncionarios, new Comparator<Funcionario>() {
             @Override
