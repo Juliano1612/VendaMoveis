@@ -5,7 +5,6 @@
  */
 package GerenciamentoDeFuncionarios;
 
-import Controle.Funcionario;
 import GerenciamentoDeFuncionarios.ControlaFuncionario;
 import java.util.ArrayList;
 import java.util.Vector;

@@ -5,8 +5,6 @@
  */
 package GerenciamentoDeFuncionarios;
 
-import Controle.Faltas;
-import Controle.Funcionario;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JFrame;
