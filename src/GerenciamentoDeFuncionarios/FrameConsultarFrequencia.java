@@ -5,8 +5,8 @@
  */
 package GerenciamentoDeFuncionarios;
 
-import Controle.Faltas;
-import Controle.Funcionario;
+import GerenciamentoDeFuncionarios.Faltas;
+import GerenciamentoDeFuncionarios.Funcionario;
 import java.util.ArrayList;
 import java.util.Vector;
 

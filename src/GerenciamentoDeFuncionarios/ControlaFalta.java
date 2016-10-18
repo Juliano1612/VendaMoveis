@@ -5,8 +5,8 @@
  */
 package GerenciamentoDeFuncionarios;
 
-import Controle.Faltas;
-import Controle.Funcionario;
+import GerenciamentoDeFuncionarios.Faltas;
+import GerenciamentoDeFuncionarios.Funcionario;
 import Util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Collections;

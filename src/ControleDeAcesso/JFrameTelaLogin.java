@@ -1,8 +1,8 @@
 package ControleDeAcesso;
 
+import Apresentacao.JFrameTelaAdmin;
 import Util.HibernateUtil;
 //import GerenciamentoDeFuncionarios.JFrameConsultarFrequencia;
-//import apresentacao.JFrameTelaAdmin;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
@@ -185,7 +185,7 @@ public class JFrameTelaLogin extends javax.swing.JFrame {
             boolean login = new ControlaAcesso().permiteAcesso(JTextField_login.getText(), JPassword_senha.getText());
             if (login) {
                 if (JTextField_login.getText().equals("admin")) {
-//                    new JFrameTelaAdmin();
+                   new JFrameTelaAdmin();
                 }
                 dispose();
             }

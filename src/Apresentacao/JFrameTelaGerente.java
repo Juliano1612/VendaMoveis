@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TelaAdministrador;
+package Apresentacao;
+
+import ControleDeAcesso.JFrameTelaLogin;
+import GerenciamentoDeFuncionarios.Funcionario;
+import javax.swing.Box;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,8 +19,20 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
     /**
      * Creates new form JFrameTelaGerente
      */
-    public JFrameTelaGerente() {
+    public JFrameTelaGerente(Funcionario funcionario) {
         initComponents();
+        
+        this.setTitle("Gerente - " + funcionario.getNome());
+        
+        jMenuPrincipal.add(Box.createHorizontalGlue());
+        jMenuPrincipal.add(jMenuSair);
+    
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+
+    private JFrameTelaGerente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -32,14 +49,15 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuPrincipal = new javax.swing.JMenuBar();
         jMenuFuncionario = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuCadastrarFuncionario = new javax.swing.JMenuItem();
+        jMenuConsultarFuncionario = new javax.swing.JMenuItem();
         jMenuProduto = new javax.swing.JMenu();
         jMenuCadastrar = new javax.swing.JMenuItem();
         jMenuConsultar = new javax.swing.JMenuItem();
         jMenuCliente = new javax.swing.JMenu();
         jMenuVenda = new javax.swing.JMenu();
         jMenuCaixa = new javax.swing.JMenu();
+        jMenuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerente - ");
@@ -70,16 +88,16 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
         jMenuFuncionario.setText("Funcionário");
 
-        jMenuItem1.setText("Cadastrar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuCadastrarFuncionario.setText("Cadastrar");
+        jMenuCadastrarFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuCadastrarFuncionarioActionPerformed(evt);
             }
         });
-        jMenuFuncionario.add(jMenuItem1);
+        jMenuFuncionario.add(jMenuCadastrarFuncionario);
 
-        jMenuItem2.setText("Consultar");
-        jMenuFuncionario.add(jMenuItem2);
+        jMenuConsultarFuncionario.setText("Consultar");
+        jMenuFuncionario.add(jMenuConsultarFuncionario);
 
         jMenuPrincipal.add(jMenuFuncionario);
 
@@ -102,6 +120,14 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
         jMenuCaixa.setText("Caixa");
         jMenuPrincipal.add(jMenuCaixa);
+
+        jMenuSair.setText("Sair");
+        jMenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuSairMouseClicked(evt);
+            }
+        });
+        jMenuPrincipal.add(jMenuSair);
 
         setJMenuBar(jMenuPrincipal);
 
@@ -129,9 +155,24 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarFuncionarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuCadastrarFuncionarioActionPerformed
+
+    private void jMenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSairMouseClicked
+        // TODO add your handling code here:
+        
+        int n = JOptionPane.showConfirmDialog(
+            null,
+            "Deseja realmente sair?",
+            "Confirmar Opção",
+            JOptionPane.YES_NO_OPTION);
+
+        if(n == JOptionPane.YES_OPTION){
+            new JFrameTelaLogin();
+            this.dispose();
+        }
+    }//GEN-LAST:event_jMenuSairMouseClicked
 
     /**
      * @param args the command line arguments
@@ -172,15 +213,20 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelImagemLogo;
     private javax.swing.JMenuItem jMenuCadastrar;
+    private javax.swing.JMenuItem jMenuCadastrarFuncionario;
     private javax.swing.JMenu jMenuCaixa;
     private javax.swing.JMenu jMenuCliente;
     private javax.swing.JMenuItem jMenuConsultar;
+    private javax.swing.JMenuItem jMenuConsultarFuncionario;
     private javax.swing.JMenu jMenuFuncionario;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar jMenuPrincipal;
     private javax.swing.JMenu jMenuProduto;
+    private javax.swing.JMenu jMenuSair;
     private javax.swing.JMenu jMenuVenda;
     private javax.swing.JPanel jPanelImagemFundo;
     // End of variables declaration//GEN-END:variables
+
+    private void title(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

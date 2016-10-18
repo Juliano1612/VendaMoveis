@@ -1,12 +1,12 @@
 package ControleDeAcesso;
 
 import Util.HibernateUtil;
-//import apresentacao.JFrameTelaAlmoxarife;
-//import apresentacao.JFrameTelaContabilidade;
-//import apresentacao.JFrameTelaGerente;
-//import apresentacao.JFrameTelaVendedor;
+//import Apresentacao.JFrameTelaAlmoxarife;
+//import Apresentacao.JFrameTelaContabilidade;
+import Apresentacao.JFrameTelaGerente;
+//import Apresentacao.JFrameTelaVendedor;
 //import GerenciamentoDeFuncionarios.Funcionario;
-import Controle.Funcionario;
+import GerenciamentoDeFuncionarios.Funcionario;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -29,7 +29,7 @@ public class ControlaAcesso {
                 HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
                 for (Acesso a : listaAcessos) {
                     if (a.getLogin().equals(login)) {
-                        //redirecionaAcesso(a.getFuncionario().getNivelAcesso());
+                        redirecionaAcesso(a.getFuncionario().getNivelAcesso(), a.getFuncionario());
                     }
                 }
                 HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
@@ -100,22 +100,22 @@ public class ControlaAcesso {
         return listaAcessos;
     }
 
-/*    public void redirecionaAcesso(int nivelAcesso) {
+    public void redirecionaAcesso(int nivelAcesso, Funcionario funcionario) {
         switch (nivelAcesso) {
             case 0:
-                new JFrameTelaGerente();
+                new JFrameTelaGerente(funcionario);
                 break;
             case 1:
-                new JFrameTelaVendedor();
+//                new JFrameTelaVendedor();
                 break;
             case 2:
-                new JFrameTelaContabilidade();
+//                new JFrameTelaContabilidade();
                 break;
             case 3:
-                new JFrameTelaAlmoxarife();
+//                new JFrameTelaAlmoxarife();
         }
     }
-*/
+    
     public boolean confereLogin(String login) {
         ArrayList<Acesso> listaAcessos = getListaAcessos();
         HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();

@@ -15,9 +15,9 @@
     <mapping resource="Controle/PedidoEstoque.hbm.xml"/>
     <mapping resource="Controle/Gastos.hbm.xml"/>
     <mapping resource="Controle/Vendas.hbm.xml"/>
-    <mapping resource="Controle/Funcionario.hbm.xml"/>
+    <mapping resource="GerenciamentoDeFuncionarios/Funcionario.hbm.xml"/>
     <mapping resource="Controle/ImagemProduto.hbm.xml"/>
-    <mapping resource="Controle/Faltas.hbm.xml"/>
+    <mapping resource="GerenciamentoDeFuncionarios/Faltas.hbm.xml"/>
     <mapping resource="Controle/Cliente.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

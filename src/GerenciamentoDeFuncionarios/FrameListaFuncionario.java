@@ -5,7 +5,7 @@
  */
 package GerenciamentoDeFuncionarios;
 
-import Controle.Funcionario;
+import GerenciamentoDeFuncionarios.Funcionario;
 import GerenciamentoDeFuncionarios.ControlaFuncionario;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -153,7 +153,7 @@ public class FrameListaFuncionario extends javax.swing.JFrame {
         if(indice != -1)
         {
             Funcionario fetchfun = this.funcionarios.get(indice);
-            JFrame framecadastro = new FrameCadastroFuncionario(fetchfun);
+            FrameCadastroFuncionario framecadastro = new FrameCadastroFuncionario(fetchfun);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

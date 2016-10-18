@@ -2,12 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 16/10/2016 21:31:26 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="Vendas" name="Controle.Faltas" optimistic-lock="version" table="Faltas">
+  <class catalog="Vendas" name="GerenciamentoDeFuncionarios.Faltas" optimistic-lock="version" table="Faltas">
     <id name="idFaltas" type="string">
       <column length="60" name="idFaltas"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="Controle.Funcionario" fetch="select" name="funcionario">
+    <many-to-one class="GerenciamentoDeFuncionarios.Funcionario" fetch="select" name="funcionario">
       <column length="60" name="id_func"/>
     </many-to-one>
     <property name="justificativaFlag" type="java.lang.Integer">

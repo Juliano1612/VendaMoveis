@@ -10,7 +10,7 @@
     <many-to-one class="Controle.Cliente" fetch="select" name="cliente">
       <column length="60" name="cli_ID"/>
     </many-to-one>
-    <many-to-one class="Controle.Funcionario" fetch="select" name="funcionario">
+    <many-to-one class="GerenciamentoDeFuncionarios.Funcionario" fetch="select" name="funcionario">
       <column length="60" name="func_ID"/>
     </many-to-one>
     <property name="dataCompra" type="date">

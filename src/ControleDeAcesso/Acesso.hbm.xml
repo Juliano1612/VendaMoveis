@@ -7,7 +7,7 @@
       <column length="50" name="login"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="Controle.Funcionario" fetch="select" name="funcionario">
+    <many-to-one class="GerenciamentoDeFuncionarios.Funcionario" fetch="select" name="funcionario">
       <column length="60" name="func_ID" not-null="true"/>
     </many-to-one>
     <property name="senha" type="string">

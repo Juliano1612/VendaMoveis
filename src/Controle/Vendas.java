@@ -2,6 +2,7 @@ package Controle;
 // Generated 16/10/2016 21:31:24 by Hibernate Tools 4.3.1
 
 
+import GerenciamentoDeFuncionarios.Funcionario;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;

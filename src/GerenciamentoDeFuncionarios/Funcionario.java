@@ -1,4 +1,4 @@
-package Controle;
+package GerenciamentoDeFuncionarios;
 // Generated 16/10/2016 21:31:24 by Hibernate Tools 4.3.1
 
 
@@ -32,21 +32,22 @@ public class Funcionario  implements java.io.Serializable {
      private String cep;
      private String telefone;
      private Integer status;
-     private Set vendases = new HashSet(0);
-     private Set faltases = new HashSet(0);
-     private Set acessos = new HashSet(0);
-
-    public Funcionario() {
-    }
-
+     private Set vendases = null;
+     private Set faltases = null;
+     private Set acessos = null;
 	
+     
+   public Funcionario(){
+       
+   }
+     
     public Funcionario(String idFunc, String nome, String cpf, String endereco) {
         this.idFunc = idFunc;
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
     }
-    public Funcionario(String idFunc, String nome, String cpf, String rg, Date dataNascimento, String estadoCivil, String nomeConjuge, String endereco, String numero, String complemento, String cidade, String estado, String cargo, Date dataContratacao, Integer nivelAcesso, String sexo, String bairro, String cep, String telefone, Integer status, Set vendases, Set faltases, Set acessos) {
+    public Funcionario(String idFunc, String nome, String cpf, String rg, Date dataNascimento, String estadoCivil, String nomeConjuge, String endereco, String numero, String complemento, String cidade, String estado, String cargo, Date dataContratacao, Integer nivelAcesso, String sexo, String bairro, String cep, String telefone, Integer status) {
        this.idFunc = idFunc;
        this.nome = nome;
        this.cpf = cpf;
@@ -67,11 +68,10 @@ public class Funcionario  implements java.io.Serializable {
        this.cep = cep;
        this.telefone = telefone;
        this.status = status;
-       this.vendases = vendases;
-       this.faltases = faltases;
-       this.acessos = acessos;
+
     }
-   
+    
+    
     public String getIdFunc() {
         return this.idFunc;
     }
