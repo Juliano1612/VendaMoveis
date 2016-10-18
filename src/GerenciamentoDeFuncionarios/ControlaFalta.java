@@ -5,8 +5,8 @@
  */
 package GerenciamentoDeFuncionarios;
 
-import GerenciamentoDeFuncionarios.Faltas;
-import GerenciamentoDeFuncionarios.Funcionario;
+import Controle.Faltas;
+import Controle.Funcionario;
 import Util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,13 +18,12 @@ import org.hibernate.Session;
 /**
  *
  * @author rafael
+ * Classe para controlar operacoes de dados e persistência sobre entidade
+ * FALTA
  */
 public class ControlaFalta {
 
-    public boolean persisteFalta(Faltas falta, Integer justificativaFlag, String justificativatextual, Date datafalta) {
-        falta.setJustificativaFlag(justificativaFlag);
-        falta.setJustificativatextual(justificativatextual);
-        falta.setDatafalta(datafalta);
+    public boolean persisteFalta(Faltas falta) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         try {
@@ -47,9 +46,14 @@ public class ControlaFalta {
     }
 
     public ArrayList<Faltas> getListaFaltas(String id_func) {
+        String formatquery = new String();
+        
+        formatquery = "From Faltas Where id_func =";
+        formatquery += id_func;
+        
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        ArrayList<Faltas> listaFaltas = (ArrayList<Faltas>) s.createQuery("From Faltas").list();
+        ArrayList<Faltas> listaFaltas = (ArrayList<Faltas>) s.createQuery(formatquery).list();
         s.getTransaction().commit();
         Collections.sort(listaFaltas, new Comparator<Faltas>() {
             @Override
@@ -57,13 +61,7 @@ public class ControlaFalta {
                 return o1.getDatafalta().compareTo(o2.getDatafalta());
             }
         });
-        
-        for(Faltas f : listaFaltas)
-        {
-            if(f.getFuncionario().getIdFunc() != id_func)
-                listaFaltas.remove(f);
-        }
-        
+             
         return listaFaltas;
     }
 
