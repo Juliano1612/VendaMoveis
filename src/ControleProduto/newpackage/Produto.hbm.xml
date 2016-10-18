@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 16/10/2016 21:31:26 by Hibernate Tools 4.3.1 -->
+<!-- Generated 07/10/2016 23:55:48 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
   <class catalog="Vendas" name="Controle.Produto" optimistic-lock="version" table="Produto">
     <id name="prodId" type="string">
@@ -34,17 +34,17 @@
     <property name="marca" type="string">
       <column length="45" name="marca"/>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="pedidoEstoques" table="PedidoEstoque">
-      <key>
-        <column length="60" name="prod_ID"/>
-      </key>
-      <one-to-many class="Controle.PedidoEstoque"/>
-    </set>
     <set fetch="select" inverse="true" lazy="true" name="prodVendas" table="Prod_Venda">
       <key>
         <column length="60" name="prod_ID"/>
       </key>
       <one-to-many class="Controle.ProdVenda"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="pedidoEstoques" table="PedidoEstoque">
+      <key>
+        <column length="60" name="prod_ID"/>
+      </key>
+      <one-to-many class="ControleEstoque.PedidoEstoque"/>
     </set>
     <set fetch="select" inverse="true" lazy="true" name="imagemProdutos" table="Imagem_Produto">
       <key>

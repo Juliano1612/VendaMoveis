@@ -1,5 +1,5 @@
 package ControleProduto;
-// Generated 07/10/2016 23:55:47 by Hibernate Tools 4.3.1
+// Generated 16/10/2016 21:31:24 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -21,8 +21,8 @@ public class Produto  implements java.io.Serializable {
      private Float largura;
      private Float profundidade;
      private String marca;
-     private Set prodVendas = new HashSet(0);
      private Set pedidoEstoques = new HashSet(0);
+     private Set prodVendas = new HashSet(0);
      private Set imagemProdutos = new HashSet(0);
 
     public Produto() {
@@ -34,7 +34,7 @@ public class Produto  implements java.io.Serializable {
         this.nomeProd = nomeProd;
         this.quantidadeEstoque = quantidadeEstoque;
     }
-    public Produto(String prodId, String nomeProd, int quantidadeEstoque, String descricao, Float precoVenda, Float precoCusto, Float altura, Float largura, Float profundidade, String marca){ //, Set prodVendas, Set pedidoEstoques, Set imagemProdutos) {
+    public Produto(String prodId, String nomeProd, int quantidadeEstoque, String descricao, Float precoVenda, Float precoCusto, Float altura, Float largura, Float profundidade, String marca, Set pedidoEstoques, Set prodVendas, Set imagemProdutos) {
        this.prodId = prodId;
        this.nomeProd = nomeProd;
        this.quantidadeEstoque = quantidadeEstoque;
@@ -45,8 +45,8 @@ public class Produto  implements java.io.Serializable {
        this.largura = largura;
        this.profundidade = profundidade;
        this.marca = marca;
-       this.prodVendas = prodVendas;
        this.pedidoEstoques = pedidoEstoques;
+       this.prodVendas = prodVendas;
        this.imagemProdutos = imagemProdutos;
     }
    
@@ -120,19 +120,19 @@ public class Produto  implements java.io.Serializable {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-    public Set getProdVendas() {
-        return this.prodVendas;
-    }
-    
-    public void setProdVendas(Set prodVendas) {
-        this.prodVendas = prodVendas;
-    }
     public Set getPedidoEstoques() {
         return this.pedidoEstoques;
     }
     
     public void setPedidoEstoques(Set pedidoEstoques) {
         this.pedidoEstoques = pedidoEstoques;
+    }
+    public Set getProdVendas() {
+        return this.prodVendas;
+    }
+    
+    public void setProdVendas(Set prodVendas) {
+        this.prodVendas = prodVendas;
     }
     public Set getImagemProdutos() {
         return this.imagemProdutos;
