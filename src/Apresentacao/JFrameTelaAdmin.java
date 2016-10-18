@@ -1,5 +1,6 @@
 package Apresentacao;
 
+import ControleDeAcesso.Acesso;
 import ControleDeAcesso.ControlaAcesso;
 import GerenciamentoDeFuncionarios.ControlaFuncionario;
 import GerenciamentoDeFuncionarios.Funcionario;
@@ -20,11 +21,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JFrameTelaAdmin extends javax.swing.JFrame {
 
-    ArrayList<Funcionario> funcionarios = new ControlaFuncionario().getListaFuncionarios();
+    ArrayList<Funcionario> funcionarios;
+    Acesso acesso = null;
 
     public JFrameTelaAdmin() {
         initComponents();
-               
+
+        jInternalFrameAcesso.setVisible(false);
+        jButtonSalvarSenhaAcesso.setVisible(false);
+        jInternalFrameAcesso.setTitle("Gerenciar Acesso");
+        jTextFieldSenhaAcesso.setEnabled(false);
+
+        jButtonConsultarFunc.setVisible(false);
+        jButtonGerenciarAcesso.setVisible(false);
+
         this.setVisible(true);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -40,9 +50,9 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jButtonEncerrarSessao = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelPrincipal = new javax.swing.JPanel();
         jTabbedPaneFuncionario = new javax.swing.JTabbedPane();
-        jPanel4 = new javax.swing.JPanel();
+        jPanelCadastrarFuncionario = new javax.swing.JPanel();
         jLabelDataNascimentoFunc = new javax.swing.JLabel();
         jLabelComplementoFunc = new javax.swing.JLabel();
         jLabelEnderecoFunc = new javax.swing.JLabel();
@@ -83,11 +93,20 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
         jLabelSenhaFunc = new javax.swing.JLabel();
         jTextFieldSenha = new javax.swing.JTextField();
         jButtonConfirmarFunc = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        jPanelConsultarFuncionario = new javax.swing.JPanel();
+        jInternalFrameAcesso = new javax.swing.JInternalFrame();
+        jLabelNomeAcesso = new javax.swing.JLabel();
+        jLabelSenhaAcesso = new javax.swing.JLabel();
+        jLabelLoginAcesso = new javax.swing.JLabel();
+        jTextFieldSenhaAcesso = new javax.swing.JTextField();
+        jButtonAlterarSenhaAcesso = new javax.swing.JButton();
+        jButtonSalvarSenhaAcesso = new javax.swing.JButton();
+        jButtonFecharInternalFrame = new javax.swing.JButton();
+        jScrollPaneTabelaFuncionarios = new javax.swing.JScrollPane();
         jTableFuncionarios = new javax.swing.JTable();
         jButtonListarFunc = new javax.swing.JButton();
         jButtonConsultarFunc = new javax.swing.JButton();
+        jButtonGerenciarAcesso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,71 +117,71 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
             }
         });
 
-        jPanel4.setLayout(null);
+        jPanelCadastrarFuncionario.setLayout(null);
 
         jLabelDataNascimentoFunc.setText("Data de Nascimento");
-        jPanel4.add(jLabelDataNascimentoFunc);
+        jPanelCadastrarFuncionario.add(jLabelDataNascimentoFunc);
         jLabelDataNascimentoFunc.setBounds(0, 290, 110, 30);
 
         jLabelComplementoFunc.setText("Complemento");
-        jPanel4.add(jLabelComplementoFunc);
+        jPanelCadastrarFuncionario.add(jLabelComplementoFunc);
         jLabelComplementoFunc.setBounds(20, 240, 80, 30);
 
         jLabelEnderecoFunc.setText("Endereço");
-        jPanel4.add(jLabelEnderecoFunc);
+        jPanelCadastrarFuncionario.add(jLabelEnderecoFunc);
         jLabelEnderecoFunc.setBounds(30, 190, 70, 30);
 
         jLabelCPFFunc.setText("CPF");
-        jPanel4.add(jLabelCPFFunc);
+        jPanelCadastrarFuncionario.add(jLabelCPFFunc);
         jLabelCPFFunc.setBounds(490, 140, 40, 30);
 
         jLabelRGFunc.setText("RG");
-        jPanel4.add(jLabelRGFunc);
+        jPanelCadastrarFuncionario.add(jLabelRGFunc);
         jLabelRGFunc.setBounds(70, 140, 30, 30);
 
         jLabelNomeCompletoFunc.setText("Nome");
-        jPanel4.add(jLabelNomeCompletoFunc);
+        jPanelCadastrarFuncionario.add(jLabelNomeCompletoFunc);
         jLabelNomeCompletoFunc.setBounds(60, 90, 40, 30);
 
         jLabelTelefoneFunc.setText("Telefone Fixo");
-        jPanel4.add(jLabelTelefoneFunc);
+        jPanelCadastrarFuncionario.add(jLabelTelefoneFunc);
         jLabelTelefoneFunc.setBounds(460, 340, 80, 30);
 
         jLabelEstadoCivilFunc.setText("Estado Civil");
-        jPanel4.add(jLabelEstadoCivilFunc);
+        jPanelCadastrarFuncionario.add(jLabelEstadoCivilFunc);
         jLabelEstadoCivilFunc.setBounds(230, 290, 70, 30);
 
         jLabelCabecalho1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelCabecalho1.setText("Cadastro de Novo Funcionario");
-        jPanel4.add(jLabelCabecalho1);
+        jPanelCadastrarFuncionario.add(jLabelCabecalho1);
         jLabelCabecalho1.setBounds(356, 20, 210, 31);
 
         jLabelNumeroFunc.setText("Número");
-        jPanel4.add(jLabelNumeroFunc);
+        jPanelCadastrarFuncionario.add(jLabelNumeroFunc);
         jLabelNumeroFunc.setBounds(480, 240, 60, 30);
 
         jLabelBairroFunc.setText("Bairro");
-        jPanel4.add(jLabelBairroFunc);
+        jPanelCadastrarFuncionario.add(jLabelBairroFunc);
         jLabelBairroFunc.setBounds(260, 240, 50, 30);
 
         jLabelCidadeFunc.setText("Cidade");
-        jPanel4.add(jLabelCidadeFunc);
+        jPanelCadastrarFuncionario.add(jLabelCidadeFunc);
         jLabelCidadeFunc.setBounds(650, 240, 40, 30);
 
         jLabelCEPfunc.setText("CEP");
-        jPanel4.add(jLabelCEPfunc);
+        jPanelCadastrarFuncionario.add(jLabelCEPfunc);
         jLabelCEPfunc.setBounds(640, 190, 40, 30);
 
         jLabelEstadoFunc.setText("Estado");
-        jPanel4.add(jLabelEstadoFunc);
+        jPanelCadastrarFuncionario.add(jLabelEstadoFunc);
         jLabelEstadoFunc.setBounds(820, 240, 50, 30);
 
         jLabelSexoFunc.setText("Sexo");
-        jPanel4.add(jLabelSexoFunc);
+        jPanelCadastrarFuncionario.add(jLabelSexoFunc);
         jLabelSexoFunc.setBounds(780, 90, 40, 30);
 
         jLabelNomeConjugeFunc.setText("Nome Conjuge");
-        jPanel4.add(jLabelNomeConjugeFunc);
+        jPanelCadastrarFuncionario.add(jLabelNomeConjugeFunc);
         jLabelNomeConjugeFunc.setBounds(20, 340, 80, 30);
 
         jTextFieldNomeCompleto.addActionListener(new java.awt.event.ActionListener() {
@@ -170,21 +189,21 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
                 jTextFieldNomeCompletoActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextFieldNomeCompleto);
+        jPanelCadastrarFuncionario.add(jTextFieldNomeCompleto);
         jTextFieldNomeCompleto.setBounds(110, 90, 660, 30);
-        jPanel4.add(jTextFieldRG2);
+        jPanelCadastrarFuncionario.add(jTextFieldRG2);
         jTextFieldRG2.setBounds(110, 140, 360, 30);
 
         jComboBoxSexo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
-        jPanel4.add(jComboBoxSexo2);
+        jPanelCadastrarFuncionario.add(jComboBoxSexo2);
         jComboBoxSexo2.setBounds(810, 90, 120, 30);
-        jPanel4.add(jTextFieldCPF2);
+        jPanelCadastrarFuncionario.add(jTextFieldCPF2);
         jTextFieldCPF2.setBounds(520, 140, 410, 30);
-        jPanel4.add(jTextFieldEndereco2);
+        jPanelCadastrarFuncionario.add(jTextFieldEndereco2);
         jTextFieldEndereco2.setBounds(110, 190, 510, 30);
-        jPanel4.add(jTextFieldCEP2);
+        jPanelCadastrarFuncionario.add(jTextFieldCEP2);
         jTextFieldCEP2.setBounds(670, 190, 260, 30);
-        jPanel4.add(jTextFieldNumero2);
+        jPanelCadastrarFuncionario.add(jTextFieldNumero2);
         jTextFieldNumero2.setBounds(530, 240, 110, 30);
 
         jTextFieldComplemento2.addActionListener(new java.awt.event.ActionListener() {
@@ -192,22 +211,22 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
                 jTextFieldComplemento2ActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextFieldComplemento2);
+        jPanelCadastrarFuncionario.add(jTextFieldComplemento2);
         jTextFieldComplemento2.setBounds(110, 240, 140, 30);
-        jPanel4.add(jTextFieldBairro2);
+        jPanelCadastrarFuncionario.add(jTextFieldBairro2);
         jTextFieldBairro2.setBounds(300, 240, 170, 30);
-        jPanel4.add(jTextFieldCidade2);
+        jPanelCadastrarFuncionario.add(jTextFieldCidade2);
         jTextFieldCidade2.setBounds(690, 240, 120, 30);
-        jPanel4.add(jTextFieldEstado2);
+        jPanelCadastrarFuncionario.add(jTextFieldEstado2);
         jTextFieldEstado2.setBounds(860, 240, 70, 30);
 
         jComboBoxEstadoCivil2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro(a)", "Casado(a)", "Viúvo(a)", "Divorciado(a)" }));
         jComboBoxEstadoCivil2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel4.add(jComboBoxEstadoCivil2);
+        jPanelCadastrarFuncionario.add(jComboBoxEstadoCivil2);
         jComboBoxEstadoCivil2.setBounds(300, 290, 130, 30);
-        jPanel4.add(jTextFieldNomeConjuge);
+        jPanelCadastrarFuncionario.add(jTextFieldNomeConjuge);
         jTextFieldNomeConjuge.setBounds(110, 340, 340, 30);
-        jPanel4.add(jTextFieldTelefone);
+        jPanelCadastrarFuncionario.add(jTextFieldTelefone);
         jTextFieldTelefone.setBounds(540, 340, 390, 30);
 
         jFormattedTextFieldDataNascimento2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
@@ -216,11 +235,11 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
                 jFormattedTextFieldDataNascimento2ActionPerformed(evt);
             }
         });
-        jPanel4.add(jFormattedTextFieldDataNascimento2);
+        jPanelCadastrarFuncionario.add(jFormattedTextFieldDataNascimento2);
         jFormattedTextFieldDataNascimento2.setBounds(110, 290, 110, 30);
 
         jLabelDataContratacaoFunc.setText("Data de Contratação");
-        jPanel4.add(jLabelDataContratacaoFunc);
+        jPanelCadastrarFuncionario.add(jLabelDataContratacaoFunc);
         jLabelDataContratacaoFunc.setBounds(440, 294, 110, 30);
 
         jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
@@ -229,28 +248,28 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
                 jFormattedTextField1ActionPerformed(evt);
             }
         });
-        jPanel4.add(jFormattedTextField1);
+        jPanelCadastrarFuncionario.add(jFormattedTextField1);
         jFormattedTextField1.setBounds(550, 290, 170, 30);
 
         jLabelCargoFunc.setText("Cargo");
-        jPanel4.add(jLabelCargoFunc);
+        jPanelCadastrarFuncionario.add(jLabelCargoFunc);
         jLabelCargoFunc.setBounds(730, 290, 50, 30);
 
         jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Almoxarife", "Contador(a)", "Gerente", "Vendedor(a)" }));
         jComboBoxCargo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel4.add(jComboBoxCargo);
+        jPanelCadastrarFuncionario.add(jComboBoxCargo);
         jComboBoxCargo.setBounds(770, 290, 160, 30);
 
         jLabelLoginFunc.setText("Login");
-        jPanel4.add(jLabelLoginFunc);
+        jPanelCadastrarFuncionario.add(jLabelLoginFunc);
         jLabelLoginFunc.setBounds(50, 390, 40, 30);
-        jPanel4.add(jTextFieldLogin);
+        jPanelCadastrarFuncionario.add(jTextFieldLogin);
         jTextFieldLogin.setBounds(110, 390, 340, 30);
 
         jLabelSenhaFunc.setText("Senha");
-        jPanel4.add(jLabelSenhaFunc);
+        jPanelCadastrarFuncionario.add(jLabelSenhaFunc);
         jLabelSenhaFunc.setBounds(470, 390, 50, 30);
-        jPanel4.add(jTextFieldSenha);
+        jPanelCadastrarFuncionario.add(jTextFieldSenha);
         jTextFieldSenha.setBounds(540, 390, 390, 30);
 
         jButtonConfirmarFunc.setText("Confirmar");
@@ -260,10 +279,52 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
                 jButtonConfirmarFuncActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonConfirmarFunc);
+        jPanelCadastrarFuncionario.add(jButtonConfirmarFunc);
         jButtonConfirmarFunc.setBounds(820, 470, 100, 50);
 
-        jTabbedPaneFuncionario.addTab("Cadastro", jPanel4);
+        jTabbedPaneFuncionario.addTab("Cadastro", jPanelCadastrarFuncionario);
+
+        jPanelConsultarFuncionario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jInternalFrameAcesso.setVisible(true);
+        jInternalFrameAcesso.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelNomeAcesso.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jInternalFrameAcesso.getContentPane().add(jLabelNomeAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 22, 424, 33));
+
+        jLabelSenhaAcesso.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelSenhaAcesso.setText("Senha Acesso:");
+        jInternalFrameAcesso.getContentPane().add(jLabelSenhaAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 121, 81, 38));
+
+        jLabelLoginAcesso.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jInternalFrameAcesso.getContentPane().add(jLabelLoginAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 71, 424, 38));
+        jInternalFrameAcesso.getContentPane().add(jTextFieldSenhaAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 121, 325, 38));
+
+        jButtonAlterarSenhaAcesso.setText("Alterar Senha");
+        jButtonAlterarSenhaAcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarSenhaAcessoActionPerformed(evt);
+            }
+        });
+        jInternalFrameAcesso.getContentPane().add(jButtonAlterarSenhaAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 140, 40));
+
+        jButtonSalvarSenhaAcesso.setText("Salvar Senha");
+        jButtonSalvarSenhaAcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarSenhaAcessoActionPerformed(evt);
+            }
+        });
+        jInternalFrameAcesso.getContentPane().add(jButtonSalvarSenhaAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 140, 40));
+
+        jButtonFecharInternalFrame.setText("Fechar");
+        jButtonFecharInternalFrame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFecharInternalFrameActionPerformed(evt);
+            }
+        });
+        jInternalFrameAcesso.getContentPane().add(jButtonFecharInternalFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 199, 110, 40));
+
+        jPanelConsultarFuncionario.add(jInternalFrameAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 460, 280));
 
         jTableFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -303,7 +364,9 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
             }
         });
         jTableFuncionarios.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(jTableFuncionarios);
+        jScrollPaneTabelaFuncionarios.setViewportView(jTableFuncionarios);
+
+        jPanelConsultarFuncionario.add(jScrollPaneTabelaFuncionarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 24, 958, 404));
 
         jButtonListarFunc.setText("Listar Funcionários");
         jButtonListarFunc.addActionListener(new java.awt.event.ActionListener() {
@@ -311,6 +374,7 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
                 jButtonListarFuncActionPerformed(evt);
             }
         });
+        jPanelConsultarFuncionario.add(jButtonListarFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 473, 190, 50));
 
         jButtonConsultarFunc.setText("Consultar");
         jButtonConsultarFunc.addActionListener(new java.awt.event.ActionListener() {
@@ -318,52 +382,34 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
                 jButtonConsultarFuncActionPerformed(evt);
             }
         });
+        jPanelConsultarFuncionario.add(jButtonConsultarFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 473, 120, 50));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonListarFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
-                        .addComponent(jButtonConsultarFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonListarFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConsultarFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64))
-        );
+        jButtonGerenciarAcesso.setText("Gerenciar Acesso");
+        jButtonGerenciarAcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGerenciarAcessoActionPerformed(evt);
+            }
+        });
+        jPanelConsultarFuncionario.add(jButtonGerenciarAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 470, 170, 60));
 
-        jTabbedPaneFuncionario.addTab("Consulta", jPanel5);
+        jTabbedPaneFuncionario.addTab("Consulta", jPanelConsultarFuncionario);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
+        jPanelPrincipal.setLayout(jPanelPrincipalLayout);
+        jPanelPrincipalLayout.setHorizontalGroup(
+            jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPrincipalLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPaneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 963, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelPrincipalLayout.setVerticalGroup(
+            jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 600, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPrincipalLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPaneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(20, Short.MAX_VALUE)))
@@ -376,12 +422,12 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(411, 411, 411)
                 .addComponent(jButtonEncerrarSessao, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 973, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 973, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonEncerrarSessao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -481,7 +527,11 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
     }
     private void jButtonListarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarFuncActionPerformed
         // TODO add your handling code here:
-        jButtonListarFunc.setVisible(false);
+        funcionarios = new ControlaFuncionario().getListaFuncionarios();
+        jButtonConsultarFunc.setVisible(true);
+        jButtonGerenciarAcesso.setVisible(true);
+        //jButtonListarFunc.setVisible(false);
+
         DefaultTableModel modelo = (DefaultTableModel) jTableFuncionarios.getModel();
         modelo.setNumRows(0);
         for (Funcionario f : funcionarios) {
@@ -501,6 +551,69 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
             new FrameCadastroFuncionario((funcionario));
         }
     }//GEN-LAST:event_jButtonConsultarFuncActionPerformed
+
+    private void jButtonGerenciarAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerenciarAcessoActionPerformed
+        // TODO add your handling code here:
+
+        int indice = jTableFuncionarios.getSelectedRow();
+        if (indice == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione um funcionário!");
+        } else {
+            Funcionario funcionario = funcionarios.get(indice);
+            ArrayList<Acesso> acessos = new ControlaAcesso().getListaAcessos();
+
+            boolean temAcesso = false;
+
+            for (Acesso a : acessos) {
+                if (a.getFuncionario().getIdFunc().equals(funcionario.getIdFunc())) {
+                    acesso = a;
+                    temAcesso = true;
+                    break;
+                }
+            }
+            if (temAcesso) {
+                jLabelNomeAcesso.setText("Nome: " + funcionario.getNome());
+                jLabelLoginAcesso.setText("Login: " + acesso.getLogin());
+                jTextFieldSenhaAcesso.setText(acesso.getSenha());
+                jInternalFrameAcesso.setVisible(true);
+                desativaConsulta(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "Este funcionário não possui acesso!");
+            }
+
+        }
+    }//GEN-LAST:event_jButtonGerenciarAcessoActionPerformed
+
+    private void jButtonAlterarSenhaAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarSenhaAcessoActionPerformed
+        // TODO add your handling code here:
+        jButtonFecharInternalFrame.setVisible(false);
+        jButtonAlterarSenhaAcesso.setVisible(false);
+        jButtonSalvarSenhaAcesso.setVisible(true);
+        jTextFieldSenhaAcesso.setEnabled(true);
+    }//GEN-LAST:event_jButtonAlterarSenhaAcessoActionPerformed
+
+    private void jButtonSalvarSenhaAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarSenhaAcessoActionPerformed
+        // TODO add your handling code here:
+        jTextFieldSenhaAcesso.setEnabled(false);
+        acesso.setSenha(jTextFieldSenhaAcesso.getText());
+        boolean persistiu = new ControlaAcesso().persisteAcesso(acesso);
+        if (persistiu) {
+            jButtonAlterarSenhaAcesso.setVisible(true);
+            jButtonFecharInternalFrame.setVisible(true);
+            jButtonSalvarSenhaAcesso.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Senha Alterada com Sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro na operação. Tente novamente!");
+            jTextFieldSenhaAcesso.setEnabled(true);
+        }
+
+    }//GEN-LAST:event_jButtonSalvarSenhaAcessoActionPerformed
+
+    private void jButtonFecharInternalFrameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharInternalFrameActionPerformed
+        // TODO add your handling code here:
+        jInternalFrameAcesso.setVisible(false);
+        desativaConsulta(true);
+    }//GEN-LAST:event_jButtonFecharInternalFrameActionPerformed
 
     public void limpaCampos() {
         jTextFieldBairro2.setText("");
@@ -558,15 +671,20 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAlterarSenhaAcesso;
     private javax.swing.JButton jButtonConfirmarFunc;
     private javax.swing.JButton jButtonConsultarFunc;
     private javax.swing.JButton jButtonEncerrarSessao;
+    private javax.swing.JButton jButtonFecharInternalFrame;
+    private javax.swing.JButton jButtonGerenciarAcesso;
     private javax.swing.JButton jButtonListarFunc;
+    private javax.swing.JButton jButtonSalvarSenhaAcesso;
     private javax.swing.JComboBox<String> jComboBoxCargo;
     private javax.swing.JComboBox<String> jComboBoxEstadoCivil2;
     private javax.swing.JComboBox<String> jComboBoxSexo2;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataNascimento2;
+    private javax.swing.JInternalFrame jInternalFrameAcesso;
     private javax.swing.JLabel jLabelBairroFunc;
     private javax.swing.JLabel jLabelCEPfunc;
     private javax.swing.JLabel jLabelCPFFunc;
@@ -579,18 +697,21 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelEnderecoFunc;
     private javax.swing.JLabel jLabelEstadoCivilFunc;
     private javax.swing.JLabel jLabelEstadoFunc;
+    private javax.swing.JLabel jLabelLoginAcesso;
     private javax.swing.JLabel jLabelLoginFunc;
+    private javax.swing.JLabel jLabelNomeAcesso;
     private javax.swing.JLabel jLabelNomeCompletoFunc;
     private javax.swing.JLabel jLabelNomeConjugeFunc;
     private javax.swing.JLabel jLabelNumeroFunc;
     private javax.swing.JLabel jLabelRGFunc;
+    private javax.swing.JLabel jLabelSenhaAcesso;
     private javax.swing.JLabel jLabelSenhaFunc;
     private javax.swing.JLabel jLabelSexoFunc;
     private javax.swing.JLabel jLabelTelefoneFunc;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPanel jPanelCadastrarFuncionario;
+    private javax.swing.JPanel jPanelConsultarFuncionario;
+    private javax.swing.JPanel jPanelPrincipal;
+    private javax.swing.JScrollPane jScrollPaneTabelaFuncionarios;
     private javax.swing.JTabbedPane jTabbedPaneFuncionario;
     private javax.swing.JTable jTableFuncionarios;
     private javax.swing.JTextField jTextFieldBairro2;
@@ -606,6 +727,17 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNumero2;
     private javax.swing.JTextField jTextFieldRG2;
     private javax.swing.JTextField jTextFieldSenha;
+    private javax.swing.JTextField jTextFieldSenhaAcesso;
     private javax.swing.JTextField jTextFieldTelefone;
     // End of variables declaration//GEN-END:variables
+
+    private void desativaConsulta(boolean bool) {
+
+        jTabbedPaneFuncionario.setEnabled(bool);
+        jTableFuncionarios.setEnabled(bool);
+        jButtonListarFunc.setEnabled(bool);
+        jButtonConsultarFunc.setEnabled(bool);
+        jButtonGerenciarAcesso.setEnabled(bool);
+        jButtonEncerrarSessao.setEnabled(bool);
+    }
 }

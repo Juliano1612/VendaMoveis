@@ -155,4 +155,17 @@ public class ControlaAcesso {
         HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         return false;
     }
+    
+    public boolean persisteAcesso(Acesso acesso){
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        try {
+            s.saveOrUpdate(acesso);
+            s.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            s.getTransaction().commit();
+            return false;
+        }
+    }
 }
