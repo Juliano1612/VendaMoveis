@@ -7,7 +7,7 @@
       <column length="60" name="Imagem_ID"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="Controle.Produto" fetch="select" name="produto">
+    <many-to-one class="ControleProduto.Produto" fetch="select" name="produto">
       <column length="60" name="prod_ID"/>
     </many-to-one>
     <property name="imagem" type="binary">

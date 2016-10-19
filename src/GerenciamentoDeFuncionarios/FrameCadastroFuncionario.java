@@ -163,23 +163,23 @@ public class FrameCadastroFuncionario extends javax.swing.JFrame {
         jTextFieldEndereco.setText(funcionario.getEndereco());
         jTextFieldEstado.setText(funcionario.getEstado());
         
-        if(funcionario.getEstadoCivil() == "Solteiro(a)")
-        {
-            this.jComboBoxEstadoCivil.setSelectedItem(EstadoCivil.SOLTEIRO);
-            this.jTextFieldNomeConjuge.setEnabled(false);
-        }
-        else
+        if(funcionario.getEstadoCivil().equals("Casado(a)"))
         {
             this.jComboBoxEstadoCivil.setSelectedItem(EstadoCivil.CASADO);
             this.jTextFieldNomeConjuge.setEnabled(true);
             jTextFieldNomeConjuge.setText(funcionario.getNomeConjuge());
+        }
+        else
+        {
+            this.jComboBoxEstadoCivil.setSelectedItem(EstadoCivil.SOLTEIRO);
+            this.jTextFieldNomeConjuge.setEnabled(false);
         }
         
         jTextFieldNomeCompleto.setText(funcionario.getNome());
  
         jTextFieldRG.setText(funcionario.getRg());
         
-        if(funcionario.getSexo() == "Masculino")
+        if(funcionario.getSexo().equals("Masculino"))
             this.jComboBoxSexo.setSelectedItem(Sexo.MASCULINO);
         else
             this.jComboBoxSexo.setSelectedItem(Sexo.FEMININO);

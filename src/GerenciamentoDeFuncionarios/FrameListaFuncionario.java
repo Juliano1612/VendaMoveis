@@ -5,15 +5,11 @@
  */
 package GerenciamentoDeFuncionarios;
 
-import GerenciamentoDeFuncionarios.ControlaFuncionario;
 import java.util.ArrayList;
 import java.util.Vector;
-import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import javax.swing.event.ListDataListener;
+
 
 /**
  *
