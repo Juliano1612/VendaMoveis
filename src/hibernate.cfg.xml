@@ -10,7 +10,7 @@
     <property name="hibernate.current_session_context_class">thread</property>
     <mapping resource="Controle/ProdVenda.hbm.xml"/>
     <mapping resource="ControleDeAcesso/Acesso.hbm.xml"/>
-    <mapping resource="Controle/Produto.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="ControleProduto/Produto.hbm.xml"/>
     <mapping resource="Controle/Parcela.hbm.xml"/>
     <mapping resource="Controle/PedidoEstoque.hbm.xml"/>
     <mapping resource="Controle/Gastos.hbm.xml"/>

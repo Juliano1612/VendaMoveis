@@ -314,7 +314,7 @@ public class JFrameCriarProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Um dos campos não está preenchido!");
         } else {
             try {
-                Produto produto = new ControlaProduto().cadastraProduto(Integer.toString(idProduto), JTextNomeProduto.getText(), Integer.parseInt(JTextQuantidade.getText()), jTextAreaDescriçãoProduto.getText(), Float.parseFloat(JTextPreçoVenda.getText()), Float.parseFloat(JTextPreçoCompra.getText()), Float.parseFloat(JTextAltura.getText()) , Float.parseFloat(JTextLargura.getText()), Float.parseFloat(JTextProfundidade.getText()), JTextMarca.getText());
+                //Produto produto = new ControlaProduto().cadastraProduto(Integer.toString(idProduto), JTextNomeProduto.getText(), Integer.parseInt(JTextQuantidade.getText()), jTextAreaDescriçãoProduto.getText(), Float.parseFloat(JTextPreçoVenda.getText()), Float.parseFloat(JTextPreçoCompra.getText()), Float.parseFloat(JTextAltura.getText()) , Float.parseFloat(JTextLargura.getText()), Float.parseFloat(JTextProfundidade.getText()), JTextMarca.getText());
 
                 JOptionPane.showMessageDialog(null, "O produto, cujo Id é : " + idProduto + " foi cadastrado com sucesso!");
                 idProduto = geraid.GeraChave(1);

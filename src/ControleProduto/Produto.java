@@ -34,7 +34,7 @@ public class Produto  implements java.io.Serializable {
         this.nomeProd = nomeProd;
         this.quantidadeEstoque = quantidadeEstoque;
     }
-    public Produto(String prodId, String nomeProd, int quantidadeEstoque, String descricao, Float precoVenda, Float precoCusto, Float altura, Float largura, Float profundidade, String marca, Set pedidoEstoques, Set prodVendas, Set imagemProdutos) {
+    public Produto(String prodId, String nomeProd, int quantidadeEstoque, String descricao, Float precoVenda, Float precoCusto, Float altura, Float largura, Float profundidade, String marca){ //, Set pedidoEstoques, Set prodVendas, Set imagemProdutos) {
        this.prodId = prodId;
        this.nomeProd = nomeProd;
        this.quantidadeEstoque = quantidadeEstoque;
