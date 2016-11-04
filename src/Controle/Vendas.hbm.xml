@@ -7,7 +7,7 @@
       <column length="60" name="venda_ID"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="Controle.Cliente" fetch="select" name="cliente">
+    <many-to-one class="ControleCliente.Cliente" fetch="select" name="cliente">
       <column length="60" name="cli_ID"/>
     </many-to-one>
     <many-to-one class="GerenciamentoDeFuncionarios.Funcionario" fetch="select" name="funcionario">

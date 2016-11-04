@@ -1,5 +1,4 @@
-package Controle;
-// Generated 16/10/2016 21:31:24 by Hibernate Tools 4.3.1
+package ControleCliente;
 
 
 import java.util.Date;
@@ -44,7 +43,7 @@ public class Cliente  implements java.io.Serializable {
         this.cpf = cpf;
         this.endereco = endereco;
     }
-    public Cliente(String cliId, String nome, String sobrenome, String cpf, String rg, Date dataNascimento, String endereco, String numero, String complemento, String cidade, String estado, String telFixo, String telMovel, String email, String nomeMae, String nomePai, String sexo, String bairro, String estadoCivil, Set vendases) {
+    public Cliente(String cliId, String nome, String sobrenome, String cpf, String rg, Date dataNascimento, String endereco, String numero, String complemento, String cidade, String estado, String telFixo, String telMovel, String email, String nomeMae, String nomePai, String sexo, String bairro, String estadoCivil) {
        this.cliId = cliId;
        this.nome = nome;
        this.sobrenome = sobrenome;
@@ -64,7 +63,7 @@ public class Cliente  implements java.io.Serializable {
        this.sexo = sexo;
        this.bairro = bairro;
        this.estadoCivil = estadoCivil;
-       this.vendases = vendases;
+       this.vendases = null;
     }
    
     public String getCliId() {
