@@ -7,10 +7,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
-/**
- *
- * @author Anderson Sergio Oyama
- */
+
 public class JFrameTelaLogin extends javax.swing.JFrame {
 
 
@@ -31,7 +28,6 @@ public class JFrameTelaLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         JButton_logar = new javax.swing.JButton();
-        JButton_ConsulFreq = new javax.swing.JButton();
         JPassword_senha = new javax.swing.JPasswordField();
         JTextField_login = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -45,17 +41,10 @@ public class JFrameTelaLogin extends javax.swing.JFrame {
             }
         });
 
-        JButton_logar.setText("Logar");
+        JButton_logar.setText("Entrar");
         JButton_logar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JButton_logarActionPerformed(evt);
-            }
-        });
-
-        JButton_ConsulFreq.setText("Consultar Frequência");
-        JButton_ConsulFreq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JButton_ConsulFreqActionPerformed(evt);
             }
         });
 
@@ -94,38 +83,30 @@ public class JFrameTelaLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(132, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(JTextField_login, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JPassword_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(132, 132, 132))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(JTextField_login, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(JPassword_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(JButton_ConsulFreq)
-                        .addGap(47, 47, 47)
-                        .addComponent(JButton_logar)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(233, 233, 233)
+                .addComponent(JButton_logar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(19, 19, 19)
-                .addComponent(JTextField_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(JPassword_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(JTextField_login, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JButton_ConsulFreq)
-                    .addComponent(JButton_logar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(JPassword_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(JButton_logar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -166,17 +147,6 @@ public class JFrameTelaLogin extends javax.swing.JFrame {
     private void formWindowIconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowIconified
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowIconified
-
-    private void JButton_ConsulFreqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton_ConsulFreqActionPerformed
-        if (JTextField_login.getText().equals("Vendedor") && JPassword_senha.getText().equals("123")) //JOptionPane.showMessageDialog(null, "Login efetuado com Sucesso!");
-        {
-//            JFrameConsultarFrequencia jFrameConsultarFrequencia = new GerenciamentoDeFuncionarios.JFrameConsultarFrequencia();
-            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
-        }// TODO add your handling code here:
-    }//GEN-LAST:event_JButton_ConsulFreqActionPerformed
 
     private void JPassword_senhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JPassword_senhaKeyPressed
         // TODO add your handling code here:
@@ -240,7 +210,6 @@ public class JFrameTelaLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JButton_ConsulFreq;
     private javax.swing.JButton JButton_logar;
     private javax.swing.JPasswordField JPassword_senha;
     private javax.swing.JTextField JTextField_login;

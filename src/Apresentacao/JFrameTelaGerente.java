@@ -5,20 +5,28 @@
  */
 package Apresentacao;
 
+import ControleCliente.JPanelConsultaCliente;
 import ControleDeAcesso.JFrameTelaLogin;
 import GerenciamentoDeFuncionarios.Funcionario;
+import GerenciamentoDeFuncionarios.JPanelCadastroFuncionario;
+import GerenciamentoDeFuncionarios.JPanelListaFuncionario;
+import java.awt.CardLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.stage.Stage;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
-/**
- *
- * @author ander
- */
+
 public class JFrameTelaGerente extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameTelaGerente
      */
+    
+    CardLayout card;
+    
     public JFrameTelaGerente(Funcionario funcionario) {
         initComponents();
         
@@ -26,7 +34,16 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         
         jMenuPrincipal.add(Box.createHorizontalGlue());
         jMenuPrincipal.add(jMenuSair);
-    
+        
+        jButtonCarrinho.setContentAreaFilled(false);
+        jButtonCarrinho.setBorderPainted(false);
+
+        JPanel jPanelImagemFundo = new JPanelImagemFundo();
+        card = (CardLayout) jPanelFundo.getLayout();
+        jPanelFundo.add(jPanelImagemFundo);
+        card.show(jPanelFundo, "jPanelImagemFundo");
+        
+        jPanelFundo.setBorder(null);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -45,19 +62,22 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabelImagemLogo = new javax.swing.JLabel();
-        jPanelImagemFundo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jPanelFundo = new javax.swing.JPanel();
+        jButtonCarrinho = new javax.swing.JButton();
         jMenuPrincipal = new javax.swing.JMenuBar();
         jMenuFuncionario = new javax.swing.JMenu();
         jMenuCadastrarFuncionario = new javax.swing.JMenuItem();
         jMenuConsultarFuncionario = new javax.swing.JMenuItem();
         jMenuProduto = new javax.swing.JMenu();
-        jMenuCadastrar = new javax.swing.JMenuItem();
-        jMenuConsultar = new javax.swing.JMenuItem();
+        jMenuCadastrarProduto = new javax.swing.JMenuItem();
+        jMenuConsultarProduto = new javax.swing.JMenuItem();
         jMenuCliente = new javax.swing.JMenu();
+        jMenuCadastrarCliente = new javax.swing.JMenuItem();
+        jMenuConsultarCliente = new javax.swing.JMenuItem();
         jMenuVenda = new javax.swing.JMenu();
+        jMenuCadastrarVenda = new javax.swing.JMenuItem();
         jMenuCaixa = new javax.swing.JMenu();
+        jMenuConsultarCaixa = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -65,33 +85,18 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
         jLabelImagemLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/redebras-topo-menor.jpg"))); // NOI18N
 
-        jPanelImagemFundo.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelImagemFundo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanelImagemFundo.setName(""); // NOI18N
-        jPanelImagemFundo.setPreferredSize(new java.awt.Dimension(1000, 600));
+        jPanelFundo.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelFundo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanelFundo.setName(""); // NOI18N
+        jPanelFundo.setPreferredSize(new java.awt.Dimension(1000, 600));
+        jPanelFundo.setLayout(new java.awt.CardLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fundo_gerente.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanelImagemFundoLayout = new javax.swing.GroupLayout(jPanelImagemFundo);
-        jPanelImagemFundo.setLayout(jPanelImagemFundoLayout);
-        jPanelImagemFundoLayout.setHorizontalGroup(
-            jPanelImagemFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelImagemFundoLayout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanelImagemFundoLayout.setVerticalGroup(
-            jPanelImagemFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelImagemFundoLayout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/shopping-cart-2-icon.png"))); // NOI18N
+        jButtonCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/shopping-cart-2-icon.png"))); // NOI18N
 
         jMenuFuncionario.setText("Funcionário");
 
-        jMenuCadastrarFuncionario.setText("Cadastrar");
+        jMenuCadastrarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/new20x20.png"))); // NOI18N
+        jMenuCadastrarFuncionario.setText("Novo");
         jMenuCadastrarFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuCadastrarFuncionarioActionPerformed(evt);
@@ -99,29 +104,73 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         });
         jMenuFuncionario.add(jMenuCadastrarFuncionario);
 
-        jMenuConsultarFuncionario.setText("Consultar");
+        jMenuConsultarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/search20x20.png"))); // NOI18N
+        jMenuConsultarFuncionario.setText("Buscar");
+        jMenuConsultarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsultarFuncionarioActionPerformed(evt);
+            }
+        });
         jMenuFuncionario.add(jMenuConsultarFuncionario);
 
         jMenuPrincipal.add(jMenuFuncionario);
 
         jMenuProduto.setText("Produto");
 
-        jMenuCadastrar.setText("Cadastrar");
-        jMenuProduto.add(jMenuCadastrar);
+        jMenuCadastrarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/simpleNew20x20.png"))); // NOI18N
+        jMenuCadastrarProduto.setText("Novo");
+        jMenuProduto.add(jMenuCadastrarProduto);
 
-        jMenuConsultar.setText("Consultar");
-        jMenuConsultar.setToolTipText("");
-        jMenuProduto.add(jMenuConsultar);
+        jMenuConsultarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/search20x20.png"))); // NOI18N
+        jMenuConsultarProduto.setText("Buscar");
+        jMenuConsultarProduto.setToolTipText("");
+        jMenuProduto.add(jMenuConsultarProduto);
 
         jMenuPrincipal.add(jMenuProduto);
 
         jMenuCliente.setText("Cliente");
+
+        jMenuCadastrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/new20x20.png"))); // NOI18N
+        jMenuCadastrarCliente.setText("Novo");
+        jMenuCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadastrarClienteActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jMenuCadastrarCliente);
+
+        jMenuConsultarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/search20x20.png"))); // NOI18N
+        jMenuConsultarCliente.setText("Buscar");
+        jMenuConsultarCliente.setToolTipText("");
+        jMenuConsultarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsultarClienteActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jMenuConsultarCliente);
+
         jMenuPrincipal.add(jMenuCliente);
 
         jMenuVenda.setText("Venda");
+
+        jMenuCadastrarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/new20x20.png"))); // NOI18N
+        jMenuCadastrarVenda.setText("Novo");
+        jMenuCadastrarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadastrarVendaActionPerformed(evt);
+            }
+        });
+        jMenuVenda.add(jMenuCadastrarVenda);
+
         jMenuPrincipal.add(jMenuVenda);
 
         jMenuCaixa.setText("Caixa");
+
+        jMenuConsultarCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/search20x20.png"))); // NOI18N
+        jMenuConsultarCaixa.setText("Consultar");
+        jMenuConsultarCaixa.setToolTipText("");
+        jMenuCaixa.add(jMenuConsultarCaixa);
+
         jMenuPrincipal.add(jMenuCaixa);
 
         jMenuSair.setText("Sair");
@@ -142,12 +191,12 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanelImagemFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelImagemLogo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(jButtonCarrinho)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -156,9 +205,9 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelImagemLogo)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonCarrinho))
                 .addGap(18, 18, 18)
-                .addComponent(jPanelImagemFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -167,6 +216,9 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     private void jMenuCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarFuncionarioActionPerformed
         // TODO add your handling code here:
+        JPanel jPanelCadastroFuncionario = new JPanelCadastroFuncionario();
+        jPanelFundo.add(jPanelCadastroFuncionario);
+        card.next(jPanelFundo);
     }//GEN-LAST:event_jMenuCadastrarFuncionarioActionPerformed
 
     private void jMenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSairMouseClicked
@@ -183,6 +235,32 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jMenuSairMouseClicked
+
+    private void jMenuCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarClienteActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jMenuCadastrarClienteActionPerformed
+
+    private void jMenuConsultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarClienteActionPerformed
+        // TODO add your handling code here:
+        JPanel jPanelConsultaCliente = new JPanelConsultaCliente();
+        jPanelFundo.add(jPanelConsultaCliente);
+        card.next(jPanelFundo);
+        //card.next(jPanelConsultaCliente);
+    }//GEN-LAST:event_jMenuConsultarClienteActionPerformed
+
+    private void jMenuConsultarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarFuncionarioActionPerformed
+        // TODO add your handling code here:
+        
+        JPanel jPanelListaFuncionario = new JPanelListaFuncionario();
+        jPanelFundo.add(jPanelListaFuncionario);
+        card.next(jPanelFundo);
+    }//GEN-LAST:event_jMenuConsultarFuncionarioActionPerformed
+
+    private void jMenuCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarVendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuCadastrarVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,21 +298,24 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonCarrinho;
     private javax.swing.JLabel jLabelImagemLogo;
-    private javax.swing.JMenuItem jMenuCadastrar;
+    private javax.swing.JMenuItem jMenuCadastrarCliente;
     private javax.swing.JMenuItem jMenuCadastrarFuncionario;
+    private javax.swing.JMenuItem jMenuCadastrarProduto;
+    private javax.swing.JMenuItem jMenuCadastrarVenda;
     private javax.swing.JMenu jMenuCaixa;
     private javax.swing.JMenu jMenuCliente;
-    private javax.swing.JMenuItem jMenuConsultar;
+    private javax.swing.JMenuItem jMenuConsultarCaixa;
+    private javax.swing.JMenuItem jMenuConsultarCliente;
     private javax.swing.JMenuItem jMenuConsultarFuncionario;
+    private javax.swing.JMenuItem jMenuConsultarProduto;
     private javax.swing.JMenu jMenuFuncionario;
     private javax.swing.JMenuBar jMenuPrincipal;
     private javax.swing.JMenu jMenuProduto;
     private javax.swing.JMenu jMenuSair;
     private javax.swing.JMenu jMenuVenda;
-    private javax.swing.JPanel jPanelImagemFundo;
+    private javax.swing.JPanel jPanelFundo;
     // End of variables declaration//GEN-END:variables
 
     private void title(String string) {

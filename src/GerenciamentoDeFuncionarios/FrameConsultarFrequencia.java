@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JFrame;
 
-/**
- *
- * @author rafael
- */
+
 public class FrameConsultarFrequencia extends javax.swing.JFrame {
 
     Funcionario funcionario;
