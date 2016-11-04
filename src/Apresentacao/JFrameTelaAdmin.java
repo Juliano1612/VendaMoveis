@@ -29,7 +29,7 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
 
         jInternalFrameAcesso.setVisible(false);
         jButtonSalvarSenhaAcesso.setVisible(false);
-        jInternalFrameAcesso.setTitle("Gerenciar Acesso");
+        jInternalFrameAcesso.setTitle("Gerenciar Acessos");
         jTextFieldSenhaAcesso.setEnabled(false);
 
         jButtonConsultarFunc.setVisible(false);
