@@ -42,8 +42,8 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         jPanelFundo.add(jPanelImagemFundo);
         card.show(jPanelFundo, "jPanelImagemFundo");
         
-        jPanelFundo.setBorder(null);
         this.setLocationRelativeTo(null);
+        jPanelFundo.setBorder(null);
         this.setVisible(true);
     }
 
