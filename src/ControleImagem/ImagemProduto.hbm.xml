@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 16/10/2016 21:31:26 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="Vendas" name="Controle.ImagemProduto" optimistic-lock="version" table="Imagem_Produto">
+  <class catalog="Vendas" name="ControleImagem.ImagemProduto" optimistic-lock="version" table="Imagem_Produto">
     <id name="imagemId" type="string">
       <column length="60" name="Imagem_ID"/>
       <generator class="assigned"/>

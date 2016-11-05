@@ -1,4 +1,4 @@
-package Controle;
+package ControleImagem;
 // Generated 16/10/2016 21:31:24 by Hibernate Tools 4.3.1
 
 import ControleProduto.Produto;
@@ -23,9 +23,9 @@ public class ImagemProduto  implements java.io.Serializable {
     public ImagemProduto(String imagemId) {
         this.imagemId = imagemId;
     }
-    public ImagemProduto(String imagemId, Produto produto, byte[] imagem) {
+    public ImagemProduto(String imagemId/*, Produto produto*/, byte[] imagem) {
        this.imagemId = imagemId;
-       this.produto = produto;
+       this.produto = null;
        this.imagem = imagem;
     }
    

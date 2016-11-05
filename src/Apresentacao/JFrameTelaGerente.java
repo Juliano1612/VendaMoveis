@@ -7,13 +7,12 @@ package Apresentacao;
 
 import ControleCliente.JPanelConsultaCliente;
 import ControleDeAcesso.JFrameTelaLogin;
+import ControleProduto.JPanelCadastrarProduto;
+import ControleProduto.JPanelConsultarProduto;
 import GerenciamentoDeFuncionarios.Funcionario;
 import GerenciamentoDeFuncionarios.JPanelCadastroFuncionario;
 import GerenciamentoDeFuncionarios.JPanelListaFuncionario;
 import java.awt.CardLayout;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.stage.Stage;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -119,11 +118,21 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
         jMenuCadastrarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/simpleNew20x20.png"))); // NOI18N
         jMenuCadastrarProduto.setText("Novo");
+        jMenuCadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadastrarProdutoActionPerformed(evt);
+            }
+        });
         jMenuProduto.add(jMenuCadastrarProduto);
 
         jMenuConsultarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/search20x20.png"))); // NOI18N
         jMenuConsultarProduto.setText("Buscar");
         jMenuConsultarProduto.setToolTipText("");
+        jMenuConsultarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsultarProdutoActionPerformed(evt);
+            }
+        });
         jMenuProduto.add(jMenuConsultarProduto);
 
         jMenuPrincipal.add(jMenuProduto);
@@ -252,7 +261,6 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     private void jMenuConsultarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarFuncionarioActionPerformed
         // TODO add your handling code here:
-        
         JPanel jPanelListaFuncionario = new JPanelListaFuncionario();
         jPanelFundo.add(jPanelListaFuncionario);
         card.next(jPanelFundo);
@@ -260,7 +268,22 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     private void jMenuCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarVendaActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jMenuCadastrarVendaActionPerformed
+
+    private void jMenuCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarProdutoActionPerformed
+        // TODO add your handling code here:
+        JPanel jPanelCadastrarProduto = new JPanelCadastrarProduto();
+        jPanelFundo.add(jPanelCadastrarProduto);
+        card.next(jPanelFundo);
+    }//GEN-LAST:event_jMenuCadastrarProdutoActionPerformed
+
+    private void jMenuConsultarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarProdutoActionPerformed
+        // TODO add your handling code here:
+        JPanel jPanelConsultarProduto = new JPanelConsultarProduto();
+        jPanelFundo.add(jPanelConsultarProduto);
+        card.next(jPanelFundo);
+    }//GEN-LAST:event_jMenuConsultarProdutoActionPerformed
 
     /**
      * @param args the command line arguments

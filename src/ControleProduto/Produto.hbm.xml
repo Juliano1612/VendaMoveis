@@ -50,7 +50,7 @@
       <key>
         <column length="60" name="prod_ID"/>
       </key>
-      <one-to-many class="Controle.ImagemProduto"/>
+      <one-to-many class="ControleImagem.ImagemProduto"/>
     </set>
   </class>
 </hibernate-mapping>

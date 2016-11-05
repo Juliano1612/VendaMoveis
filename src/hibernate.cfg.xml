@@ -16,7 +16,7 @@
     <mapping resource="Controle/Gastos.hbm.xml"/>
     <mapping resource="Controle/Vendas.hbm.xml"/>
     <mapping resource="GerenciamentoDeFuncionarios/Funcionario.hbm.xml"/>
-    <mapping resource="Controle/ImagemProduto.hbm.xml"/>
+    <mapping resource="ControleImagem/ImagemProduto.hbm.xml"/>
     <mapping resource="GerenciamentoDeFuncionarios/Faltas.hbm.xml"/>
     <mapping resource="ControleCliente/Cliente.hbm.xml"/>
   </session-factory>
