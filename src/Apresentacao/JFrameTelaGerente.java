@@ -7,6 +7,7 @@ package Apresentacao;
 
 import ControleCliente.JPanelConsultaCliente;
 import ControleDeAcesso.JFrameTelaLogin;
+import ControleDeAcesso.JPanelMinhaConta;
 import ControleProduto.JPanelCadastrarProduto;
 import ControleProduto.JPanelConsultarProduto;
 import GerenciamentoDeFuncionarios.Funcionario;
@@ -25,14 +26,18 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
      */
     
     CardLayout card;
+    Funcionario funcionario;
     
-    public JFrameTelaGerente(Funcionario funcionario) {
+    public JFrameTelaGerente(Funcionario func) {
         initComponents();
+        
+        funcionario = func;
         
         this.setTitle("Gerente - " + funcionario.getNome());
         
         jMenuPrincipal.add(Box.createHorizontalGlue());
         jMenuPrincipal.add(jMenuSair);
+        jMenuPrincipal.add(jMenuMinhaConta);
         
         jButtonCarrinho.setContentAreaFilled(false);
         jButtonCarrinho.setBorderPainted(false);
@@ -79,8 +84,9 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         jMenuCaixa = new javax.swing.JMenu();
         jMenuConsultarCaixa = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
+        jMenuMinhaConta = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerente - ");
 
         jLabelImagemLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/redebras-topo-menor.jpg"))); // NOI18N
@@ -191,6 +197,19 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         });
         jMenuPrincipal.add(jMenuSair);
 
+        jMenuMinhaConta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/gear20x20.png"))); // NOI18N
+        jMenuMinhaConta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuMinhaContaMouseClicked(evt);
+            }
+        });
+        jMenuMinhaConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuMinhaContaActionPerformed(evt);
+            }
+        });
+        jMenuPrincipal.add(jMenuMinhaConta);
+
         setJMenuBar(jMenuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -286,6 +305,17 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         card.next(jPanelFundo);
     }//GEN-LAST:event_jMenuConsultarProdutoActionPerformed
 
+    private void jMenuMinhaContaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuMinhaContaMouseClicked
+        // TODO add your handling code here:
+        JPanel jPanelMinhaConta = new JPanelMinhaConta(funcionario);
+        jPanelFundo.add(jPanelMinhaConta);
+        card.next(jPanelFundo);
+    }//GEN-LAST:event_jMenuMinhaContaMouseClicked
+
+    private void jMenuMinhaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMinhaContaActionPerformed
+        
+    }//GEN-LAST:event_jMenuMinhaContaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -335,6 +365,7 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuConsultarFuncionario;
     private javax.swing.JMenuItem jMenuConsultarProduto;
     private javax.swing.JMenu jMenuFuncionario;
+    private javax.swing.JMenu jMenuMinhaConta;
     private javax.swing.JMenuBar jMenuPrincipal;
     private javax.swing.JMenu jMenuProduto;
     private javax.swing.JMenu jMenuSair;

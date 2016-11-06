@@ -20,6 +20,7 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
      */
     DefaultTableModel modelo;
     ArrayList<Produto> produtos;
+    Produto produto;
 
     public JPanelConsultarProduto() {
         initComponents();
@@ -88,6 +89,11 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
 
         jButtonEditarProduto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonEditarProduto.setText("Editar");
+        jButtonEditarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarProdutoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelConsultarProdutoLayout = new javax.swing.GroupLayout(jPanelConsultarProduto);
         jPanelConsultarProduto.setLayout(jPanelConsultarProdutoLayout);
@@ -170,7 +176,19 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
 
     private void jButtonDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetalhesActionPerformed
         // TODO add your handling code here:
+        int indiceProd = jTableProdutos.getSelectedRow();
+        if (indiceProd == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione um produto para saber mais detalhes do produto.");
+        } else {
+            produto = produtos.get(indiceProd);
+            JFrameDetalheProduto jFrameDetalheProduto = new JFrameDetalheProduto((produto));
+        }
+        
     }//GEN-LAST:event_jButtonDetalhesActionPerformed
+
+    private void jButtonEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditarProdutoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

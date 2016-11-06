@@ -44,6 +44,21 @@ public class ControlaAcesso {
         }
     }
 
+    public Acesso buscaAcesso(Funcionario funcionario) {
+        ArrayList<Acesso> acessos = getListaAcessos();
+        Acesso acesso = null;
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        for (Acesso a : acessos) {
+            if (a.getFuncionario().getIdFunc().equals(funcionario.getIdFunc())) {
+                acesso = a;
+                break;
+            }
+        }
+        s.getTransaction().commit();
+        return acesso;
+    }
+
     public Funcionario identificaUsuario(String login, String senha) {
 
         if ((login.equals("admin")) && (senha.equals("123"))) {
@@ -115,7 +130,7 @@ public class ControlaAcesso {
 //                new JFrameTelaAlmoxarife();
         }
     }
-    
+
     public boolean confereLogin(String login) {
         ArrayList<Acesso> listaAcessos = getListaAcessos();
         HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
@@ -155,8 +170,8 @@ public class ControlaAcesso {
         HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         return false;
     }
-    
-    public boolean persisteAcesso(Acesso acesso){
+
+    public boolean persisteAcesso(Acesso acesso) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         try {
