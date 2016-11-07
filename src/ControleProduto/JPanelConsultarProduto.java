@@ -5,6 +5,7 @@
  */
 package ControleProduto;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -44,8 +45,8 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
         jButtonPesquisar = new javax.swing.JButton();
         jButtonEditarProduto = new javax.swing.JButton();
 
-        jPanelConsultarProduto.setMaximumSize(new java.awt.Dimension(999, 599));
-        jPanelConsultarProduto.setMinimumSize(new java.awt.Dimension(999, 599));
+        jPanelConsultarProduto.setMaximumSize(new java.awt.Dimension(995, 595));
+        jPanelConsultarProduto.setMinimumSize(new java.awt.Dimension(995, 595));
 
         jTableProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,6 +79,11 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
         jLabelNomeProduto.setText("Nome do produto:");
 
         jTextFieldCampoPesquisa.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTextFieldCampoPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldCampoPesquisaKeyPressed(evt);
+            }
+        });
 
         jButtonPesquisar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jButtonPesquisar.setText("Pesquisar");
@@ -100,25 +106,23 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
         jPanelConsultarProdutoLayout.setHorizontalGroup(
             jPanelConsultarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConsultarProdutoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelConsultarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsultarProdutoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonEditarProduto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDetalhes))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelConsultarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelConsultarProdutoLayout.createSequentialGroup()
                         .addComponent(jLabelNomeProduto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldCampoPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonPesquisar)))
-                .addContainerGap())
+                        .addComponent(jTextFieldCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonEditarProduto))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelConsultarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonPesquisar)
+                    .addComponent(jButtonDetalhes))
+                .addGap(27, 27, 27))
             .addGroup(jPanelConsultarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelConsultarProdutoLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 966, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(23, Short.MAX_VALUE)))
         );
         jPanelConsultarProdutoLayout.setVerticalGroup(
             jPanelConsultarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +132,7 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
                     .addComponent(jLabelNomeProduto)
                     .addComponent(jTextFieldCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPesquisar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 521, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 542, Short.MAX_VALUE)
                 .addGroup(jPanelConsultarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDetalhes)
                     .addComponent(jButtonEditarProduto))
@@ -144,11 +148,11 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGap(0, 999, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanelConsultarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 1, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,7 +179,6 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jButtonDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetalhesActionPerformed
-        // TODO add your handling code here:
         int indiceProd = jTableProdutos.getSelectedRow();
         if (indiceProd == -1) {
             JOptionPane.showMessageDialog(null, "Selecione um produto para saber mais detalhes do produto.");
@@ -183,13 +186,34 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
             produto = produtos.get(indiceProd);
             JFrameDetalheProduto jFrameDetalheProduto = new JFrameDetalheProduto((produto));
         }
-        
     }//GEN-LAST:event_jButtonDetalhesActionPerformed
 
     private void jButtonEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarProdutoActionPerformed
-        // TODO add your handling code here:
+        int indiceProd = jTableProdutos.getSelectedRow();
+        if (indiceProd == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione um produto para saber mais detalhes do produto.");
+        } else {
+            Produto produto = produtos.get(indiceProd);
+            JFrameEditarProduto jFrameEditarProduto = new JFrameEditarProduto((produto));
+        }
     }//GEN-LAST:event_jButtonEditarProdutoActionPerformed
 
+    private void jTextFieldCampoPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCampoPesquisaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (jTextFieldCampoPesquisa.getText().equals("Nome do Produto")) {
+                JOptionPane.showMessageDialog(null, "Digite um nome para realizar a pesquisa.");
+            } else {
+                modelo = (DefaultTableModel) jTableProdutos.getModel();
+                modelo.setNumRows(0);
+                produtos = new ControlaProduto().getListaProdutos();
+                for (Produto p : produtos) {
+                    if (p.getNomeProd().contains(jTextFieldCampoPesquisa.getText())) {
+                        modelo.addRow(new Object[]{p.getProdId(), p.getNomeProd(), p.getDescricao(), p.getPrecoVenda(), p.getQuantidadeEstoque()});
+                    }
+                }
+            }
+    }//GEN-LAST:event_jTextFieldCampoPesquisaKeyPressed
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDetalhes;

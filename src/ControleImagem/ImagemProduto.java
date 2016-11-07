@@ -23,7 +23,7 @@ public class ImagemProduto  implements java.io.Serializable {
     public ImagemProduto(String imagemId) {
         this.imagemId = imagemId;
     }
-    public ImagemProduto(String imagemId/*, Produto produto*/, byte[] imagem) {
+    public ImagemProduto(String imagemId, /*Produto produto,*/ byte[] imagem) {
        this.imagemId = imagemId;
        this.produto = null;
        this.imagem = imagem;

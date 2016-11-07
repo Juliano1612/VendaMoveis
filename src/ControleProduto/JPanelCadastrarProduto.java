@@ -5,9 +5,13 @@
  */
 package ControleProduto;
 
+import ControleImagem.ControlaImagemProduto;
+import ControleImagem.ImagemProduto;
 import GeradorDeId.GeraId;
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
+import javax.swing.Icon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -28,8 +32,8 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
 
     public JPanelCadastrarProduto() {
         initComponents();
-        idProduto = geraid.GeraChave(1);
-        jTextFieldIDProduto.setText(Integer.toString(idProduto)); 
+        //idProduto = geraid.GeraChave(1);
+        //jTextFieldIDProduto.setText(Integer.toString(idProduto)); 
     }
 
     /**
@@ -68,6 +72,10 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
         jLabelPrecoVenda = new javax.swing.JLabel();
         jTextFieldPrecoVenda = new javax.swing.JTextField();
         JLabelFotoProduto = new javax.swing.JLabel();
+
+        setMaximumSize(new java.awt.Dimension(995, 595));
+        setMinimumSize(new java.awt.Dimension(995, 595));
+        setPreferredSize(new java.awt.Dimension(995, 595));
 
         JPanelDimensao.setBorder(javax.swing.BorderFactory.createTitledBorder("Dimensão do Produto:"));
 
@@ -154,7 +162,6 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
 
         jTextFieldMarcaProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jTextFieldIDProduto.setEditable(false);
         jTextFieldIDProduto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jButtonRetrocederFoto.setText("Retroceder");
@@ -181,7 +188,12 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(185, 185, 185)
+                .addComponent(jButtonAvançarFoto)
+                .addGap(87, 87, 87)
+                .addComponent(jButtonSelecionarFoto)
+                .addContainerGap(541, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(19, 19, 19)
@@ -193,11 +205,8 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jButtonRetrocederFoto)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButtonSelecionarFoto))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jButtonRetrocederFoto, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(JLabelFotoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,14 +237,18 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
                                             .addComponent(jLabelPrecoCompra)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jTextFieldPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(JPanelDimensao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButtonAvançarFoto)))))
+                                        .addComponent(JPanelDimensao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addComponent(jLabelDescricao))
-                    .addContainerGap(19, Short.MAX_VALUE)))
+                    .addContainerGap(14, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(221, 221, 221)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSelecionarFoto)
+                    .addComponent(jButtonAvançarFoto))
+                .addContainerGap(356, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(18, 18, 18)
@@ -263,10 +276,7 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(JPanelDimensao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonSelecionarFoto)
-                        .addComponent(jButtonAvançarFoto)
-                        .addComponent(jButtonRetrocederFoto))
+                    .addComponent(jButtonRetrocederFoto)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(jLabelDescricao)
                     .addGap(4, 4, 4)
@@ -284,7 +294,8 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         int tam = Imagens.length;
-        if (jTextFieldNomeProduto.getText().equals("")
+        if (jTextFieldIDProduto.getText().equals("")
+                ||jTextFieldNomeProduto.getText().equals("")
                 || jTextFieldMarcaProduto.getText().equals("")
                 || jTextFieldQuantidade.getText().equals("")
                 || jTextFieldPrecoVenda.getText().equals("")
@@ -296,18 +307,15 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
             showMessageDialog(null, "Um dos campos não foi preenchido");
         } else {
             try {
-                Produto produto = new ControlaProduto().cadastraProduto(Integer.toString(idProduto), jTextFieldNomeProduto.getText(), Integer.parseInt(jTextFieldQuantidade.getText()), jTextAreaDescrição.getText(), Float.parseFloat(jTextFieldPrecoVenda.getText()), Float.parseFloat(jTextFieldPrecoCompra.getText()), Float.parseFloat(JTextAltura4.getText()), Float.parseFloat(JTextLargura4.getText()), Float.parseFloat(JTextProfundidade4.getText()), jTextFieldMarcaProduto.getText());
-                JOptionPane.showMessageDialog(null, "O produto: " + jTextFieldNomeProduto.getText() + ", foi registrado com ID: " + idProduto + ".");
-                idProduto = geraid.GeraChave(1);
-                idImagem = geraid.GeraChave(3);
-                for (int i = 0; i != tam; i++) {
-                    //BufferedImage bImageFromConvert = ImageIO.read(Imagens[i]);
-                    //byte[] bytes = Files.readAllBytes(Paths.get(Imagens[i]));
-                    //ImagemProduto imagemProduto = new ControlaImagemProduto().cadastraImagem(Integer.toString(idImagem), bImageFromConvert );
-                    idImagem = geraid.GeraChave(3);
-                }
+                //idProduto = geraid.GeraChave(1);
+                //idImagem = geraid.GeraChave(3);
+                //for (int i = 0; i != tam; i++) {
+                //ImagemProduto imagemProduto = new ControlaImagemProduto().cadastraImagem(Integer.toString(idImagem), Imagens[i].getAbsolutePath() );
+                //idImagem = geraid.GeraChave(3);
+                Produto produto = new ControlaProduto().cadastraProduto(jTextFieldIDProduto.getText()/*Integer.toString(idProduto)*/, jTextFieldNomeProduto.getText(), Integer.parseInt(jTextFieldQuantidade.getText()), jTextAreaDescrição.getText(), Float.parseFloat(jTextFieldPrecoVenda.getText()), Float.parseFloat(jTextFieldPrecoCompra.getText()), Float.parseFloat(JTextAltura4.getText()) , Float.parseFloat(JTextLargura4.getText()), Float.parseFloat(JTextProfundidade4.getText()), jTextFieldMarcaProduto.getText());
+                JOptionPane.showMessageDialog(null, "O produto: " + jTextFieldNomeProduto.getText() + ", foi registrado com ID: " + jTextFieldIDProduto/*idProduto*/ + ".");
+                //}
                 limpaCampos();
-
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "O produto não pode ser cadastrado devido a um erro!");
             }
@@ -315,26 +323,38 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonSelecionarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarFotoActionPerformed
-        if (Imagens.length != 0) {
-            jButtonSelecionarFoto.setVisible(true);
-        } else {
-            jButtonSelecionarFoto.setVisible(false);
-        }
-
+        if(jTextFieldIDProduto.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Digite primeiramente um ID para o produto");
+        }else{
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg");
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(filter);
-        fileChooser.setMultiSelectionEnabled(true);
+        fileChooser.setMultiSelectionEnabled(false);
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             Imagens = fileChooser.getSelectedFiles();
             int tam = Imagens.length;
-            /*System.out.println("Tamanho do tam: " + tam);
-            for (int i = 0; i != tam; i++) {
+            System.out.println("Tamanho do tam: " + tam);
+            File file = fileChooser.getSelectedFile();
+            byte[] bFile = new byte[(int) file.length()];
+            try {
+	     FileInputStream fileInputStream = new FileInputStream(file);
+             fileInputStream.read(bFile);
+             idImagem = geraid.GeraChave(3);
+             ImagemProduto imagemProduto = new ControlaImagemProduto().cadastraImagem(jTextFieldIDProduto.getText(), bFile);
+             //JLabelFotoProduto.setIcon((Icon) file);
+	     fileInputStream.close();
+            } catch (Exception e) {
+	     e.printStackTrace();
+        }
+            
+            /*for (int i = 0; i != tam; i++) {
                 System.out.println("Selected file: " + Imagens[i].getAbsolutePath());
             }*///TESTE PARA VERIFICAR A EXECUÇÃO
         }
+
+    }
     }//GEN-LAST:event_jButtonSelecionarFotoActionPerformed
 
     public void limpaCampos() {
@@ -345,8 +365,11 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
         jTextFieldPrecoVenda.setText("");
         JTextLargura4.setText("");
         JTextProfundidade4.setText("");
-        JLabeProfundidade4.setText("");
+        JTextAltura4.setText("");
         jTextFieldMarcaProduto.setText("");
+        jTextFieldIDProduto.setText("");
+        
+        
 
     }
 
