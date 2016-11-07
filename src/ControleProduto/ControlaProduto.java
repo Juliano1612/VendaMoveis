@@ -92,7 +92,7 @@ public class ControlaProduto {
     public ArrayList<Produto> getListaChaves() {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Produto> listaChaves = (ArrayList<Produto>) s.createQuery("From Produto").list();
-        Collections.sort(listaChaves, new Comparator <Produto>() {
+        Collections.sort(listaChaves, new Comparator<Produto>() {
             @Override
             public int compare(Produto o1, Produto o2) {
                 return o1.getProdId().compareTo(o2.getProdId());

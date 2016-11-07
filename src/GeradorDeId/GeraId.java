@@ -37,6 +37,7 @@ public class GeraId {
             while(controleImagem.checaChave(Integer.toString(id)) == true){
                 id = gerador.nextInt(tamanhoId);
             }
+            
         }
         return id;
     }

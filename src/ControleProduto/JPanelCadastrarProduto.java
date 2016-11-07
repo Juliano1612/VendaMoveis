@@ -23,9 +23,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class JPanelCadastrarProduto extends javax.swing.JPanel {
 
-    /**
-     * Creates new form JPanelCadastrarProduto
-     */
     GeraId geraid = new GeraId();
     int idProduto, idImagem;
     File[] Imagens;
@@ -313,7 +310,7 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
                 //ImagemProduto imagemProduto = new ControlaImagemProduto().cadastraImagem(Integer.toString(idImagem), Imagens[i].getAbsolutePath() );
                 //idImagem = geraid.GeraChave(3);
                 Produto produto = new ControlaProduto().cadastraProduto(jTextFieldIDProduto.getText()/*Integer.toString(idProduto)*/, jTextFieldNomeProduto.getText(), Integer.parseInt(jTextFieldQuantidade.getText()), jTextAreaDescrição.getText(), Float.parseFloat(jTextFieldPrecoVenda.getText()), Float.parseFloat(jTextFieldPrecoCompra.getText()), Float.parseFloat(JTextAltura4.getText()) , Float.parseFloat(JTextLargura4.getText()), Float.parseFloat(JTextProfundidade4.getText()), jTextFieldMarcaProduto.getText());
-                JOptionPane.showMessageDialog(null, "O produto: " + jTextFieldNomeProduto.getText() + ", foi registrado com ID: " + jTextFieldIDProduto/*idProduto*/ + ".");
+                JOptionPane.showMessageDialog(null, "O produto: " + jTextFieldNomeProduto.getText() + ", foi registrado com sucesso!");
                 //}
                 limpaCampos();
             } catch (Exception e) {
@@ -341,11 +338,13 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
             try {
 	     FileInputStream fileInputStream = new FileInputStream(file);
              fileInputStream.read(bFile);
-             idImagem = geraid.GeraChave(3);
+             //idImagem = geraid.GeraChave(3);
              ImagemProduto imagemProduto = new ControlaImagemProduto().cadastraImagem(jTextFieldIDProduto.getText(), bFile);
              //JLabelFotoProduto.setIcon((Icon) file);
 	     fileInputStream.close();
+             file = null;
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao salvar a imagem!");
 	     e.printStackTrace();
         }
             
