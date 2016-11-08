@@ -18,26 +18,25 @@ import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
 public class JFrameTelaGerente extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameTelaGerente
      */
-    
     CardLayout card;
     Funcionario funcionario;
-    
+
     public JFrameTelaGerente(Funcionario func) {
         initComponents();
-        
+
         funcionario = func;
-        
+
         this.setTitle("Gerente - " + funcionario.getNome());
-        
+
         jMenuPrincipal.add(Box.createHorizontalGlue());
         jMenuPrincipal.add(jMenuSair);
-        
+        jMenuPrincipal.add(jMenuMinhaConta);
+
         jButtonCarrinho.setContentAreaFilled(false);
         jButtonCarrinho.setBorderPainted(false);
 
@@ -45,7 +44,7 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         card = (CardLayout) jPanelFundo.getLayout();
         jPanelFundo.add(jPanelImagemFundo);
         card.show(jPanelFundo, "jPanelImagemFundo");
-        
+
         jPanelFundo.setBorder(null);
         this.setLocationRelativeTo(null);
         jPanelFundo.setBorder(null);
@@ -254,14 +253,14 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     private void jMenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSairMouseClicked
         // TODO add your handling code here:
-        
-        int n = JOptionPane.showConfirmDialog(
-            null,
-            "Deseja realmente sair?",
-            "Confirmar Opção",
-            JOptionPane.YES_NO_OPTION);
 
-        if(n == JOptionPane.YES_OPTION){
+        int n = JOptionPane.showConfirmDialog(
+                null,
+                "Deseja realmente sair?",
+                "Confirmar Opção",
+                JOptionPane.YES_NO_OPTION);
+
+        if (n == JOptionPane.YES_OPTION) {
             new JFrameTelaLogin();
             this.dispose();
         }
@@ -269,8 +268,8 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     private void jMenuCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarClienteActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jMenuCadastrarClienteActionPerformed
 
     private void jMenuConsultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarClienteActionPerformed
@@ -290,7 +289,7 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     private void jMenuCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarVendaActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenuCadastrarVendaActionPerformed
 
     private void jMenuCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarProdutoActionPerformed
