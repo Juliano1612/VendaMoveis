@@ -27,7 +27,7 @@ public class JPanelMinhaConta extends javax.swing.JPanel {
 
         funcionario = func;
 
-        //acesso = new ControlaAcesso().buscaAcesso(funcionario);
+        acesso = new ControlaAcesso().buscaAcesso(funcionario);
 
         jTextFieldNomeCompleto.setText(func.getNome());
         jTextFieldLogin.setText(acesso.getLogin());

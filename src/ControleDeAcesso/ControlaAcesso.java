@@ -43,6 +43,21 @@ public class ControlaAcesso {
             return false;
         }
     }
+    
+    public Acesso buscaAcesso(Funcionario funcionario) {
+        ArrayList<Acesso> acessos = getListaAcessos();
+        Acesso acesso = null;
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        for (Acesso a : acessos) {
+            if (a.getFuncionario().getIdFunc().equals(funcionario.getIdFunc())) {
+                acesso = a;
+                break;
+            }
+        }
+        s.getTransaction().commit();
+        return acesso;
+    }
 
     public Funcionario identificaUsuario(String login, String senha) {
 
