@@ -93,6 +93,7 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
         jLabelSenhaFunc = new javax.swing.JLabel();
         jTextFieldSenha = new javax.swing.JTextField();
         jButtonConfirmarFunc = new javax.swing.JButton();
+        jLabelAvisoCampoObrigatorio = new javax.swing.JLabel();
         jPanelConsultarFuncionario = new javax.swing.JPanel();
         jInternalFrameAcesso = new javax.swing.JInternalFrame();
         jLabelNomeAcesso = new javax.swing.JLabel();
@@ -119,7 +120,7 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
 
         jPanelCadastrarFuncionario.setLayout(null);
 
-        jLabelDataNascimentoFunc.setText("Data de Nascimento");
+        jLabelDataNascimentoFunc.setText("Data de Nascimento *");
         jPanelCadastrarFuncionario.add(jLabelDataNascimentoFunc);
         jLabelDataNascimentoFunc.setBounds(0, 290, 110, 30);
 
@@ -127,19 +128,19 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
         jPanelCadastrarFuncionario.add(jLabelComplementoFunc);
         jLabelComplementoFunc.setBounds(20, 240, 80, 30);
 
-        jLabelEnderecoFunc.setText("Endereço");
+        jLabelEnderecoFunc.setText("Endereço *");
         jPanelCadastrarFuncionario.add(jLabelEnderecoFunc);
         jLabelEnderecoFunc.setBounds(30, 190, 70, 30);
 
-        jLabelCPFFunc.setText("CPF");
+        jLabelCPFFunc.setText("CPF *");
         jPanelCadastrarFuncionario.add(jLabelCPFFunc);
         jLabelCPFFunc.setBounds(490, 140, 40, 30);
 
-        jLabelRGFunc.setText("RG");
+        jLabelRGFunc.setText("RG *");
         jPanelCadastrarFuncionario.add(jLabelRGFunc);
         jLabelRGFunc.setBounds(70, 140, 30, 30);
 
-        jLabelNomeCompletoFunc.setText("Nome");
+        jLabelNomeCompletoFunc.setText("Nome *");
         jPanelCadastrarFuncionario.add(jLabelNomeCompletoFunc);
         jLabelNomeCompletoFunc.setBounds(60, 90, 40, 30);
 
@@ -147,7 +148,7 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
         jPanelCadastrarFuncionario.add(jLabelTelefoneFunc);
         jLabelTelefoneFunc.setBounds(460, 340, 80, 30);
 
-        jLabelEstadoCivilFunc.setText("Estado Civil");
+        jLabelEstadoCivilFunc.setText("Estado Civil *");
         jPanelCadastrarFuncionario.add(jLabelEstadoCivilFunc);
         jLabelEstadoCivilFunc.setBounds(230, 290, 70, 30);
 
@@ -156,29 +157,29 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
         jPanelCadastrarFuncionario.add(jLabelCabecalho1);
         jLabelCabecalho1.setBounds(356, 20, 210, 31);
 
-        jLabelNumeroFunc.setText("Número");
+        jLabelNumeroFunc.setText("Número *");
         jPanelCadastrarFuncionario.add(jLabelNumeroFunc);
         jLabelNumeroFunc.setBounds(480, 240, 60, 30);
 
-        jLabelBairroFunc.setText("Bairro");
+        jLabelBairroFunc.setText("Bairro *");
         jPanelCadastrarFuncionario.add(jLabelBairroFunc);
         jLabelBairroFunc.setBounds(260, 240, 50, 30);
 
-        jLabelCidadeFunc.setText("Cidade");
+        jLabelCidadeFunc.setText("Cidade *");
         jPanelCadastrarFuncionario.add(jLabelCidadeFunc);
-        jLabelCidadeFunc.setBounds(650, 240, 40, 30);
+        jLabelCidadeFunc.setBounds(640, 240, 50, 30);
 
-        jLabelCEPfunc.setText("CEP");
+        jLabelCEPfunc.setText("CEP *");
         jPanelCadastrarFuncionario.add(jLabelCEPfunc);
         jLabelCEPfunc.setBounds(640, 190, 40, 30);
 
-        jLabelEstadoFunc.setText("Estado");
+        jLabelEstadoFunc.setText("Estado *");
         jPanelCadastrarFuncionario.add(jLabelEstadoFunc);
-        jLabelEstadoFunc.setBounds(820, 240, 50, 30);
+        jLabelEstadoFunc.setBounds(810, 240, 50, 30);
 
-        jLabelSexoFunc.setText("Sexo");
+        jLabelSexoFunc.setText("Sexo *");
         jPanelCadastrarFuncionario.add(jLabelSexoFunc);
-        jLabelSexoFunc.setBounds(780, 90, 40, 30);
+        jLabelSexoFunc.setBounds(770, 90, 40, 30);
 
         jLabelNomeConjugeFunc.setText("Nome Conjuge");
         jPanelCadastrarFuncionario.add(jLabelNomeConjugeFunc);
@@ -238,7 +239,7 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
         jPanelCadastrarFuncionario.add(jFormattedTextFieldDataNascimento2);
         jFormattedTextFieldDataNascimento2.setBounds(110, 290, 110, 30);
 
-        jLabelDataContratacaoFunc.setText("Data de Contratação");
+        jLabelDataContratacaoFunc.setText("Data de Contratação *");
         jPanelCadastrarFuncionario.add(jLabelDataContratacaoFunc);
         jLabelDataContratacaoFunc.setBounds(440, 294, 110, 30);
 
@@ -251,7 +252,7 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
         jPanelCadastrarFuncionario.add(jFormattedTextField1);
         jFormattedTextField1.setBounds(550, 290, 170, 30);
 
-        jLabelCargoFunc.setText("Cargo");
+        jLabelCargoFunc.setText("Cargo *");
         jPanelCadastrarFuncionario.add(jLabelCargoFunc);
         jLabelCargoFunc.setBounds(730, 290, 50, 30);
 
@@ -260,13 +261,13 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
         jPanelCadastrarFuncionario.add(jComboBoxCargo);
         jComboBoxCargo.setBounds(770, 290, 160, 30);
 
-        jLabelLoginFunc.setText("Login");
+        jLabelLoginFunc.setText("Login *");
         jPanelCadastrarFuncionario.add(jLabelLoginFunc);
         jLabelLoginFunc.setBounds(50, 390, 40, 30);
         jPanelCadastrarFuncionario.add(jTextFieldLogin);
         jTextFieldLogin.setBounds(110, 390, 340, 30);
 
-        jLabelSenhaFunc.setText("Senha");
+        jLabelSenhaFunc.setText("Senha *");
         jPanelCadastrarFuncionario.add(jLabelSenhaFunc);
         jLabelSenhaFunc.setBounds(470, 390, 50, 30);
         jPanelCadastrarFuncionario.add(jTextFieldSenha);
@@ -281,6 +282,12 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
         });
         jPanelCadastrarFuncionario.add(jButtonConfirmarFunc);
         jButtonConfirmarFunc.setBounds(820, 470, 100, 50);
+
+        jLabelAvisoCampoObrigatorio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelAvisoCampoObrigatorio.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelAvisoCampoObrigatorio.setText("* = Campo Obrigatório!");
+        jPanelCadastrarFuncionario.add(jLabelAvisoCampoObrigatorio);
+        jLabelAvisoCampoObrigatorio.setBounds(60, 50, 140, 30);
 
         jTabbedPaneFuncionario.addTab("Cadastro", jPanelCadastrarFuncionario);
 
@@ -685,6 +692,7 @@ public class JFrameTelaAdmin extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataNascimento2;
     private javax.swing.JInternalFrame jInternalFrameAcesso;
+    private javax.swing.JLabel jLabelAvisoCampoObrigatorio;
     private javax.swing.JLabel jLabelBairroFunc;
     private javax.swing.JLabel jLabelCEPfunc;
     private javax.swing.JLabel jLabelCPFFunc;

@@ -59,6 +59,7 @@ public class JPanelMinhaConta extends javax.swing.JPanel {
         jPasswordFieldConfirmarSenha = new javax.swing.JPasswordField();
         jPasswordFieldNovaSenha = new javax.swing.JPasswordField();
         jPasswordFieldSenhaAtual = new javax.swing.JPasswordField();
+        jLabelAvisoSenhasCoincidirem = new javax.swing.JLabel();
         jLabelNomeCompleto = new javax.swing.JLabel();
         jLabelLogin = new javax.swing.JLabel();
         jTextFieldNomeCompleto = new javax.swing.JTextField();
@@ -129,6 +130,12 @@ public class JPanelMinhaConta extends javax.swing.JPanel {
             }
         });
         jInternalFrameAcesso.getContentPane().add(jPasswordFieldSenhaAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 300, 40));
+
+        jLabelAvisoSenhasCoincidirem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelAvisoSenhasCoincidirem.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelAvisoSenhasCoincidirem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelAvisoSenhasCoincidirem.setText("As senhas abaixo devem coincidir!");
+        jInternalFrameAcesso.getContentPane().add(jLabelAvisoSenhasCoincidirem, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 290, 20));
 
         add(jInternalFrameAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 460, 280));
 
@@ -246,6 +253,7 @@ public class JPanelMinhaConta extends javax.swing.JPanel {
     private javax.swing.JButton jButtonFecharInternalFrame;
     private javax.swing.JButton jButtonSalvarSenhaAcesso;
     private javax.swing.JInternalFrame jInternalFrameAcesso;
+    private javax.swing.JLabel jLabelAvisoSenhasCoincidirem;
     private javax.swing.JLabel jLabelConfirmarSenha;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelNomeCompleto;
