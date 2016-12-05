@@ -1,45 +1,44 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 07/10/2016 23:55:48 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2016 21:31:26 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Controle.Vendas" table="Vendas" catalog="Vendas" optimistic-lock="version">
-        <id name="vendaId" type="string">
-            <column name="venda_ID" length="60" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="cliente" class="Controle.Cliente" fetch="select">
-            <column name="cli_ID" length="60" />
-        </many-to-one>
-        <many-to-one name="funcionario" class="Controle.Funcionario" fetch="select">
-            <column name="func_ID" length="60" />
-        </many-to-one>
-        <property name="dataCompra" type="date">
-            <column name="Data_compra" length="10" />
-        </property>
-        <property name="valorTotal" type="java.lang.Float">
-            <column name="valor_total" precision="12" scale="0" />
-        </property>
-        <property name="numParcelas" type="java.lang.Integer">
-            <column name="num_parcelas" />
-        </property>
-        <property name="formaPagamento" type="string">
-            <column name="forma_pagamento" length="60" />
-        </property>
-        <property name="statusVenda" type="java.lang.Integer">
-            <column name="status_venda" />
-        </property>
-        <set name="prodVendas" table="Prod_Venda" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="venda_ID" length="60" />
-            </key>
-            <one-to-many class="Controle.ProdVenda" />
-        </set>
-        <set name="parcelas" table="Parcela" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="venda_ID" length="60" />
-            </key>
-            <one-to-many class="Controle.Parcela" />
-        </set>
-    </class>
+  <class catalog="Vendas" name="Controle.Vendas" optimistic-lock="version" table="Vendas">
+    <id name="vendaId" type="string">
+      <column length="60" name="venda_ID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="ControleCliente.Cliente" fetch="select" name="cliente">
+      <column length="60" name="cli_ID"/>
+    </many-to-one>
+    <many-to-one class="GerenciamentoDeFuncionarios.Funcionario" fetch="select" name="funcionario">
+      <column length="60" name="func_ID"/>
+    </many-to-one>
+    <property name="dataCompra" type="date">
+      <column length="10" name="Data_compra"/>
+    </property>
+    <property name="valorTotal" type="java.lang.Float">
+      <column name="valor_total" precision="12" scale="0"/>
+    </property>
+    <property name="numParcelas" type="java.lang.Integer">
+      <column name="num_parcelas"/>
+    </property>
+    <property name="formaPagamento" type="string">
+      <column length="60" name="forma_pagamento"/>
+    </property>
+    <property name="statusVenda" type="java.lang.Integer">
+      <column name="status_venda"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="prodVendas" table="Prod_Venda">
+      <key>
+        <column length="60" name="venda_ID"/>
+      </key>
+      <one-to-many class="Controle.ProdVenda"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="parcelas" table="Parcela">
+      <key>
+        <column length="60" name="venda_ID"/>
+      </key>
+      <one-to-many class="Controle.Parcela"/>
+    </set>
+  </class>
 </hibernate-mapping>

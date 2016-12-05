@@ -1,24 +1,23 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 07/10/2016 23:55:48 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2016 21:31:26 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Controle.ProdVenda" table="Prod_Venda" catalog="Vendas" optimistic-lock="version">
-        <id name="prodVendaId" type="string">
-            <column name="prodVenda_ID" length="60" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="produto" class="Controle.Produto" fetch="select">
-            <column name="prod_ID" length="60" />
-        </many-to-one>
-        <many-to-one name="vendas" class="Controle.Vendas" fetch="select">
-            <column name="venda_ID" length="60" />
-        </many-to-one>
-        <property name="quantidade" type="java.lang.Integer">
-            <column name="quantidade" />
-        </property>
-        <property name="valorUnitario" type="java.lang.Float">
-            <column name="valor_unitario" precision="12" scale="0" />
-        </property>
-    </class>
+  <class catalog="Vendas" name="Controle.ProdVenda" optimistic-lock="version" table="Prod_Venda">
+    <id name="prodVendaId" type="string">
+      <column length="60" name="prodVenda_ID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="ControleProduto.Produto" fetch="select" name="produto">
+      <column length="60" name="prod_ID"/>
+    </many-to-one>
+    <many-to-one class="Controle.Vendas" fetch="select" name="vendas">
+      <column length="60" name="venda_ID"/>
+    </many-to-one>
+    <property name="quantidade" type="java.lang.Integer">
+      <column name="quantidade"/>
+    </property>
+    <property name="valorUnitario" type="java.lang.Float">
+      <column name="valor_unitario" precision="12" scale="0"/>
+    </property>
+  </class>
 </hibernate-mapping>

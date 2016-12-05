@@ -8,16 +8,16 @@
     <property name="hibernate.connection.username">Sistema</property>
     <property name="hibernate.connection.password">sistema975</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="Controle/Cliente.hbm.xml"/>
-    <mapping resource="Controle/Faltas.hbm.xml"/>
-    <mapping resource="Controle/Vendas.hbm.xml"/>
-    <mapping resource="Controle/Produto.hbm.xml"/>
-    <mapping resource="Controle/Gastos.hbm.xml"/>
-    <mapping resource="Controle/Acesso.hbm.xml"/>
+    <mapping resource="Controle/ProdVenda.hbm.xml"/>
+    <mapping resource="ControleDeAcesso/Acesso.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="ControleProduto/Produto.hbm.xml"/>
     <mapping resource="Controle/Parcela.hbm.xml"/>
     <mapping resource="Controle/PedidoEstoque.hbm.xml"/>
-    <mapping resource="Controle/ProdVenda.hbm.xml"/>
-    <mapping resource="Controle/Funcionario.hbm.xml"/>
-    <mapping resource="Controle/ImagemProduto.hbm.xml"/>
+    <mapping resource="Controle/Gastos.hbm.xml"/>
+    <mapping resource="Controle/Vendas.hbm.xml"/>
+    <mapping resource="GerenciamentoDeFuncionarios/Funcionario.hbm.xml"/>
+    <mapping resource="ControleImagem/ImagemProduto.hbm.xml"/>
+    <mapping resource="GerenciamentoDeFuncionarios/Faltas.hbm.xml"/>
+    <mapping resource="ControleCliente/Cliente.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

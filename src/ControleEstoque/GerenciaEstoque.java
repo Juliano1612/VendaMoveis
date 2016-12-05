@@ -1,7 +1,7 @@
 package ControleEstoque;
 
 import ControleProduto.Produto;
-import Hibernate.HibernateUtil;
+import Util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

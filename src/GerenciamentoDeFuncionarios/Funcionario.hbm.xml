@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2016 21:31:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="Vendas" name="GerenciamentoDeFuncionarios.Funcionario" optimistic-lock="version" table="Funcionario">
+    <id name="idFunc" type="string">
+      <column length="60" name="id_func"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nome" type="string">
+      <column length="60" name="Nome" not-null="true"/>
+    </property>
+    <property name="cpf" type="string">
+      <column length="20" name="CPF" not-null="true"/>
+    </property>
+    <property name="rg" type="string">
+      <column length="15" name="RG"/>
+    </property>
+    <property name="dataNascimento" type="date">
+      <column length="10" name="Data_nascimento"/>
+    </property>
+    <property name="estadoCivil" type="string">
+      <column length="20" name="Estado_Civil"/>
+    </property>
+    <property name="nomeConjuge" type="string">
+      <column length="80" name="Nome_conjuge"/>
+    </property>
+    <property name="endereco" type="string">
+      <column length="60" name="Endereco" not-null="true"/>
+    </property>
+    <property name="numero" type="string">
+      <column length="15" name="Numero"/>
+    </property>
+    <property name="complemento" type="string">
+      <column length="25" name="Complemento"/>
+    </property>
+    <property name="cidade" type="string">
+      <column length="30" name="Cidade"/>
+    </property>
+    <property name="estado" type="string">
+      <column length="30" name="Estado"/>
+    </property>
+    <property name="cargo" type="string">
+      <column length="25" name="Cargo"/>
+    </property>
+    <property name="dataContratacao" type="date">
+      <column length="10" name="Data_contratacao"/>
+    </property>
+    <property name="nivelAcesso" type="java.lang.Integer">
+      <column name="nivel_acesso"/>
+    </property>
+    <property name="sexo" type="string">
+      <column length="10" name="sexo"/>
+    </property>
+    <property name="bairro" type="string">
+      <column length="50" name="bairro"/>
+    </property>
+    <property name="cep" type="string">
+      <column length="15" name="cep"/>
+    </property>
+    <property name="telefone" type="string">
+      <column length="15" name="telefone"/>
+    </property>
+    <property name="status" type="java.lang.Integer">
+      <column name="status"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="vendases" table="Vendas">
+      <key>
+        <column length="60" name="func_ID"/>
+      </key>
+      <one-to-many class="Controle.Vendas"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="faltases" table="Faltas">
+      <key>
+        <column length="60" name="id_func"/>
+      </key>
+      <one-to-many class="GerenciamentoDeFuncionarios.Funcionario"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="acessos" table="Acesso">
+      <key>
+        <column length="60" name="func_ID" not-null="true"/>
+      </key>
+      <one-to-many class="ControleDeAcesso.Acesso"/>
+    </set>
+  </class>
+</hibernate-mapping>

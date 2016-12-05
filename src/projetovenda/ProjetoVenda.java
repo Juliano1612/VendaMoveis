@@ -5,6 +5,10 @@
  */
 package projetovenda;
 
+import ControleDeAcesso.JFrameTelaLogin;
+import Util.HibernateUtil;
+import org.hibernate.Session;
+
 /**
  *
  * @author ander
@@ -16,6 +20,9 @@ public class ProjetoVenda {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        JFrameTelaLogin jFrameTelaLogin = new JFrameTelaLogin();
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+
     }
-    
+
 }
