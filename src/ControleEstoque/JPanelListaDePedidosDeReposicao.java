@@ -5,17 +5,64 @@
  */
 package ControleEstoque;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rafael
  */
 public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
 
+    private ArrayList <PedidoEstoque> pedidos;
+    
     /**
      * Creates new form JPanelListaDePedidosDeReposicao
      */
     public JPanelListaDePedidosDeReposicao() {
         initComponents();
+        updatePedidosEstoque();
+    }
+    
+    public void updatePedidosEstoque()
+    {
+        pedidos = new ControlaPedidoEstoque().getListaPedidoEstoque();
+        DefaultTableModel model = new DefaultTableModel();
+        String[] colunas = new String[5];
+        
+        model.setColumnCount(5);
+        colunas[0] = "ID";
+        colunas[1] = "Status";
+        colunas[2] = "Produto";
+        colunas[3] = "Quant. Pedida";
+        colunas[4] = "Quant. Confirmada";
+        model.setColumnIdentifiers(colunas);
+        
+        for(PedidoEstoque p : pedidos)
+        {
+            Object[] obe = new Object[5];
+            
+            obe[0] = p.getIdPedEst();
+            
+            if(p.getEstatus() == 0)
+                obe[1] = "Não Processado";
+            else if(p.getEstatus() == 1)
+                obe[1] = "Efetivado";
+            else
+                obe[1] = "Cancelado";
+            
+            obe[2] = p.getProduto().getNomeProd();
+            obe[3] = p.getQuantidadePed();
+            
+            if(p.getEstatus() == 1)
+                obe[4] = p.getQuantidade();
+            else
+                obe[4] = "-";
+            
+            model.addRow(obe);
+        }
+        
+        this.jTable1.setModel(model);
     }
 
     /**
