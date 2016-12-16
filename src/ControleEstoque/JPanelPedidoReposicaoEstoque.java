@@ -58,7 +58,6 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jTextFieldQuantPed = new javax.swing.JTextField();
         jButtonCadastrar = new javax.swing.JButton();
-        jButtonCancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldQuantAt = new javax.swing.JTextField();
 
@@ -81,8 +80,6 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
             }
         });
 
-        jButtonCancelar.setText("Cancelar");
-
         jLabel3.setText("Quant. Atual:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -99,15 +96,14 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldQuantPed))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                        .addComponent(jButtonCancelar))
+                        .addComponent(jTextFieldQuantPed, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldQuantAt)))
+                        .addComponent(jTextFieldQuantAt))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonCadastrar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -127,9 +123,7 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(jTextFieldQuantPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonCadastrar)
-                            .addComponent(jButtonCancelar))))
+                        .addComponent(jButtonCadastrar)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -139,13 +133,14 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
         Date d = new Date();
         String idate;
         
-        idate = this.jTextFieldQuantPed.toString();
+        idate = this.produtos.get(this.jList1.getSelectedIndex()).getProdId();
         idate += d.getTime();
         
         p.setProduto(this.produtos.get(this.jList1.getSelectedIndex()));
         p.setEstatus(0);
-        p.setIdPedEst(p.getProduto().getProdId() + idate);
-        p.setQuantidade(Integer.parseInt(this.jTextFieldQuantPed.getText()));
+        p.setIdPedEst(idate);
+        p.setQuantidadePed(Integer.parseInt(this.jTextFieldQuantPed.getText()));
+        p.setQuantidade(0);
         
         boolean persistiu = new ControlaPedidoEstoque().persistePedidoEstoque(p);
         if(persistiu){
@@ -158,7 +153,6 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastrar;
-    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
