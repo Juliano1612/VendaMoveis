@@ -5,17 +5,66 @@
  */
 package ControleEstoque;
 
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rafael
  */
 public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
 
+    private ArrayList <PedidoEstoque> pedidos;
+    
     /**
      * Creates new form JPanelListaDePedidosDeReposicao
      */
     public JPanelListaDePedidosDeReposicao() {
         initComponents();
+        updatePedidosEstoque();
+    }
+    
+    public void updatePedidosEstoque()
+    {
+        pedidos = new ControlaPedidoEstoque().getListaPedidoEstoque();
+        DefaultTableModel model = new DefaultTableModel();
+        String[] colunas = new String[5];
+        
+        model.setColumnCount(5);
+        colunas[0] = "ID";
+        colunas[1] = "Status";
+        colunas[2] = "Produto";
+        colunas[3] = "Quant. Pedida";
+        colunas[4] = "Quant. Confirmada";
+        model.setColumnIdentifiers(colunas);
+        
+        for(PedidoEstoque p : pedidos)
+        {
+            Object[] obe = new Object[5];
+            
+            obe[0] = p.getIdPedEst();
+            
+            if(p.getEstatus() == 0)
+                obe[1] = "Não Processado";
+            else if(p.getEstatus() == 1)
+                obe[1] = "Efetivado";
+            else
+                obe[1] = "Cancelado";
+            
+            obe[2] = p.getProduto().getNomeProd();
+            obe[3] = p.getQuantidadePed();
+            
+            if(p.getEstatus() == 1)
+                obe[4] = p.getQuantidade();
+            else
+                obe[4] = "-";
+            
+            model.addRow(obe);
+        }
+        
+        this.jTable1.setModel(model);
     }
 
     /**
@@ -32,8 +81,6 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("Lista de Pedidos de Reposição de Estoque");
@@ -60,15 +107,6 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
 
         jButton2.setText("Cancelar Pedido");
 
-        jButton3.setText("Voltar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Criar Novo Pedido");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,33 +121,25 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton3)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2)
-                                    .addComponent(jButton1)
-                                    .addComponent(jButton4))
-                                .addGap(30, 30, 30))))))
+                            .addComponent(jButton2)
+                            .addComponent(jButton1))
+                        .addGap(40, 40, 40))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addGap(105, 105, 105)
-                        .addComponent(jButton3)))
+                        .addGap(134, 134, 134))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -118,16 +148,10 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

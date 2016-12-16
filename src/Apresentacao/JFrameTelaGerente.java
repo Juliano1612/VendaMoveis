@@ -8,6 +8,8 @@ package Apresentacao;
 import ControleCliente.JPanelConsultaCliente;
 import ControleDeAcesso.JFrameTelaLogin;
 import ControleDeAcesso.JPanelMinhaConta;
+import ControleEstoque.JPanelListaDePedidosDeReposicao;
+import ControleEstoque.JPanelPedidoReposicaoEstoque;
 import ControleProduto.JPanelCadastrarProduto;
 import ControleProduto.JPanelConsultarProduto;
 import GerenciamentoDeFuncionarios.Funcionario;
@@ -74,6 +76,9 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         jMenuProduto = new javax.swing.JMenu();
         jMenuCadastrarProduto = new javax.swing.JMenuItem();
         jMenuConsultarProduto = new javax.swing.JMenuItem();
+        jMenuPedido = new javax.swing.JMenu();
+        jMenuItemNovoPedido = new javax.swing.JMenuItem();
+        jMenuItemPedidosRep = new javax.swing.JMenuItem();
         jMenuCliente = new javax.swing.JMenu();
         jMenuCadastrarCliente = new javax.swing.JMenuItem();
         jMenuConsultarCliente = new javax.swing.JMenuItem();
@@ -144,6 +149,26 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         jMenuProduto.add(jMenuConsultarProduto);
 
         jMenuPrincipal.add(jMenuProduto);
+
+        jMenuPedido.setText("Pedidos");
+
+        jMenuItemNovoPedido.setText("Novo");
+        jMenuItemNovoPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNovoPedidoActionPerformed(evt);
+            }
+        });
+        jMenuPedido.add(jMenuItemNovoPedido);
+
+        jMenuItemPedidosRep.setText("Buscar");
+        jMenuItemPedidosRep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPedidosRepActionPerformed(evt);
+            }
+        });
+        jMenuPedido.add(jMenuItemPedidosRep);
+
+        jMenuPrincipal.add(jMenuPedido);
 
         jMenuCliente.setText("Cliente");
 
@@ -317,6 +342,18 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuMinhaContaActionPerformed
 
+    private void jMenuItemPedidosRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPedidosRepActionPerformed
+        JPanel jPanelListaPedRep = new JPanelListaDePedidosDeReposicao();
+        jPanelFundo.add(jPanelListaPedRep);
+        card.next(jPanelFundo);
+    }//GEN-LAST:event_jMenuItemPedidosRepActionPerformed
+
+    private void jMenuItemNovoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNovoPedidoActionPerformed
+        JPanel jPanelNovoPedRep = new JPanelPedidoReposicaoEstoque();
+        jPanelFundo.add(jPanelNovoPedRep);
+        card.next(jPanelFundo);
+    }//GEN-LAST:event_jMenuItemNovoPedidoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -366,7 +403,10 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuConsultarFuncionario;
     private javax.swing.JMenuItem jMenuConsultarProduto;
     private javax.swing.JMenu jMenuFuncionario;
+    private javax.swing.JMenuItem jMenuItemNovoPedido;
+    private javax.swing.JMenuItem jMenuItemPedidosRep;
     private javax.swing.JMenu jMenuMinhaConta;
+    private javax.swing.JMenu jMenuPedido;
     private javax.swing.JMenuBar jMenuPrincipal;
     private javax.swing.JMenu jMenuProduto;
     private javax.swing.JMenu jMenuSair;
