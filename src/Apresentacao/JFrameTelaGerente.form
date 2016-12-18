@@ -267,6 +267,9 @@
           <Image iconType="3" name="/Icones/shopping-cart-2-icon.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCarrinhoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

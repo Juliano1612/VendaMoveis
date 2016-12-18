@@ -1,4 +1,4 @@
-package Controle;
+package ControleDeVendas;
 // Generated 16/10/2016 21:31:24 by Hibernate Tools 4.3.1
 
 

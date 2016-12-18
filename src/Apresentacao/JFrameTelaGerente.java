@@ -8,6 +8,8 @@ package Apresentacao;
 import ControleCliente.JPanelConsultaCliente;
 import ControleDeAcesso.JFrameTelaLogin;
 import ControleDeAcesso.JPanelMinhaConta;
+import ControleDeVendas.JPanelCarrinhoDeCompras;
+import ControleDeVendas.ProdutosCarrinho;
 import ControleEstoque.JPanelListaDePedidosDeReposicao;
 import ControleEstoque.JPanelPedidoReposicaoEstoque;
 import ControleProduto.JPanelCadastrarProduto;
@@ -16,6 +18,7 @@ import GerenciamentoDeFuncionarios.Funcionario;
 import GerenciamentoDeFuncionarios.JPanelCadastroFuncionario;
 import GerenciamentoDeFuncionarios.JPanelListaFuncionario;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,11 +30,13 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
      */
     CardLayout card;
     Funcionario funcionario;
+    public ArrayList<ProdutosCarrinho> produtosCarrinho;
 
     public JFrameTelaGerente(Funcionario func) {
         initComponents();
 
         funcionario = func;
+        produtosCarrinho = new ArrayList<ProdutosCarrinho>();
 
         this.setTitle("Gerente - " + funcionario.getNome());
 
@@ -104,6 +109,11 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         jPanelFundo.setLayout(new java.awt.CardLayout());
 
         jButtonCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/shopping-cart-2-icon.png"))); // NOI18N
+        jButtonCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCarrinhoActionPerformed(evt);
+            }
+        });
 
         jMenuFuncionario.setText("Funcionário");
 
@@ -353,6 +363,13 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         jPanelFundo.add(jPanelNovoPedRep);
         card.next(jPanelFundo);
     }//GEN-LAST:event_jMenuItemNovoPedidoActionPerformed
+
+    private void jButtonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarrinhoActionPerformed
+        // TODO add your handling code here:
+        JPanel jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, produtosCarrinho);
+        jPanelFundo.add(jPanelCarrinhoDeCompras);
+        card.next(jPanelFundo);
+    }//GEN-LAST:event_jButtonCarrinhoActionPerformed
 
     /**
      * @param args the command line arguments

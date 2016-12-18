@@ -68,7 +68,7 @@
       <key>
         <column length="60" name="func_ID"/>
       </key>
-      <one-to-many class="Controle.Vendas"/>
+      <one-to-many class="ControleDeVendas.Vendas"/>
     </set>
     <set fetch="select" inverse="true" lazy="true" name="faltases" table="Faltas">
       <key>
