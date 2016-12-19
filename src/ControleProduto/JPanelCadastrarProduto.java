@@ -11,6 +11,7 @@ import GeradorDeId.GeraId;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import javafx.stage.FileChooser;
 import javax.swing.Icon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -324,8 +325,13 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Digite primeiramente um ID para o produto");
         }else{
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg");
+        /*FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Selecione as Imagens");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "jpg", "png", "jpeg");
+        fileChooser.getExtensionFilters().add(extFilter);*/
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(filter);
+        fileChooser.setDialogTitle("Selecione as Imagens");
         fileChooser.setMultiSelectionEnabled(false);
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         int result = fileChooser.showOpenDialog(this);

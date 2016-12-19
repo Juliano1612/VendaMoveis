@@ -44,7 +44,7 @@
       <key>
         <column length="60" name="prod_ID"/>
       </key>
-      <one-to-many class="Controle.ProdVenda"/>
+      <one-to-many class="ControleDeVendas.ProdVenda"/>
     </set>
     <set fetch="select" inverse="true" lazy="true" name="imagemProdutos" table="Imagem_Produto">
       <key>

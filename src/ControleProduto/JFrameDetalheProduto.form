@@ -26,8 +26,20 @@
           <Group type="102" attributes="0">
               <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="JLabelFotoProduto" min="-2" pref="235" max="-2" attributes="0"/>
+                  <Component id="JLabelDescrição" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Component id="jButtonFechar" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="960" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jButtonAntFoto" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jButtonProxFoto" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="JLabelFotoProduto" min="-2" pref="235" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
@@ -55,11 +67,6 @@
                           </Group>
                           <Component id="JPanelDimensao" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Component id="JLabelDescrição" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="jButtonFechar" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="960" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -113,7 +120,12 @@
                   </Group>
                   <Component id="JLabelFotoProduto" min="-2" pref="197" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="89" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jButtonProxFoto" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonAntFoto" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="60" max="32767" attributes="0"/>
               <Component id="JLabelDescrição" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="123" max="-2" attributes="0"/>
@@ -321,6 +333,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFecharActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonProxFoto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pr&#xf3;ximo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonAntFoto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Anterior"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

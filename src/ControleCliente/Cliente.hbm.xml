@@ -65,7 +65,7 @@
       <key>
         <column length="60" name="cli_ID"/>
       </key>
-      <one-to-many class="Controle.Vendas"/>
+      <one-to-many class="ControleDeVendas.Vendas"/>
     </set>
   </class>
 </hibernate-mapping>

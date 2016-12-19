@@ -15,7 +15,6 @@ import GeradorDeId.GeraId;
  * @author ander
  */
 public class ControlaProduto {
-    int idPedidoEstoque;
     public boolean persisteProduto(Produto produto, String nomeProd, Integer Quantidade, String descricao, Float precoVenda, Float precoCusto){
         produto.setNomeProd(nomeProd);
         produto.setQuantidadeEstoque(Quantidade);
@@ -101,26 +100,6 @@ public class ControlaProduto {
         s.getTransaction().commit();
         return listaChaves;
     }
-    
-        
-    private static final SessionFactory sessionFactory;
-    
-    static {
-        try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-    
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
 
      public ArrayList<Produto> getListaProdutos() {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -133,11 +112,5 @@ public class ControlaProduto {
             }
         });
         return listaProdutos;
-    }
-    private static class Produtos {
-
-        public Produtos() {
-        }
-    }
-    
+    }  
 }

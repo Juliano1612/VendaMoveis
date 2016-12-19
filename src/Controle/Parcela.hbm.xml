@@ -7,7 +7,7 @@
       <column length="60" name="parcela_ID"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="Controle.Vendas" fetch="select" name="vendas">
+    <many-to-one class="ControleDeVendas.Vendas" fetch="select" name="vendas">
       <column length="60" name="venda_ID"/>
     </many-to-one>
     <property name="parcela" type="java.lang.Integer">
