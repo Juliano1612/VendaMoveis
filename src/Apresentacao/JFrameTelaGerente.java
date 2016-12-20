@@ -8,6 +8,7 @@ package Apresentacao;
 import ControleCliente.JPanelConsultaCliente;
 import ControleDeAcesso.JFrameTelaLogin;
 import ControleDeAcesso.JPanelMinhaConta;
+import ControleDeVendas.ControlaVenda;
 import ControleDeVendas.JPanelCarrinhoDeCompras;
 import ControleDeVendas.VendaAberta;
 import ControleEstoque.JPanelListaDePedidosDeReposicao;
@@ -368,11 +369,14 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     private void jButtonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarrinhoActionPerformed
         // TODO add your handling code here:
+        ControlaVenda controlaVenda = new ControlaVenda();
+        
         Date data = new Date();
         String idVenda;
-        if (vendaAberta == null) {
+        if (controlaVenda.getVendaAbertaFuncionario(funcionario) == null) {
             idVenda = funcionario.getIdFunc() + data.getTime();
-            JPanel jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, vendaAberta.getVendaId());
+            controlaVenda.novaVendaAberta(idVenda, funcionario);
+            JPanel jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, idVenda);
             jPanelFundo.add(jPanelCarrinhoDeCompras);
             card.next(jPanelFundo);
         } else {
@@ -383,7 +387,7 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION);
 
             if (n == JOptionPane.YES_OPTION) {
-                JPanel jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, vendaAberta.getVendaId());
+                JPanel jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, controlaVenda.getVendaAbertaFuncionario(funcionario).getVendaId());
                 jPanelFundo.add(jPanelCarrinhoDeCompras);
                 card.next(jPanelFundo);
             }

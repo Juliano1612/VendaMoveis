@@ -32,7 +32,7 @@ public class Vendas  implements java.io.Serializable {
     public Vendas(String vendaId) {
         this.vendaId = vendaId;
     }
-    public Vendas(String vendaId, Cliente cliente, Funcionario funcionario, Date dataCompra, Float valorTotal, Integer numParcelas, String formaPagamento, Integer statusVenda, Set prodVendas, Set parcelas) {
+    public Vendas(String vendaId, Cliente cliente, Funcionario funcionario, Date dataCompra, Float valorTotal, Integer numParcelas, String formaPagamento, Integer statusVenda) {
        this.vendaId = vendaId;
        this.cliente = cliente;
        this.funcionario = funcionario;
@@ -41,8 +41,21 @@ public class Vendas  implements java.io.Serializable {
        this.numParcelas = numParcelas;
        this.formaPagamento = formaPagamento;
        this.statusVenda = statusVenda;
-       this.prodVendas = prodVendas;
-       this.parcelas = parcelas;
+       this.prodVendas = null;
+       this.parcelas = null;
+    }
+    
+    public Vendas(String vendaId, Funcionario funcionario, Integer statusVenda) {
+        this.vendaId = vendaId;
+       this.cliente = null;
+       this.funcionario = funcionario;
+       this.dataCompra = null;
+       this.valorTotal = null;
+       this.numParcelas = null;
+       this.formaPagamento = null;
+       this.statusVenda = statusVenda;
+       this.prodVendas = null;
+       this.parcelas = null;
     }
    
     public String getVendaId() {

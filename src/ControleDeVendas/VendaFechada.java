@@ -16,8 +16,12 @@ import java.util.Set;
  */
 public class VendaFechada extends Vendas{
 
-    public VendaFechada(String vendaId, Cliente cliente, Funcionario funcionario, Date dataCompra, Float valorTotal, Integer numParcelas, String formaPagamento, Integer statusVenda, Set prodVendas, Set parcelas) {
-        super(vendaId, cliente, funcionario, dataCompra, valorTotal, numParcelas, formaPagamento, statusVenda, prodVendas, parcelas);
+    public VendaFechada(String vendaId, Cliente cliente, Funcionario funcionario, Date dataCompra, Float valorTotal, Integer numParcelas, String formaPagamento, Integer statusVenda) {
+        super(vendaId, cliente, funcionario, dataCompra, valorTotal, numParcelas, formaPagamento, statusVenda);
     }   
+
+    VendaFechada(String vendaId, Cliente cliente, Funcionario funcionario, Date dataCompra, Float valorTotal, int numParcelas, String formaPagamento, int statusVenda) {
+        super(vendaId, cliente, funcionario, dataCompra, valorTotal, numParcelas, formaPagamento, statusVenda);
+    }
     
 }
