@@ -9,7 +9,6 @@ import ControleCliente.JPanelConsultaCliente;
 import ControleDeAcesso.JFrameTelaLogin;
 import ControleDeAcesso.JPanelMinhaConta;
 import ControleDeVendas.JPanelCarrinhoDeCompras;
-import ControleDeVendas.ProdutosCarrinho;
 import ControleEstoque.JPanelListaDePedidosDeReposicao;
 import ControleEstoque.JPanelPedidoReposicaoEstoque;
 import ControleProduto.JPanelCadastrarProduto;
@@ -30,13 +29,11 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
      */
     CardLayout card;
     Funcionario funcionario;
-    public ArrayList<ProdutosCarrinho> produtosCarrinho;
 
     public JFrameTelaGerente(Funcionario func) {
         initComponents();
 
         funcionario = func;
-        produtosCarrinho = new ArrayList<ProdutosCarrinho>();
 
         this.setTitle("Gerente - " + funcionario.getNome());
 
@@ -162,6 +159,7 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
         jMenuPedido.setText("Pedidos");
 
+        jMenuItemNovoPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/simpleNew20x20.png"))); // NOI18N
         jMenuItemNovoPedido.setText("Novo");
         jMenuItemNovoPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +168,7 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         });
         jMenuPedido.add(jMenuItemNovoPedido);
 
+        jMenuItemPedidosRep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/search20x20.png"))); // NOI18N
         jMenuItemPedidosRep.setText("Buscar");
         jMenuItemPedidosRep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,7 +365,7 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     private void jButtonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarrinhoActionPerformed
         // TODO add your handling code here:
-        JPanel jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, produtosCarrinho);
+        JPanel jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario);
         jPanelFundo.add(jPanelCarrinhoDeCompras);
         card.next(jPanelFundo);
     }//GEN-LAST:event_jButtonCarrinhoActionPerformed
