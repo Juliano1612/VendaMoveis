@@ -1,5 +1,5 @@
 package GerenciamentoDeFuncionarios;
-// Generated 16/10/2016 21:31:24 by Hibernate Tools 4.3.1
+// Generated 20/12/2016 16:53:10 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -32,15 +32,14 @@ public class Funcionario  implements java.io.Serializable {
      private String cep;
      private String telefone;
      private Integer status;
-     private Set vendases = null;
-     private Set faltases = null;
-     private Set acessos = null;
+     private Set vendases = new HashSet(0);
+     private Set faltases = new HashSet(0);
+     private Set acessos = new HashSet(0);
+
+    public Funcionario() {
+    }
+
 	
-     
-   public Funcionario(){
-       
-   }
-     
     public Funcionario(String idFunc, String nome, String cpf, String endereco) {
         this.idFunc = idFunc;
         this.nome = nome;
@@ -68,10 +67,11 @@ public class Funcionario  implements java.io.Serializable {
        this.cep = cep;
        this.telefone = telefone;
        this.status = status;
-
+       this.vendases = null;
+       this.faltases = null;
+       this.acessos = null;
     }
-    
-    
+   
     public String getIdFunc() {
         return this.idFunc;
     }

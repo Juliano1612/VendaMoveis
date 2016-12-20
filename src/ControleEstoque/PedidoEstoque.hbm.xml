@@ -1,23 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 07/10/2016 23:55:48 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/12/2016 16:53:11 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="Vendas" name="ControleEstoque.PedidoEstoque" optimistic-lock="version" table="PedidoEstoque">
-    <id name="idPedEst" type="string">
-      <column length="60" name="IdPedEst"/>
-      <generator class="assigned"/>
-    </id>
-    <many-to-one class="ControleProduto.Produto" fetch="select" name="produto">
-      <column length="60" name="prod_ID"/>
-    </many-to-one>
-    <property name="quantidade" type="java.lang.Integer">
-      <column name="quantidade"/>
-    </property>
-    <property name="estatus" type="java.lang.Integer">
-      <column name="estatus"/>
-    </property>
-    <property name="quantidadePed" type="java.lang.Integer">
-      <column name="quantidadePed"/>
-    </property>
-  </class>
+    <class name="ControleEstoque.PedidoEstoque" table="PedidoEstoque" catalog="Vendas" optimistic-lock="version">
+        <id name="idPedEst" type="string">
+            <column name="IdPedEst" length="60" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="funcionario" class="GerenciamentoDeFuncionarios.Funcionario" fetch="select">
+            <column name="id_func" length="60" />
+        </many-to-one>
+        <property name="dataPed" type="date">
+            <column name="dataPed" length="10" />
+        </property>
+        <property name="dataAtend" type="date">
+            <column name="dataAtend" length="10" />
+        </property>
+        <set name="prodPedEstoques" table="ProdPedEstoque" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPedEst" length="60" />
+            </key>
+            <one-to-many class="ControleEstoque.ProdPedEstoque" />
+        </set>
+    </class>
 </hibernate-mapping>

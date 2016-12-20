@@ -1,23 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 16/10/2016 21:31:26 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/12/2016 16:53:11 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="Vendas" name="GerenciamentoDeFuncionarios.Faltas" optimistic-lock="version" table="Faltas">
-    <id name="idFaltas" type="string">
-      <column length="60" name="idFaltas"/>
-      <generator class="assigned"/>
-    </id>
-    <many-to-one class="GerenciamentoDeFuncionarios.Funcionario" fetch="select" name="funcionario">
-      <column length="60" name="id_func"/>
-    </many-to-one>
-    <property name="justificativaFlag" type="java.lang.Integer">
-      <column name="justificativaFlag"/>
-    </property>
-    <property name="justificativatextual" type="string">
-      <column length="60" name="justificativatextual"/>
-    </property>
-    <property name="datafalta" type="date">
-      <column length="10" name="datafalta"/>
-    </property>
-  </class>
+    <class name="GerenciamentoDeFuncionarios.Faltas" table="Faltas" catalog="Vendas">
+        <id name="idFaltas" type="string">
+            <column name="idFaltas" length="60" />
+            <generator class="assigned"></generator>
+        </id>
+        <many-to-one name="funcionario" class="GerenciamentoDeFuncionarios.Funcionario" fetch="select">
+            <column name="id_func" length="60" />
+        </many-to-one>
+        <property name="justificativaFlag" type="java.lang.Integer">
+            <column name="justificativaFlag" />
+        </property>
+        <property name="justificativatextual" type="string">
+            <column name="justificativatextual" length="60" />
+        </property>
+        <property name="datafalta" type="date">
+            <column name="datafalta" length="10" />
+        </property>
+    </class>
 </hibernate-mapping>

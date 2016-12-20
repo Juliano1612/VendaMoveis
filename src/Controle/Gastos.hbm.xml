@@ -1,20 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 16/10/2016 21:31:26 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/12/2016 16:53:11 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="Vendas" name="Controle.Gastos" optimistic-lock="version" table="Gastos">
-    <id name="idGasto" type="string">
-      <column length="60" name="idGasto"/>
-      <generator class="assigned"/>
-    </id>
-    <property name="nomeGasto" type="string">
-      <column length="60" name="nomeGasto"/>
-    </property>
-    <property name="valor" type="java.lang.Float">
-      <column name="valor" precision="12" scale="0"/>
-    </property>
-    <property name="data" type="string">
-      <column length="6" name="data"/>
-    </property>
-  </class>
+    <class name="Controle.Gastos" table="Gastos" catalog="Vendas">
+        <id name="idGasto" type="string">
+            <column name="idGasto" length="60" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="nomeGasto" type="string">
+            <column name="nomeGasto" length="60" />
+        </property>
+        <property name="valor" type="java.lang.Float">
+            <column name="valor" precision="12" scale="0" />
+        </property>
+        <property name="data" type="string">
+            <column name="data" length="6" />
+        </property>
+    </class>
 </hibernate-mapping>

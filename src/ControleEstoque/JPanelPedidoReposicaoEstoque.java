@@ -133,22 +133,22 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
         Date d = new Date();
         String idate;
         
-        p.setProduto(this.produtos.get(this.jList1.getSelectedIndex()));
-        p.setEstatus(0);
-        p.setQuantidadePed(Integer.parseInt(this.jTextFieldQuantPed.getText()));
-        p.setQuantidade(0);
-        
-        idate = this.produtos.get(this.jList1.getSelectedIndex()).getProdId();
-        idate += p.getQuantidadePed();
-        idate += d.getTime();
-        p.setIdPedEst(idate);
-        
-        boolean persistiu = new ControlaPedidoEstoque().persistePedidoEstoque(p);
-        if(persistiu){
-            JOptionPane.showMessageDialog(null, "Pedido de reposição cadastrado com sucesso!");
-        }else{
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar pedido!");
-        }
+//        p.setProduto(this.produtos.get(this.jList1.getSelectedIndex()));
+//        p.setEstatus(0);
+//        p.setQuantidadePed(Integer.parseInt(this.jTextFieldQuantPed.getText()));
+//        p.setQuantidade(0);
+//        
+//        idate = this.produtos.get(this.jList1.getSelectedIndex()).getProdId();
+//        idate += p.getQuantidadePed();
+//        idate += d.getTime();
+//        p.setIdPedEst(idate);
+//        
+//        boolean persistiu = new ControlaPedidoEstoque().persistePedidoEstoque(p);
+//        if(persistiu){
+//            JOptionPane.showMessageDialog(null, "Pedido de reposição cadastrado com sucesso!");
+//        }else{
+//            JOptionPane.showMessageDialog(null, "Erro ao cadastrar pedido!");
+//        }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
 

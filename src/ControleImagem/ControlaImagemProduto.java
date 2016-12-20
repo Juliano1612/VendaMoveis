@@ -16,10 +16,11 @@ public class ControlaImagemProduto {
     public ImagemProduto cadastraImagem(String imagemId, byte[] imagem){
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        ImagemProduto imagemProduto = new ImagemProduto(imagemId, imagem);
-        s.save(imagemProduto);
-        s.getTransaction().commit();
-        return imagemProduto;
+//        ImagemProduto imagemProduto = new ImagemProduto(imagemId, imagem);
+//        s.save(imagemProduto);
+//        s.getTransaction().commit();
+//        return imagemProduto;
+           return null;
     }
     public boolean checaChave(String prodId) {
         ArrayList<ImagemProduto> listaChaves = getListaChaves();

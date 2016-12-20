@@ -22,7 +22,7 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
     DefaultTableModel tableModel;
     float valorTotal = 0;
 
-    public JPanelCarrinhoDeCompras(Funcionario func) {
+    public JPanelCarrinhoDeCompras(Funcionario func, String idVendaAberta) {
         initComponents();
 
         funcionario = func;

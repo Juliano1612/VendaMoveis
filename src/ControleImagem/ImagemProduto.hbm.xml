@@ -1,17 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 16/10/2016 21:31:26 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/12/2016 16:53:11 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="Vendas" name="ControleImagem.ImagemProduto" optimistic-lock="version" table="Imagem_Produto">
-    <id name="imagemId" type="string">
-      <column length="60" name="Imagem_ID"/>
-      <generator class="assigned"/>
-    </id>
-    <many-to-one class="ControleProduto.Produto" fetch="select" name="produto">
-      <column length="60" name="prod_ID"/>
-    </many-to-one>
-    <property name="imagem" type="binary">
-      <column name="imagem"/>
-    </property>
-  </class>
+    <class name="ControleImagem.ImagemProduto" table="Imagem_Produto" catalog="Vendas">
+        <id name="imagemId" type="string">
+            <column name="Imagem_ID" length="60" />
+            <generator class="assigned"></generator>
+        </id>
+        <many-to-one name="produto" class="ControleProduto.Produto" fetch="select">
+            <column name="prod_ID" length="60" />
+        </many-to-one>
+        <property name="imagem" type="binary">
+            <column name="imagem" />
+        </property>
+    </class>
 </hibernate-mapping>
