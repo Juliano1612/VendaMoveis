@@ -133,14 +133,15 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
         Date d = new Date();
         String idate;
         
-        idate = this.produtos.get(this.jList1.getSelectedIndex()).getProdId();
-        idate += d.getTime();
-        
         p.setProduto(this.produtos.get(this.jList1.getSelectedIndex()));
         p.setEstatus(0);
-        p.setIdPedEst(idate);
         p.setQuantidadePed(Integer.parseInt(this.jTextFieldQuantPed.getText()));
         p.setQuantidade(0);
+        
+        idate = this.produtos.get(this.jList1.getSelectedIndex()).getProdId();
+        idate += p.getQuantidadePed();
+        idate += d.getTime();
+        p.setIdPedEst(idate);
         
         boolean persistiu = new ControlaPedidoEstoque().persistePedidoEstoque(p);
         if(persistiu){
