@@ -339,7 +339,9 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     private void jMenuConsultarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarProdutoActionPerformed
         // TODO add your handling code here:
-        JPanel jPanelConsultarProduto = new JPanelConsultarProduto();
+        ControlaVenda controlaVenda = new ControlaVenda();
+        controlaVenda.getVendaAbertaFuncionario(funcionario);
+        JPanel jPanelConsultarProduto = new JPanelConsultarProduto(controlaVenda.getVendaAbertaFuncionario(funcionario), funcionario);
         jPanelFundo.add(jPanelConsultarProduto);
         card.next(jPanelFundo);
     }//GEN-LAST:event_jMenuConsultarProdutoActionPerformed
@@ -370,7 +372,7 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
     private void jButtonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarrinhoActionPerformed
         // TODO add your handling code here:
         ControlaVenda controlaVenda = new ControlaVenda();
-        
+
         Date data = new Date();
         String idVenda;
         if (controlaVenda.getVendaAbertaFuncionario(funcionario) == null) {
@@ -385,13 +387,19 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
                     "Já existem produtos no carrinho, gostaria de esvaziá-lo?",
                     "Confirmar Opção",
                     JOptionPane.YES_NO_OPTION);
-
+            JPanel jPanelCarrinhoDeCompras;
             if (n == JOptionPane.YES_OPTION) {
-                JPanel jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, controlaVenda.getVendaAbertaFuncionario(funcionario).getVendaId());
-                jPanelFundo.add(jPanelCarrinhoDeCompras);
-                card.next(jPanelFundo);
+                controlaVenda.excluiVendaAberta(funcionario);
+                idVenda = funcionario.getIdFunc() + data.getTime();
+                controlaVenda.novaVendaAberta(idVenda, funcionario);
+                jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, idVenda);
+            } else {
+
+                jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, controlaVenda.getVendaAbertaFuncionario(funcionario).getVendaId());
             }
 
+            jPanelFundo.add(jPanelCarrinhoDeCompras);
+            card.next(jPanelFundo);
         }
 
     }//GEN-LAST:event_jButtonCarrinhoActionPerformed

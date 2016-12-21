@@ -76,10 +76,9 @@ public class ControlaVenda {
         Session c = HibernateUtil.getSessionFactory().getCurrentSession();
         c.beginTransaction();
         for (Vendas v : listaVendasAbertas) {
-            System.out.println(v.getFuncionario().getIdFunc() + "       " + funcionario.getIdFunc());
             if (v.getFuncionario().getIdFunc().equals(funcionario.getIdFunc())) {
                 c.getTransaction().commit();
-                return (VendaAberta) v;
+                return vendaToVendaAberta(v);
             }
         }
 
@@ -87,7 +86,13 @@ public class ControlaVenda {
 
         return null;
     }
-    
+
+    public VendaAberta vendaToVendaAberta(Vendas venda) {
+        
+        VendaAberta vendaAberta = new VendaAberta(venda.getVendaId(), venda.getFuncionario(), 0);
+        return vendaAberta;
+    }
+
     public void excluiVendaAberta(Funcionario funcionario) {
 
         ArrayList<Vendas> listaVendasAbertas = getListaVendasAbertas();
@@ -95,8 +100,8 @@ public class ControlaVenda {
         c.beginTransaction();
         for (Vendas v : listaVendasAbertas) {
             if (v.getFuncionario().getIdFunc().equals(funcionario.getIdFunc())) {
-                c.getTransaction().commit();
                 c.delete(v);
+                break;
             }
         }
 
@@ -106,21 +111,16 @@ public class ControlaVenda {
     public ArrayList<Vendas> getListaVendasAbertas() {
         Session c = HibernateUtil.getSessionFactory().getCurrentSession();
         c.beginTransaction();
-        ArrayList<Vendas> listaVendas = (ArrayList<Vendas>) c.createQuery("From Vendas Where vendaId is 0").list();
+        ArrayList<Vendas> listaVendas = (ArrayList<Vendas>) c.createQuery("From Vendas Where statusVenda is 0").list();
         c.getTransaction().commit();
-        Collections.sort(listaVendas, new Comparator<Vendas>() {
-            @Override
-            public int compare(Vendas v1, Vendas v2) {
-                return v1.getDataCompra().compareTo(v2.getDataCompra());
-            }
-        });
+
         return listaVendas;
     }
 
     public ArrayList<Vendas> getListaVendasFechadas() {
         Session c = HibernateUtil.getSessionFactory().getCurrentSession();
         c.beginTransaction();
-        ArrayList<Vendas> listaVendas = (ArrayList<Vendas>) c.createQuery("From Vendas Where vendaId is 1").list();
+        ArrayList<Vendas> listaVendas = (ArrayList<Vendas>) c.createQuery("From Vendas Where statusVenda is 1").list();
         c.getTransaction().commit();
         Collections.sort(listaVendas, new Comparator<Vendas>() {
             @Override
@@ -134,7 +134,7 @@ public class ControlaVenda {
     public ArrayList<Vendas> getListaVendasFinalizadas() {
         Session c = HibernateUtil.getSessionFactory().getCurrentSession();
         c.beginTransaction();
-        ArrayList<Vendas> listaVendas = (ArrayList<Vendas>) c.createQuery("From Vendas Where vendaId is 2").list();
+        ArrayList<Vendas> listaVendas = (ArrayList<Vendas>) c.createQuery("From Vendas Where statusVenda is 2").list();
         c.getTransaction().commit();
         Collections.sort(listaVendas, new Comparator<Vendas>() {
             @Override
