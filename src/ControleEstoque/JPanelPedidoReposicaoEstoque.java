@@ -7,6 +7,7 @@ package ControleEstoque;
 
 import ControleProduto.ControlaProduto;
 import ControleProduto.Produto;
+import GerenciamentoDeFuncionarios.Funcionario;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
@@ -18,26 +19,38 @@ import javax.swing.JOptionPane;
  */
 public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
     
-    private ArrayList <Produto> produtos;
+    private ArrayList <ProdPedEstoque> prodpedes;
+    Funcionario funcionario;
+    Date datahoje;
 
     /**
      * Creates new form JPanelPedidoReposicaoEstoque
      */
-    public JPanelPedidoReposicaoEstoque() {
+    public JPanelPedidoReposicaoEstoque(Funcionario funcionario) {
         initComponents();
-        this.FetchProdutos();
-        this.jTextFieldQuantAt.setEditable(false);
+        this.funcionario = funcionario;
+        
+        datahoje = new Date();
+        this.jTextFieldDataPed.setText(datahoje.toString());
+        this.jTextFieldDataPed.setEditable(false);
+        
+        this.jTextFieldFuncionario.setText(funcionario.getNome());
+        this.jTextFieldFuncionario.setEditable(false);
     }
     
-    public void FetchProdutos()
+    public void FetchProdPedEs()
     {
-        produtos = new ControlaProduto().getListaProdutos();
-            
         Vector <String> nomes_prod = new Vector();
         
-        for(Produto p: produtos)
+        for(ProdPedEstoque ppe: prodpedes)
         {
-            nomes_prod.add(p.getNomeProd());
+            String novoitem;
+            
+            novoitem = ppe.getProduto().getNomeProd();
+            novoitem += " (";
+            novoitem += ppe.getQuantidade();
+            novoitem += ")";
+            nomes_prod.add(novoitem);
         }
 
         this.jList1.setListData(nomes_prod);        
@@ -56,10 +69,11 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
         jList1 = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldQuantPed = new javax.swing.JTextField();
+        jTextFieldFuncionario = new javax.swing.JTextField();
         jButtonCadastrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldQuantAt = new javax.swing.JTextField();
+        jTextFieldDataPed = new javax.swing.JTextField();
+        jButtonAdicionar = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -71,7 +85,7 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("Pedido de Reposição de Estoque");
 
-        jLabel2.setText("Quant. a Pedir:");
+        jLabel2.setText("Funcionário:");
 
         jButtonCadastrar.setText("Cadastrar Pedido");
         jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +94,14 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setText("Quant. Atual:");
+        jLabel3.setText("Data do Pedido:");
+
+        jButtonAdicionar.setText("Adicionar Item");
+        jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -96,14 +117,16 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldQuantPed, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
+                        .addComponent(jTextFieldFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldQuantAt))
+                        .addComponent(jTextFieldDataPed))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonCadastrar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonCadastrar)
+                            .addComponent(jButtonAdicionar))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -117,12 +140,14 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextFieldQuantAt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldDataPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextFieldQuantPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAdicionar)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonCadastrar)))
                 .addContainerGap())
         );
@@ -151,15 +176,20 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
 //        }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAdicionar;
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextFieldQuantAt;
-    private javax.swing.JTextField jTextFieldQuantPed;
+    private javax.swing.JTextField jTextFieldDataPed;
+    private javax.swing.JTextField jTextFieldFuncionario;
     // End of variables declaration//GEN-END:variables
 }
