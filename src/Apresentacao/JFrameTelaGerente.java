@@ -364,7 +364,7 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPedidosRepActionPerformed
 
     private void jMenuItemNovoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNovoPedidoActionPerformed
-        JPanel jPanelNovoPedRep = new JPanelPedidoReposicaoEstoque();
+        JPanel jPanelNovoPedRep = new JPanelPedidoReposicaoEstoque(funcionario);
         jPanelFundo.add(jPanelNovoPedRep);
         card.next(jPanelFundo);
     }//GEN-LAST:event_jMenuItemNovoPedidoActionPerformed

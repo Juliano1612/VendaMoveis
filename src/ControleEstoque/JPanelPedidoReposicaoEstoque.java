@@ -20,17 +20,20 @@ import javax.swing.JOptionPane;
 public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
     
     private ArrayList <ProdPedEstoque> prodpedes;
-    Funcionario funcionario;
-    Date datahoje;
+    PedidoEstoque pedido_estoque;
 
     /**
      * Creates new form JPanelPedidoReposicaoEstoque
      */
     public JPanelPedidoReposicaoEstoque(Funcionario funcionario) {
         initComponents();
-        this.funcionario = funcionario;
+        pedido_estoque = new PedidoEstoque();
+        prodpedes = new ArrayList<>();
+        this.FetchProdPedEs();
+        pedido_estoque.setFuncionario(funcionario);
         
-        datahoje = new Date();
+        Date datahoje = new Date();
+        pedido_estoque.setDataPed(datahoje);
         this.jTextFieldDataPed.setText(datahoje.toString());
         this.jTextFieldDataPed.setEditable(false);
         
@@ -178,6 +181,7 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
 
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
         // TODO add your handling code here:
+        new JFrameIncluirProduto(prodpedes, pedido_estoque, this).setVisible(true);    
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
 
