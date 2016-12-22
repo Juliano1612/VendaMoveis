@@ -6,10 +6,14 @@
 package ControleEstoque;
 
 import ControleProduto.Produto;
+import ControleEstoque.ControlaProdPedEstoque;
+import GerenciamentoDeFuncionarios.Funcionario;
 import Util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
@@ -21,22 +25,29 @@ public class ControlaPedidoEstoque {
 
     public boolean persistePedidoEstoque(PedidoEstoque pedido) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        
         s.beginTransaction();
         try {
             s.saveOrUpdate(pedido);
             s.getTransaction().commit();
-            return true;
         } catch (Exception e) {
             s.getTransaction().commit();
             return false;
         }
+        
+        for(Object ppes : pedido.getProdPedEstoques())
+        {
+            ProdPedEstoque ppe = (ProdPedEstoque) ppes;
+            
+            if( (new ControlaProdPedEstoque().persisteProdPedEstoque(ppe)) == false) return false;
+        }
+        return true;
     }
 
-    public PedidoEstoque criarPedidoEstoque(String idPedEst, Produto produto, Integer quantidade, Integer estatus, Integer quantidadePed) {
+    public PedidoEstoque criarPedidoEstoque(String idPedEst, Funcionario funcionario, Date dataPed, Date dataAtend, Set prodPedEstoques) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-//        PedidoEstoque pedido = new PedidoEstoque(idPedEst, produto, quantidade, estatus, quantidadePed);
-        PedidoEstoque pedido = new PedidoEstoque(); //só pra nao dar erro
+        PedidoEstoque pedido = new PedidoEstoque(idPedEst, funcionario, dataPed, dataAtend, prodPedEstoques);
         s.save(pedido);
         s.getTransaction().commit();
         return pedido;
@@ -47,12 +58,12 @@ public class ControlaPedidoEstoque {
         s.beginTransaction();
         ArrayList<PedidoEstoque> listaPedido = (ArrayList<PedidoEstoque>) s.createQuery("From PedidoEstoque").list();
         s.getTransaction().commit();
-//        Collections.sort(listaPedido, new Comparator<PedidoEstoque>() {
-//            @Override
-//            public int compare(PedidoEstoque o1, PedidoEstoque o2) {
-//                return o1.getProduto().getNomeProd().compareTo(o2.getProduto().getNomeProd());
-//            }
-//        });
+        Collections.sort(listaPedido, new Comparator<PedidoEstoque>() {
+            @Override
+            public int compare(PedidoEstoque o1, PedidoEstoque o2) {
+                return o1.getDataPed().compareTo(o2.getDataPed());
+            }
+        });
         return listaPedido;
     }
 
