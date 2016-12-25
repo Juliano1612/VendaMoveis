@@ -152,6 +152,7 @@ public class JFrameIncluirProduto extends javax.swing.JFrame {
         ProdPedEstoque novo = new ProdPedEstoque();
         String novoid;
         
+        novo.setPedidoEstoque(ped);
         novo.setProduto(produtos.get(this.jList1.getSelectedIndex()));
         novoid = ped.getIdPedEst();
         novoid += novo.getProduto().getProdId();

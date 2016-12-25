@@ -72,7 +72,7 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
             
             for(Funcionario f : funcionarios)
             {
-                if(f.getCpf().equals(p.getFuncionario().getCpf()))
+                if(f.getIdFunc().equals(p.getFuncionario().getIdFunc()))
                     obe[2] = f.getNome();
             }
             

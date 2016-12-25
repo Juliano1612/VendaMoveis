@@ -27,6 +27,7 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
      */
     public JPanelPedidoReposicaoEstoque(Funcionario funcionario) {
         initComponents();
+        
         pedido_estoque = new PedidoEstoque();
         prodpedes = new ArrayList<>();
         this.FetchProdPedEs();
@@ -34,11 +35,17 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
         
         Date datahoje = new Date();
         pedido_estoque.setDataPed(datahoje);
+        pedido_estoque.setDataAtend(datahoje);
         this.jTextFieldDataPed.setText(datahoje.toString());
         this.jTextFieldDataPed.setEditable(false);
         
         this.jTextFieldFuncionario.setText(funcionario.getNome());
         this.jTextFieldFuncionario.setEditable(false);
+        
+        String idate;        
+        idate = this.pedido_estoque.getFuncionario().getCpf();
+        idate += datahoje.getTime();
+        pedido_estoque.setIdPedEst(idate);
     }
     
     public void FetchProdPedEs()
@@ -157,26 +164,23 @@ public class JPanelPedidoReposicaoEstoque extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        PedidoEstoque p = new PedidoEstoque();
-        Date d = new Date();
-        String idate;
+        boolean persistiu = new ControlaPedidoEstoque().persistePedidoEstoque(pedido_estoque);
+        boolean erro_cadastro = !persistiu;       
         
-//        p.setProduto(this.produtos.get(this.jList1.getSelectedIndex()));
-//        p.setEstatus(0);
-//        p.setQuantidadePed(Integer.parseInt(this.jTextFieldQuantPed.getText()));
-//        p.setQuantidade(0);
-//        
-//        idate = this.produtos.get(this.jList1.getSelectedIndex()).getProdId();
-//        idate += p.getQuantidadePed();
-//        idate += d.getTime();
-//        p.setIdPedEst(idate);
-//        
-//        boolean persistiu = new ControlaPedidoEstoque().persistePedidoEstoque(p);
-//        if(persistiu){
-//            JOptionPane.showMessageDialog(null, "Pedido de reposição cadastrado com sucesso!");
-//        }else{
-//            JOptionPane.showMessageDialog(null, "Erro ao cadastrar pedido!");
-//        }
+        for(ProdPedEstoque ppe : prodpedes)
+        {
+            persistiu = new ControlaProdPedEstoque().persisteProdPedEstoque(ppe);
+            if(!persistiu)
+            {
+                erro_cadastro = true;
+            }
+        }
+        
+        if(!erro_cadastro){
+            JOptionPane.showMessageDialog(null, "Pedido Cadastrado com Sucesso!");
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao salvar alterações!");
+        }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
