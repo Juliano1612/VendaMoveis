@@ -5,10 +5,16 @@
  */
 package ControleProduto;
 
+import ControleDeVendas.ControlaVenda;
+import ControleDeVendas.JPanelCarrinhoDeCompras;
+import ControleDeVendas.Vendas;
+import GerenciamentoDeFuncionarios.Funcionario;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,9 +30,17 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
     DefaultTableModel modelo;
     ArrayList<Produto> produtos;
     Produto produto;
+    String idVenda;
+    Funcionario funcionario;
+    
 
-    public JPanelConsultarProduto() {
+    public JPanelConsultarProduto(Vendas venda, Funcionario func) {
         initComponents();
+        
+        idVenda = venda.getVendaId();
+        funcionario = func;
+        
+        jInternalFrameAdicionandoAoCarrinho.setVisible(false);
 
     }
 
@@ -48,7 +62,7 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
         jButtonPesquisar = new javax.swing.JButton();
         jButtonEditarProduto = new javax.swing.JButton();
         jButtonAdicionarAoCarrinho = new javax.swing.JButton();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
+        jInternalFrameAdicionandoAoCarrinho = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
 
         jPanelConsultarProduto.setMaximumSize(new java.awt.Dimension(995, 595));
@@ -114,27 +128,28 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
             }
         });
 
-        jInternalFrame1.setVisible(true);
+        jInternalFrameAdicionandoAoCarrinho.setTitle("Adicionando ao Carrinho");
+        jInternalFrameAdicionandoAoCarrinho.setVisible(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Adicionar ao Carrinho");
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jInternalFrameAdicionandoAoCarrinhoLayout = new javax.swing.GroupLayout(jInternalFrameAdicionandoAoCarrinho.getContentPane());
+        jInternalFrameAdicionandoAoCarrinho.getContentPane().setLayout(jInternalFrameAdicionandoAoCarrinhoLayout);
+        jInternalFrameAdicionandoAoCarrinhoLayout.setHorizontalGroup(
+            jInternalFrameAdicionandoAoCarrinhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrameAdicionandoAoCarrinhoLayout.createSequentialGroup()
                 .addGap(200, 200, 200)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(231, Short.MAX_VALUE))
         );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+        jInternalFrameAdicionandoAoCarrinhoLayout.setVerticalGroup(
+            jInternalFrameAdicionandoAoCarrinhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrameAdicionandoAoCarrinhoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelConsultarProdutoLayout = new javax.swing.GroupLayout(jPanelConsultarProduto);
@@ -159,7 +174,7 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
                 .addGap(27, 27, 27))
             .addGroup(jPanelConsultarProdutoLayout.createSequentialGroup()
                 .addGap(249, 249, 249)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jInternalFrameAdicionandoAoCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelConsultarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelConsultarProdutoLayout.createSequentialGroup()
@@ -176,8 +191,8 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
                     .addComponent(jTextFieldCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPesquisar))
                 .addGap(98, 98, 98)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addComponent(jInternalFrameAdicionandoAoCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addGroup(jPanelConsultarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDetalhes)
                     .addComponent(jButtonEditarProduto)
@@ -262,6 +277,23 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
     }
     private void jButtonAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarAoCarrinhoActionPerformed
         // TODO add your handling code here:
+        Date data = new Date();
+        ControlaVenda controlaVenda = new ControlaVenda();
+        if(idVenda == null){
+            int n = JOptionPane.showConfirmDialog(
+                    null,
+                    "Não há nenhuma venda em andamento, gostaria de iniciar?",
+                    "Confirmar Opção",
+                    JOptionPane.YES_NO_OPTION);
+            JPanel jPanelCarrinhoDeCompras;
+            if (n == JOptionPane.YES_OPTION) {
+                idVenda = funcionario.getIdFunc() + data.getTime();
+                controlaVenda.novaVendaAberta(idVenda, funcionario);
+                jInternalFrameAdicionandoAoCarrinho.setVisible(true);
+            }
+
+        }
+        
     }//GEN-LAST:event_jButtonAdicionarAoCarrinhoActionPerformed
 
 
@@ -270,7 +302,7 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
     private javax.swing.JButton jButtonDetalhes;
     private javax.swing.JButton jButtonEditarProduto;
     private javax.swing.JButton jButtonPesquisar;
-    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JInternalFrame jInternalFrameAdicionandoAoCarrinho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelNomeProduto;
     private javax.swing.JPanel jPanelConsultarProduto;

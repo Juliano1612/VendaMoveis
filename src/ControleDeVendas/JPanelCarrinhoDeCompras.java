@@ -19,26 +19,24 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
      * Creates new form JPanelCarrinhoDeCompras
      */
     Funcionario funcionario;
-    ArrayList<ProdutosCarrinho> produtosCarrinho;
     DefaultTableModel tableModel;
     float valorTotal = 0;
 
-    public JPanelCarrinhoDeCompras(Funcionario func, ArrayList<ProdutosCarrinho> prodCarrinho) {
+    public JPanelCarrinhoDeCompras(Funcionario func, String idVendaAberta) {
         initComponents();
 
         funcionario = func;
-        produtosCarrinho = prodCarrinho;
         tableModel = (DefaultTableModel) jTableCarrinho.getModel();
 
         tableModel.setNumRows(0);
 
-        for (ProdutosCarrinho pc : produtosCarrinho) {
-            tableModel.addRow(new Object[]{pc.getProduto().getProdId(), pc.getProduto().getNomeProd(), pc.getProduto().getPrecoVenda(), pc.getQuantidade(), pc.getValorTotal(), false});
-        }
-
-        if (produtosCarrinho.isEmpty()) {
-            jLabelValorTotal.setText("Valor Total = R$ "+valorTotal);
-        }
+//        for (ProdutosCarrinho pc : produtosCarrinho) {
+//            tableModel.addRow(new Object[]{pc.getProduto().getProdId(), pc.getProduto().getNomeProd(), pc.getProduto().getPrecoVenda(), pc.getQuantidade(), pc.getValorTotal(), false});
+//        }
+//
+//        if (produtosCarrinho.isEmpty()) {
+//            jLabelValorTotal.setText("Valor Total = R$ "+valorTotal);
+//        }
     }
 
     /**

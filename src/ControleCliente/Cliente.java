@@ -1,4 +1,5 @@
 package ControleCliente;
+// Generated 20/12/2016 16:53:10 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;

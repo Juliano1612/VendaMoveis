@@ -5,9 +5,11 @@
  */
 package ControleEstoque;
 
-import java.awt.CardLayout;
+import ControleProduto.ControlaProduto;
+import ControleProduto.Produto;
+import GerenciamentoDeFuncionarios.ControlaFuncionario;
+import GerenciamentoDeFuncionarios.Funcionario;
 import java.util.ArrayList;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,6 +19,9 @@ import javax.swing.table.DefaultTableModel;
 public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
 
     private ArrayList <PedidoEstoque> pedidos;
+    private ArrayList <ProdPedEstoque> prodpedes;
+    private ArrayList <Produto> produtos;
+    private ArrayList <Funcionario> funcionarios;
     
     /**
      * Creates new form JPanelListaDePedidosDeReposicao
@@ -29,37 +34,63 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
     public void updatePedidosEstoque()
     {
         pedidos = new ControlaPedidoEstoque().getListaPedidoEstoque();
+        produtos = new ControlaProduto().getListaProdutos();
+        funcionarios = new ControlaFuncionario().getListaFuncionarios();
+        
         DefaultTableModel model = new DefaultTableModel();
-        String[] colunas = new String[5];
+        String[] colunas = new String[6];
         
         model.setColumnCount(5);
         colunas[0] = "ID";
         colunas[1] = "Status";
-        colunas[2] = "Produto";
-        colunas[3] = "Quant. Pedida";
-        colunas[4] = "Quant. Confirmada";
+        colunas[2] = "Solicitante";
+        colunas[3] = "Data Sol.";
+        colunas[4] = "Data At.";
+        colunas[5] = "Produtos";
         model.setColumnIdentifiers(colunas);
         
         for(PedidoEstoque p : pedidos)
         {
-            Object[] obe = new Object[5];
+            prodpedes = new ControlaProdPedEstoque().getListaProdPedEstoque(p);
+            Object[] obe = new Object[6];
             
             obe[0] = p.getIdPedEst();
             
-            if(p.getEstatus() == 0)
+            int naoatendidos = 0;
+            for(ProdPedEstoque ppe: prodpedes)
+            {
+                if(ppe.getStat() == 0)
+                    ++naoatendidos;
+            }
+            
+            if(naoatendidos == prodpedes.size())
                 obe[1] = "Não Processado";
-            else if(p.getEstatus() == 1)
+            else if(naoatendidos == 0)
                 obe[1] = "Efetivado";
             else
-                obe[1] = "Cancelado";
+                obe[1] = "Parcial";
             
-            obe[2] = p.getProduto().getNomeProd();
-            obe[3] = p.getQuantidadePed();
+            for(Funcionario f : funcionarios)
+            {
+                if(f.getCpf().equals(p.getFuncionario().getCpf()))
+                    obe[2] = f.getNome();
+            }
             
-            if(p.getEstatus() == 1)
-                obe[4] = p.getQuantidade();
-            else
-                obe[4] = "-";
+            obe[3] = p.getDataPed().toString();
+            obe[4] = p.getDataAtend().toString();
+            
+            obe[5] = "";
+            for(ProdPedEstoque ppe : prodpedes)
+            {
+                for(Produto pdt : produtos)
+                {
+                    if(ppe.getProduto().getProdId().equals(pdt.getProdId()))
+                    {
+                        obe[5] += pdt.getNomeProd();
+                        obe[5] += ", ";
+                    }
+                }
+            }
             
             model.addRow(obe);
         }

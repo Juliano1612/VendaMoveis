@@ -18,10 +18,6 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-/**
- *
- * @author Juliano
- */
 public class JPanelCadastrarProduto extends javax.swing.JPanel {
 
     GeraId geraid = new GeraId();
@@ -303,7 +299,18 @@ public class JPanelCadastrarProduto extends javax.swing.JPanel {
                 || JTextAltura4.getText().equals("")
                 || jTextAreaDescrição.getText().equals("")) {
             showMessageDialog(null, "Um dos campos não foi preenchido");
-        } else {
+        }else if(  Float.valueOf(jTextFieldIDProduto.getText()) < 0
+                || Float.valueOf(jTextFieldQuantidade.getText()) < 0
+                || Float.valueOf(jTextFieldPrecoVenda.getText()) < 0
+                || Float.valueOf(jTextFieldPrecoCompra.getText()) <0
+                || Float.valueOf(JTextLargura4.getText()) < 0
+                || Float.valueOf(JTextProfundidade4.getText()) < 0
+                || Float.valueOf(JTextAltura4.getText()) < 0){
+            showMessageDialog(null, "Um dos valores inseridos é menor que 0!");
+        }else if((Float.valueOf(jTextFieldPrecoVenda.getText())) <= (Float.valueOf(jTextFieldPrecoCompra.getText()))){
+            showMessageDialog(null, "O preço de Venda é menor que o preço de Compra!");
+        }
+        else {
             try {
                 //idProduto = geraid.GeraChave(1);
                 //idImagem = geraid.GeraChave(3);

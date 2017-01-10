@@ -8,8 +8,9 @@ package Apresentacao;
 import ControleCliente.JPanelConsultaCliente;
 import ControleDeAcesso.JFrameTelaLogin;
 import ControleDeAcesso.JPanelMinhaConta;
+import ControleDeVendas.ControlaVenda;
 import ControleDeVendas.JPanelCarrinhoDeCompras;
-import ControleDeVendas.ProdutosCarrinho;
+import ControleDeVendas.VendaAberta;
 import ControleEstoque.JPanelListaDePedidosDeReposicao;
 import ControleEstoque.JPanelPedidoReposicaoEstoque;
 import ControleProduto.JPanelCadastrarProduto;
@@ -19,6 +20,7 @@ import GerenciamentoDeFuncionarios.JPanelCadastroFuncionario;
 import GerenciamentoDeFuncionarios.JPanelListaFuncionario;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,13 +32,12 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
      */
     CardLayout card;
     Funcionario funcionario;
-    public ArrayList<ProdutosCarrinho> produtosCarrinho;
+    VendaAberta vendaAberta;
 
     public JFrameTelaGerente(Funcionario func) {
         initComponents();
 
         funcionario = func;
-        produtosCarrinho = new ArrayList<ProdutosCarrinho>();
 
         this.setTitle("Gerente - " + funcionario.getNome());
 
@@ -162,6 +163,7 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
         jMenuPedido.setText("Pedidos");
 
+        jMenuItemNovoPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/simpleNew20x20.png"))); // NOI18N
         jMenuItemNovoPedido.setText("Novo");
         jMenuItemNovoPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +172,7 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         });
         jMenuPedido.add(jMenuItemNovoPedido);
 
+        jMenuItemPedidosRep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/search20x20.png"))); // NOI18N
         jMenuItemPedidosRep.setText("Buscar");
         jMenuItemPedidosRep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,7 +339,9 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     private void jMenuConsultarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarProdutoActionPerformed
         // TODO add your handling code here:
-        JPanel jPanelConsultarProduto = new JPanelConsultarProduto();
+        ControlaVenda controlaVenda = new ControlaVenda();
+        controlaVenda.getVendaAbertaFuncionario(funcionario);
+        JPanel jPanelConsultarProduto = new JPanelConsultarProduto(controlaVenda.getVendaAbertaFuncionario(funcionario), funcionario);
         jPanelFundo.add(jPanelConsultarProduto);
         card.next(jPanelFundo);
     }//GEN-LAST:event_jMenuConsultarProdutoActionPerformed
@@ -359,16 +364,44 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPedidosRepActionPerformed
 
     private void jMenuItemNovoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNovoPedidoActionPerformed
-        JPanel jPanelNovoPedRep = new JPanelPedidoReposicaoEstoque();
+        JPanel jPanelNovoPedRep = new JPanelPedidoReposicaoEstoque(funcionario);
         jPanelFundo.add(jPanelNovoPedRep);
         card.next(jPanelFundo);
     }//GEN-LAST:event_jMenuItemNovoPedidoActionPerformed
 
     private void jButtonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarrinhoActionPerformed
         // TODO add your handling code here:
-        JPanel jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, produtosCarrinho);
-        jPanelFundo.add(jPanelCarrinhoDeCompras);
-        card.next(jPanelFundo);
+        ControlaVenda controlaVenda = new ControlaVenda();
+
+        Date data = new Date();
+        String idVenda;
+        if (controlaVenda.getVendaAbertaFuncionario(funcionario) == null) {
+            idVenda = funcionario.getIdFunc() + data.getTime();
+            controlaVenda.novaVendaAberta(idVenda, funcionario);
+            JPanel jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, idVenda);
+            jPanelFundo.add(jPanelCarrinhoDeCompras);
+            card.next(jPanelFundo);
+        } else {
+            int n = JOptionPane.showConfirmDialog(
+                    null,
+                    "Já existem produtos no carrinho, gostaria de esvaziá-lo?",
+                    "Confirmar Opção",
+                    JOptionPane.YES_NO_OPTION);
+            JPanel jPanelCarrinhoDeCompras;
+            if (n == JOptionPane.YES_OPTION) {
+                controlaVenda.excluiVendaAberta(funcionario);
+                idVenda = funcionario.getIdFunc() + data.getTime();
+                controlaVenda.novaVendaAberta(idVenda, funcionario);
+                jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, idVenda);
+            } else {
+
+                jPanelCarrinhoDeCompras = new JPanelCarrinhoDeCompras(funcionario, controlaVenda.getVendaAbertaFuncionario(funcionario).getVendaId());
+            }
+
+            jPanelFundo.add(jPanelCarrinhoDeCompras);
+            card.next(jPanelFundo);
+        }
+
     }//GEN-LAST:event_jButtonCarrinhoActionPerformed
 
     /**

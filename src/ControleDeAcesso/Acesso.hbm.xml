@@ -1,17 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 16/10/2016 21:31:26 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/12/2016 16:53:11 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="Vendas" name="ControleDeAcesso.Acesso" optimistic-lock="version" table="Acesso">
-    <id name="login" type="string">
-      <column length="50" name="login"/>
-      <generator class="assigned"/>
-    </id>
-    <many-to-one class="GerenciamentoDeFuncionarios.Funcionario" fetch="select" name="funcionario">
-      <column length="60" name="func_ID" not-null="true"/>
-    </many-to-one>
-    <property name="senha" type="string">
-      <column length="50" name="senha" not-null="true"/>
-    </property>
-  </class>
+    <class name="ControleDeAcesso.Acesso" table="Acesso" catalog="Vendas">
+        <id name="login" type="string">
+            <column name="login" length="50" />
+            <generator class="assigned"></generator>
+        </id>
+        <many-to-one name="funcionario" class="GerenciamentoDeFuncionarios.Funcionario" fetch="select">
+            <column name="func_ID" length="60" not-null="true" />
+        </many-to-one>
+        <property name="senha" type="string">
+            <column name="senha" length="50" not-null="true" />
+        </property>
+    </class>
 </hibernate-mapping>

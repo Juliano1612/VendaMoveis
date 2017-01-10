@@ -6,6 +6,7 @@
 package projetovenda;
 
 import ControleDeAcesso.JFrameTelaLogin;
+import ControleDeVendas.ControlaVenda;
 import Util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -24,6 +25,8 @@ public class ProjetoVenda {
         // TODO code application logic here
         JFrameTelaLogin jFrameTelaLogin = new JFrameTelaLogin();
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        
 
     }
 

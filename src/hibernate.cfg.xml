@@ -11,13 +11,14 @@
     <mapping resource="ControleDeVendas/ProdVenda.hbm.xml"/>
     <mapping resource="ControleDeAcesso/Acesso.hbm.xml"/>
     <mapping class="" file="" jar="" package="" resource="ControleProduto/Produto.hbm.xml"/>
-    <mapping resource="Controle/Parcela.hbm.xml"/>
-    <mapping resource="Controle/PedidoEstoque.hbm.xml"/>
+    <mapping resource="ControleDeVendas/Parcela.hbm.xml"/>
+    <mapping resource="ControleEstoque/PedidoEstoque.hbm.xml"/>
     <mapping resource="Controle/Gastos.hbm.xml"/>
     <mapping resource="ControleDeVendas/Vendas.hbm.xml"/>
     <mapping resource="GerenciamentoDeFuncionarios/Funcionario.hbm.xml"/>
     <mapping resource="ControleImagem/ImagemProduto.hbm.xml"/>
     <mapping resource="GerenciamentoDeFuncionarios/Faltas.hbm.xml"/>
     <mapping resource="ControleCliente/Cliente.hbm.xml"/>
+    <mapping resource="ControleEstoque/ProdPedEstoque.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
