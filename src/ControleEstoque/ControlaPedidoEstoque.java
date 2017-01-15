@@ -61,7 +61,7 @@ public class ControlaPedidoEstoque {
         Collections.sort(listaPedido, new Comparator<PedidoEstoque>() {
             @Override
             public int compare(PedidoEstoque o1, PedidoEstoque o2) {
-                return o1.getDataPed().compareTo(o2.getDataPed());
+                return (- o1.getDataPed().compareTo(o2.getDataPed()));
             }
         });
         return listaPedido;
