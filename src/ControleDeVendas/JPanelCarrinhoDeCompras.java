@@ -6,8 +6,10 @@
 package ControleDeVendas;
 
 import GerenciamentoDeFuncionarios.Funcionario;
+import Util.HibernateUtil;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import org.hibernate.Session;
 
 /**
  *
@@ -21,6 +23,7 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
     Funcionario funcionario;
     DefaultTableModel tableModel;
     float valorTotal = 0;
+    ArrayList<ProdVenda> prodsVenda;
 
     public JPanelCarrinhoDeCompras(Funcionario func, String idVendaAberta) {
         initComponents();
@@ -30,13 +33,18 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
 
         tableModel.setNumRows(0);
 
-//        for (ProdutosCarrinho pc : produtosCarrinho) {
-//            tableModel.addRow(new Object[]{pc.getProduto().getProdId(), pc.getProduto().getNomeProd(), pc.getProduto().getPrecoVenda(), pc.getQuantidade(), pc.getValorTotal(), false});
-//        }
-//
-//        if (produtosCarrinho.isEmpty()) {
-//            jLabelValorTotal.setText("Valor Total = R$ "+valorTotal);
-//        }
+        prodsVenda = new ControlaProdVenda().getProdsVenda(idVendaAberta);
+        
+        Session c = HibernateUtil.getSessionFactory().getCurrentSession();
+        c.beginTransaction();
+        for (ProdVenda pv : prodsVenda) {
+            tableModel.addRow(new Object[]{pv.getProduto().getProdId(), pv.getProduto().getNomeProd(), pv.getValorUnitario(), pv.getQuantidade(), ""+(pv.getQuantidade() * pv.getValorUnitario()), false});
+        }
+        c.getTransaction().commit();
+        
+        if (prodsVenda.isEmpty()) {
+            jLabelValorTotal.setText("Valor Total = R$ " + valorTotal);
+        }
     }
 
     /**
