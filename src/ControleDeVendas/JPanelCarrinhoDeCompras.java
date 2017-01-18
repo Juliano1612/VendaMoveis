@@ -10,7 +10,6 @@ import ControleProduto.Produto;
 import GerenciamentoDeFuncionarios.Funcionario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Hibernate;
 
@@ -42,17 +41,16 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
         prodsVenda = new ControlaProdVenda().getProdsVenda(idVendaAberta);
         ControlaProduto controlaProduto = new ControlaProduto();
         Produto produto;
-        //Session c = HibernateUtil.getSessionFactory().getCurrentSession();
-        //c.beginTransaction();
+
         for (ProdVenda pv : prodsVenda) {
             Hibernate.initialize(pv.getProduto().getProdId());
             produto = controlaProduto.getProduto(pv.getProduto().getProdId());
             listaProds.add(produto);
             tableModel.addRow(new Object[]{produto.getProdId(), produto.getNomeProd(), pv.getValorUnitario(), pv.getQuantidade(), "" + (pv.getQuantidade() * pv.getValorUnitario()), false});
+            valorTotal += pv.getQuantidade() * pv.getValorUnitario();
         }
-        //c.getTransaction().commit();
 
-        if (prodsVenda.isEmpty()) {
+        if (!prodsVenda.isEmpty()) {
             jLabelValorTotal.setText("Valor Total = R$ " + valorTotal);
         }
     }
@@ -147,6 +145,11 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
 
         jButtonConfirmarCompra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonConfirmarCompra.setText("Confirmar Compra");
+        jButtonConfirmarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarCompraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -199,8 +202,6 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
         if (n == JOptionPane.YES_OPTION) {
             for (int i = 0; i < prodsVenda.size(); i++) {
                 if (tableModel.getValueAt(i, 5) == (Object) true) {
-                    //exclui prodVenda
-                    //System.out.println(prodsVenda.get(i).getProdVendaId());
                     new ControlaProdVenda().deletaProdVenda(prodsVenda.get(i).getProdVendaId(), idVenda);
                 }
             }
@@ -212,25 +213,28 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
             prodsVenda = new ControlaProdVenda().getProdsVenda(idVenda);
             ControlaProduto controlaProduto = new ControlaProduto();
             Produto produto;
-            //Session c = HibernateUtil.getSessionFactory().getCurrentSession();
-            //c.beginTransaction();
+            valorTotal = 0;
             for (ProdVenda pv : prodsVenda) {
                 Hibernate.initialize(pv.getProduto().getProdId());
                 produto = controlaProduto.getProduto(pv.getProduto().getProdId());
                 listaProds.add(produto);
                 tableModel.addRow(new Object[]{produto.getProdId(), produto.getNomeProd(), pv.getValorUnitario(), pv.getQuantidade(), "" + (pv.getQuantidade() * pv.getValorUnitario()), false});
+                valorTotal += pv.getQuantidade() * pv.getValorUnitario();
             }
 
+            if (!prodsVenda.isEmpty()) {
+                jLabelValorTotal.setText("Valor Total = R$ " + valorTotal);
+            }
         }
 
-//        if (indiceProd == -1) {
-//            JOptionPane.showMessageDialog(null, "Selecione um produto para saber mais detalhes do produto.");
-//        } else {
-//            produto = produtos.get(indiceProd);
-//            JFrameDetalheProduto jFrameDetalheProduto = new JFrameDetalheProduto((produto));
-//        }
 
     }//GEN-LAST:event_jButtonRemoverSelecionadosActionPerformed
+
+    private void jButtonConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarCompraActionPerformed
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_jButtonConfirmarCompraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
