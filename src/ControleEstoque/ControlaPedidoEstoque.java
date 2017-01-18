@@ -35,12 +35,12 @@ public class ControlaPedidoEstoque {
             return false;
         }
         
-        for(Object ppes : pedido.getProdPedEstoques())
+/*        for(Object ppes : pedido.getProdPedEstoques())
         {
             ProdPedEstoque ppe = (ProdPedEstoque) ppes;
             
             if( (new ControlaProdPedEstoque().persisteProdPedEstoque(ppe)) == false) return false;
-        }
+        }*/
         return true;
     }
 

@@ -10,6 +10,8 @@ import ControleProduto.Produto;
 import GerenciamentoDeFuncionarios.ControlaFuncionario;
 import GerenciamentoDeFuncionarios.Funcionario;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -57,18 +59,21 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
             obe[0] = p.getIdPedEst();
             
             int naoatendidos = 0;
+            int cancelados = 0;
             for(ProdPedEstoque ppe: prodpedes)
             {
                 if(ppe.getStat() == 0)
                     ++naoatendidos;
+                else if(ppe.getStat() == 3)
+                    ++cancelados;
             }
             
             if(naoatendidos == prodpedes.size())
                 obe[1] = "Não Processado";
-            else if(naoatendidos == 0)
-                obe[1] = "Efetivado";
+            else if(cancelados == prodpedes.size())
+                obe[1] = "Cancelado";
             else
-                obe[1] = "Parcial";
+                obe[1] = "Efetivado";
             
             for(Funcionario f : funcionarios)
             {
@@ -137,6 +142,11 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
         });
 
         jButton2.setText("Cancelar Pedido");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -146,7 +156,7 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(7, 7, 7))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,9 +165,7 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(48, 48, 48)
                                 .addComponent(jButton1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -178,8 +186,52 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        PedidoEstoque selecionado = pedidos.get(jTable1.getSelectedRow());
+        
+        if(selecionado.getDataAtend().equals(selecionado.getDataPed()))
+        {
+            new JFrameConfirmarPedido(selecionado, this).setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Erro: Esse pedido já foi efetivado. Escolha outro pedido.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        PedidoEstoque selecionado = pedidos.get(jTable1.getSelectedRow());
+        
+        if(selecionado.getDataAtend().equals(selecionado.getDataPed()))
+        {
+            Date dataAtend = new Date();
+            selecionado.setDataAtend(dataAtend);
+            boolean persistiu = new ControlaPedidoEstoque().persistePedidoEstoque(selecionado);
+            boolean deuerro = !persistiu;
+            
+            ControlaProdPedEstoque ctrlppe = new ControlaProdPedEstoque();
+            ArrayList <ProdPedEstoque> ppelist = ctrlppe.getListaProdPedEstoque(selecionado);
+            for(ProdPedEstoque ppe : ppelist)
+            {
+                ppe.setStat(3); //Cancelado
+                persistiu = ctrlppe.persisteProdPedEstoque(ppe);
+                if(!persistiu)
+                    deuerro = true;
+            }
+            
+            if(!deuerro){
+                JOptionPane.showMessageDialog(null, "Pedido Cancelado!");
+                this.updatePedidosEstoque();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Erro ao cancelar pedido!");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Erro: Esse pedido já foi efetivado. Escolha outro pedido.");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
