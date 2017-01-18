@@ -5,9 +5,11 @@
  */
 package ControleDeVendas;
 
+import ControleProduto.ControlaProduto;
 import ControleProduto.Produto;
 import Util.HibernateUtil;
 import java.util.ArrayList;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
 /**
@@ -39,6 +41,50 @@ public class ControlaProdVenda {
         c.getTransaction().commit();
 
         return minhaVenda;
+    }
+
+    public ProdVenda getProdVenda(String idProdVenda, String idVenda) {
+
+        ArrayList<ProdVenda> listaProdVenda = getProdsVenda(idVenda);
+        for (ProdVenda p : listaProdVenda) {
+            if (p.getProdVendaId().equals(idProdVenda)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void deletaProdsVenda(Vendas v) {
+
+        ArrayList<ProdVenda> listaProdVenda = getProdsVenda(v.getVendaId());
+
+        Produto produto;
+        for (ProdVenda pv : listaProdVenda) {
+            Hibernate.initialize(pv.getProduto().getProdId());
+            produto = new ControlaProduto().getProduto(pv.getProduto().getProdId());
+            produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() + pv.getQuantidade());
+            Session c = HibernateUtil.getSessionFactory().getCurrentSession();
+            c.beginTransaction();
+            c.saveOrUpdate(produto);
+            c.delete(pv);
+            c.getTransaction().commit();
+
+        }
+
+    }
+
+    public void deletaProdVenda(String idProdVenda, String idVenda) {
+        Produto produto;
+        ProdVenda pv = getProdVenda(idProdVenda, idVenda);
+        Hibernate.initialize(pv.getProduto().getProdId());
+        produto = new ControlaProduto().getProduto(pv.getProduto().getProdId());
+        produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() + pv.getQuantidade());
+        Session c = HibernateUtil.getSessionFactory().getCurrentSession();
+        c.beginTransaction();
+        c.saveOrUpdate(produto);
+        c.delete(pv);
+        c.getTransaction().commit();
+
     }
 
 }

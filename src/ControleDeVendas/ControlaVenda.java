@@ -88,7 +88,7 @@ public class ControlaVenda {
     }
 
     public VendaAberta vendaToVendaAberta(Vendas venda) {
-        
+
         VendaAberta vendaAberta = new VendaAberta(venda.getVendaId(), venda.getFuncionario(), 0);
         return vendaAberta;
     }
@@ -96,16 +96,21 @@ public class ControlaVenda {
     public void excluiVendaAberta(Funcionario funcionario) {
 
         ArrayList<Vendas> listaVendasAbertas = getListaVendasAbertas();
-        Session c = HibernateUtil.getSessionFactory().getCurrentSession();
-        c.beginTransaction();
+
+        ControlaProdVenda controlaProdVenda = new ControlaProdVenda();
         for (Vendas v : listaVendasAbertas) {
             if (v.getFuncionario().getIdFunc().equals(funcionario.getIdFunc())) {
+                //chama delete prodVenda
+                controlaProdVenda.deletaProdsVenda(v);
+                Session c = HibernateUtil.getSessionFactory().getCurrentSession();
+                c.beginTransaction();
                 c.delete(v);
+                c.getTransaction().commit();
+
                 break;
             }
         }
 
-        c.getTransaction().commit();
     }
 
     public ArrayList<Vendas> getListaVendasAbertas() {

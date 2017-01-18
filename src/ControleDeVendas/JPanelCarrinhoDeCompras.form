@@ -137,6 +137,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Remover Selecionados"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRemoverSelecionadosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelTituloCarrinho">
       <Properties>

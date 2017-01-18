@@ -5,11 +5,14 @@
  */
 package ControleDeVendas;
 
+import ControleProduto.ControlaProduto;
+import ControleProduto.Produto;
 import GerenciamentoDeFuncionarios.Funcionario;
-import Util.HibernateUtil;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.Session;
+import org.hibernate.Hibernate;
 
 /**
  *
@@ -24,24 +27,31 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
     DefaultTableModel tableModel;
     float valorTotal = 0;
     ArrayList<ProdVenda> prodsVenda;
+    ArrayList<Produto> listaProds = new ArrayList();
+    String idVenda;
 
     public JPanelCarrinhoDeCompras(Funcionario func, String idVendaAberta) {
         initComponents();
 
+        idVenda = idVendaAberta;
         funcionario = func;
         tableModel = (DefaultTableModel) jTableCarrinho.getModel();
 
         tableModel.setNumRows(0);
 
         prodsVenda = new ControlaProdVenda().getProdsVenda(idVendaAberta);
-        
-        Session c = HibernateUtil.getSessionFactory().getCurrentSession();
-        c.beginTransaction();
+        ControlaProduto controlaProduto = new ControlaProduto();
+        Produto produto;
+        //Session c = HibernateUtil.getSessionFactory().getCurrentSession();
+        //c.beginTransaction();
         for (ProdVenda pv : prodsVenda) {
-            tableModel.addRow(new Object[]{pv.getProduto().getProdId(), pv.getProduto().getNomeProd(), pv.getValorUnitario(), pv.getQuantidade(), ""+(pv.getQuantidade() * pv.getValorUnitario()), false});
+            Hibernate.initialize(pv.getProduto().getProdId());
+            produto = controlaProduto.getProduto(pv.getProduto().getProdId());
+            listaProds.add(produto);
+            tableModel.addRow(new Object[]{produto.getProdId(), produto.getNomeProd(), pv.getValorUnitario(), pv.getQuantidade(), "" + (pv.getQuantidade() * pv.getValorUnitario()), false});
         }
-        c.getTransaction().commit();
-        
+        //c.getTransaction().commit();
+
         if (prodsVenda.isEmpty()) {
             jLabelValorTotal.setText("Valor Total = R$ " + valorTotal);
         }
@@ -125,6 +135,11 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
 
         jButtonRemoverSelecionados.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonRemoverSelecionados.setText("Remover Selecionados");
+        jButtonRemoverSelecionados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoverSelecionadosActionPerformed(evt);
+            }
+        });
 
         jLabelTituloCarrinho.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelTituloCarrinho.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -172,6 +187,50 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonRemoverSelecionadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverSelecionadosActionPerformed
+        // TODO add your handling code here:
+
+        int n = JOptionPane.showConfirmDialog(
+                null,
+                "Tem certeza que deseja excluir esses itens?",
+                "Confirmar Opção",
+                JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            for (int i = 0; i < prodsVenda.size(); i++) {
+                if (tableModel.getValueAt(i, 5) == (Object) true) {
+                    //exclui prodVenda
+                    //System.out.println(prodsVenda.get(i).getProdVendaId());
+                    new ControlaProdVenda().deletaProdVenda(prodsVenda.get(i).getProdVendaId(), idVenda);
+                }
+            }
+
+            tableModel = (DefaultTableModel) jTableCarrinho.getModel();
+
+            tableModel.setNumRows(0);
+
+            prodsVenda = new ControlaProdVenda().getProdsVenda(idVenda);
+            ControlaProduto controlaProduto = new ControlaProduto();
+            Produto produto;
+            //Session c = HibernateUtil.getSessionFactory().getCurrentSession();
+            //c.beginTransaction();
+            for (ProdVenda pv : prodsVenda) {
+                Hibernate.initialize(pv.getProduto().getProdId());
+                produto = controlaProduto.getProduto(pv.getProduto().getProdId());
+                listaProds.add(produto);
+                tableModel.addRow(new Object[]{produto.getProdId(), produto.getNomeProd(), pv.getValorUnitario(), pv.getQuantidade(), "" + (pv.getQuantidade() * pv.getValorUnitario()), false});
+            }
+
+        }
+
+//        if (indiceProd == -1) {
+//            JOptionPane.showMessageDialog(null, "Selecione um produto para saber mais detalhes do produto.");
+//        } else {
+//            produto = produtos.get(indiceProd);
+//            JFrameDetalheProduto jFrameDetalheProduto = new JFrameDetalheProduto((produto));
+//        }
+
+    }//GEN-LAST:event_jButtonRemoverSelecionadosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

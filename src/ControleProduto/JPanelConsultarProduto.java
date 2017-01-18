@@ -421,14 +421,20 @@ public class JPanelConsultarProduto extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "A quantidade desejada é invalida ( <= 0 )!");
         } else {
             ControlaProdVenda controlaProdVenda = new ControlaProdVenda();
-            controlaProdVenda.novoProdVenda(idVenda+new Date().getTime(), produto, new ControlaVenda().getVendaAbertaFuncionario(funcionario), Integer.parseInt(jTextFieldQuantidadeDesejadaAdd.getText()), produto.getPrecoVenda());
+            controlaProdVenda.novoProdVenda(idVenda + new Date().getTime(), produto, new ControlaVenda().getVendaAbertaFuncionario(funcionario), Integer.parseInt(jTextFieldQuantidadeDesejadaAdd.getText()), produto.getPrecoVenda());
+            produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - Integer.parseInt(jTextFieldQuantidadeDesejadaAdd.getText()));
+            new ControlaProduto().atualizaProduto(produto);
             jInternalFrameAdicionandoAoCarrinho.setVisible(false);
+            jButtonPesquisarActionPerformed(evt);
+
         }
     }//GEN-LAST:event_jButtonAdicionarProdutosAddActionPerformed
 
     private void jButtonCancelarAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarAddActionPerformed
         // TODO add your handling code here:
         jInternalFrameAdicionandoAoCarrinho.setVisible(false);
+        jButtonPesquisarActionPerformed(evt);
+
     }//GEN-LAST:event_jButtonCancelarAddActionPerformed
 
 
