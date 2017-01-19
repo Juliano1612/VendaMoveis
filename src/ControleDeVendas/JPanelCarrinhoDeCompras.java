@@ -206,7 +206,7 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
                             .addComponent(jComboBoxNumeroParcelas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jInternalFrameConfirmaCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButtonFinalizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonConfirmarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)))
+                        .addComponent(jButtonConfirmarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         jInternalFrameConfirmaCompraLayout.setVerticalGroup(
@@ -433,6 +433,29 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
                     break;
             }
             
+            idVenda = funcionario.getIdFunc() + new Date().getTime();
+            new ControlaVenda().novaVendaAberta(idVenda, funcionario);
+            JOptionPane.showMessageDialog(null, "A venda anterior foi fechada  e uma nova venda foi inicializada!");
+            tableModel = (DefaultTableModel) jTableCarrinho.getModel();
+
+        tableModel.setNumRows(0);
+
+        prodsVenda = new ControlaProdVenda().getProdsVenda(idVenda);
+        ControlaProduto controlaProduto = new ControlaProduto();
+        Produto produto;
+
+        for (ProdVenda pv : prodsVenda) {
+            Hibernate.initialize(pv.getProduto().getProdId());
+            produto = controlaProduto.getProduto(pv.getProduto().getProdId());
+            listaProds.add(produto);
+            tableModel.addRow(new Object[]{produto.getProdId(), produto.getNomeProd(), pv.getValorUnitario(), pv.getQuantidade(), "" + (pv.getQuantidade() * pv.getValorUnitario()), false});
+            valorTotal += pv.getQuantidade() * pv.getValorUnitario();
+        }
+
+        if (!prodsVenda.isEmpty()) {
+            jLabelValorTotal.setText("Valor Total = R$ " + valorTotal);
+        }
+        jInternalFrameConfirmaCompra.setVisible(false);
         }
 
     }//GEN-LAST:event_jButtonFinalizarActionPerformed

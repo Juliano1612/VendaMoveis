@@ -88,7 +88,8 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         jMenuCadastrarCliente = new javax.swing.JMenuItem();
         jMenuConsultarCliente = new javax.swing.JMenuItem();
         jMenuVenda = new javax.swing.JMenu();
-        jMenuCadastrarVenda = new javax.swing.JMenuItem();
+        jMenuConsultarVendaFechada = new javax.swing.JMenuItem();
+        jMenuConsultarVendaFinalizada = new javax.swing.JMenuItem();
         jMenuCaixa = new javax.swing.JMenu();
         jMenuConsultarCaixa = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
@@ -207,14 +208,23 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
         jMenuVenda.setText("Venda");
 
-        jMenuCadastrarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/new20x20.png"))); // NOI18N
-        jMenuCadastrarVenda.setText("Novo");
-        jMenuCadastrarVenda.addActionListener(new java.awt.event.ActionListener() {
+        jMenuConsultarVendaFechada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/search20x20.png"))); // NOI18N
+        jMenuConsultarVendaFechada.setText("Buscar Venda Fechada");
+        jMenuConsultarVendaFechada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCadastrarVendaActionPerformed(evt);
+                jMenuConsultarVendaFechadaActionPerformed(evt);
             }
         });
-        jMenuVenda.add(jMenuCadastrarVenda);
+        jMenuVenda.add(jMenuConsultarVendaFechada);
+
+        jMenuConsultarVendaFinalizada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/search20x20.png"))); // NOI18N
+        jMenuConsultarVendaFinalizada.setText("Buscar Venda Finalizada");
+        jMenuConsultarVendaFinalizada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsultarVendaFinalizadaActionPerformed(evt);
+            }
+        });
+        jMenuVenda.add(jMenuConsultarVendaFinalizada);
 
         jMenuPrincipal.add(jMenuVenda);
 
@@ -324,11 +334,6 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
         card.next(jPanelFundo);
     }//GEN-LAST:event_jMenuConsultarFuncionarioActionPerformed
 
-    private void jMenuCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarVendaActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jMenuCadastrarVendaActionPerformed
-
     private void jMenuCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarProdutoActionPerformed
         // TODO add your handling code here:
         JPanel jPanelCadastrarProduto = new JPanelCadastrarProduto();
@@ -403,6 +408,14 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonCarrinhoActionPerformed
 
+    private void jMenuConsultarVendaFechadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarVendaFechadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuConsultarVendaFechadaActionPerformed
+
+    private void jMenuConsultarVendaFinalizadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarVendaFinalizadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuConsultarVendaFinalizadaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -444,13 +457,14 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuCadastrarCliente;
     private javax.swing.JMenuItem jMenuCadastrarFuncionario;
     private javax.swing.JMenuItem jMenuCadastrarProduto;
-    private javax.swing.JMenuItem jMenuCadastrarVenda;
     private javax.swing.JMenu jMenuCaixa;
     private javax.swing.JMenu jMenuCliente;
     private javax.swing.JMenuItem jMenuConsultarCaixa;
     private javax.swing.JMenuItem jMenuConsultarCliente;
     private javax.swing.JMenuItem jMenuConsultarFuncionario;
     private javax.swing.JMenuItem jMenuConsultarProduto;
+    private javax.swing.JMenuItem jMenuConsultarVendaFechada;
+    private javax.swing.JMenuItem jMenuConsultarVendaFinalizada;
     private javax.swing.JMenu jMenuFuncionario;
     private javax.swing.JMenuItem jMenuItemNovoPedido;
     private javax.swing.JMenuItem jMenuItemPedidosRep;

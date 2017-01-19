@@ -30,13 +30,18 @@ public class ControlaVenda {
     }
 
     public VendaFechada novaVendaFechada(VendaAberta vendaAberta, Cliente cliente, Date dataCompra, Float valorTotal, int numParcelas, String formaPagamento) {
+        ArrayList<ProdVenda> prodsVenda = new ControlaProdVenda().getProdsVenda(vendaAberta.getVendaId());
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        VendaFechada vendaFechada = new VendaFechada(vendaAberta.getVendaId()+"1", cliente, vendaAberta.getFuncionario(), dataCompra, valorTotal, numParcelas, formaPagamento, 1);
+        Vendas vendaFechada = new Vendas(vendaAberta.getVendaId()+"1", cliente, vendaAberta.getFuncionario(), dataCompra, valorTotal, numParcelas, formaPagamento, 1);    
+        for(ProdVenda pv : prodsVenda){
+            pv.setVendas((Vendas) vendaFechada);
+            s.saveOrUpdate(pv);
+        }
         s.save(vendaFechada);
-        s.delete(vendaAberta);
+        s.delete(vendaAbertaToVenda(vendaAberta));
         s.getTransaction().commit();
-        return vendaFechada;
+        return new VendaFechada(vendaAberta.getVendaId()+"1", cliente, vendaAberta.getFuncionario(), dataCompra, valorTotal, numParcelas, formaPagamento, 1);
     }
 
     public VendaFinalizada novaVendaFinalizada(VendaFechada vendaFechada) {
@@ -85,6 +90,10 @@ public class ControlaVenda {
         c.getTransaction().commit();
 
         return null;
+    }
+    public Vendas vendaAbertaToVenda(VendaAberta vendaAberta){
+        
+        return new Vendas(vendaAberta.getVendaId(), vendaAberta.getFuncionario(), 0);
     }
 
     public VendaAberta vendaToVendaAberta(Vendas venda) {
