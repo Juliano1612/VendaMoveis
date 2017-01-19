@@ -32,7 +32,7 @@ public class ControlaVenda {
     public VendaFechada novaVendaFechada(VendaAberta vendaAberta, Cliente cliente, Date dataCompra, Float valorTotal, int numParcelas, String formaPagamento) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        VendaFechada vendaFechada = new VendaFechada(vendaAberta.getVendaId(), cliente, vendaAberta.getFuncionario(), dataCompra, valorTotal, numParcelas, formaPagamento, 1);
+        VendaFechada vendaFechada = new VendaFechada(vendaAberta.getVendaId()+"1", cliente, vendaAberta.getFuncionario(), dataCompra, valorTotal, numParcelas, formaPagamento, 1);
         s.save(vendaFechada);
         s.delete(vendaAberta);
         s.getTransaction().commit();
@@ -42,7 +42,7 @@ public class ControlaVenda {
     public VendaFinalizada novaVendaFinalizada(VendaFechada vendaFechada) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        VendaFinalizada vendaFinalizada = new VendaFinalizada(vendaFechada.getVendaId(), vendaFechada.getCliente(), vendaFechada.getFuncionario(), vendaFechada.getDataCompra(), vendaFechada.getValorTotal(), vendaFechada.getNumParcelas(), vendaFechada.getFormaPagamento(), 2);
+        VendaFinalizada vendaFinalizada = new VendaFinalizada(vendaFechada.getVendaId()+"2", vendaFechada.getCliente(), vendaFechada.getFuncionario(), vendaFechada.getDataCompra(), vendaFechada.getValorTotal(), vendaFechada.getNumParcelas(), vendaFechada.getFormaPagamento(), 2);
         s.save(vendaFinalizada);
         s.delete(vendaFechada);
         s.getTransaction().commit();
@@ -93,6 +93,18 @@ public class ControlaVenda {
         return vendaAberta;
     }
 
+    public VendaFechada vendaToVendaFechada(Vendas vendaAberta) {
+
+        VendaFechada vendaFechada = new VendaFechada(vendaAberta.getVendaId(), vendaAberta.getCliente(), vendaAberta.getFuncionario(), vendaAberta.getDataCompra(), vendaAberta.getValorTotal(), vendaAberta.getNumParcelas(), vendaAberta.getFormaPagamento() , 1);
+        return vendaFechada;
+    }
+    
+    public VendaFinalizada vendaToVendaFinalizada(Vendas vendaFechada) {
+        VendaFinalizada vendaFinalizada = new VendaFinalizada(vendaFechada.getVendaId(), vendaFechada.getCliente(), vendaFechada.getFuncionario(), vendaFechada.getDataCompra(), vendaFechada.getValorTotal(), vendaFechada.getNumParcelas(), vendaFechada.getFormaPagamento() , 1);
+        return vendaFinalizada;
+    }
+
+
     public void excluiVendaAberta(Funcionario funcionario) {
 
         ArrayList<Vendas> listaVendasAbertas = getListaVendasAbertas();
@@ -122,32 +134,40 @@ public class ControlaVenda {
         return listaVendas;
     }
 
-    public ArrayList<Vendas> getListaVendasFechadas() {
+    public ArrayList<VendaFechada> getListaVendasFechadas() {
         Session c = HibernateUtil.getSessionFactory().getCurrentSession();
         c.beginTransaction();
         ArrayList<Vendas> listaVendas = (ArrayList<Vendas>) c.createQuery("From Vendas Where statusVenda is 1").list();
         c.getTransaction().commit();
-        Collections.sort(listaVendas, new Comparator<Vendas>() {
+        ArrayList<VendaFechada> listaVendasFechadas = new ArrayList();
+        for(Vendas v : listaVendas){
+            listaVendasFechadas.add(vendaToVendaFechada(v));
+        }
+        Collections.sort(listaVendasFechadas, new Comparator<VendaFechada>() {
             @Override
-            public int compare(Vendas v1, Vendas v2) {
+            public int compare(VendaFechada v1, VendaFechada v2) {
                 return v1.getDataCompra().compareTo(v2.getDataCompra());
             }
         });
-        return listaVendas;
+        return listaVendasFechadas;
     }
 
-    public ArrayList<Vendas> getListaVendasFinalizadas() {
+    public ArrayList<VendaFinalizada> getListaVendasFinalizadas() {
         Session c = HibernateUtil.getSessionFactory().getCurrentSession();
         c.beginTransaction();
         ArrayList<Vendas> listaVendas = (ArrayList<Vendas>) c.createQuery("From Vendas Where statusVenda is 2").list();
         c.getTransaction().commit();
-        Collections.sort(listaVendas, new Comparator<Vendas>() {
+        ArrayList<VendaFinalizada> listaVendasFinalizadas = new ArrayList();
+        for(Vendas v : listaVendas){
+            listaVendasFinalizadas.add(vendaToVendaFinalizada(v));
+        }
+        Collections.sort(listaVendasFinalizadas, new Comparator<VendaFinalizada>() {
             @Override
-            public int compare(Vendas v1, Vendas v2) {
+            public int compare(VendaFinalizada v1, VendaFinalizada v2) {
                 return v1.getDataCompra().compareTo(v2.getDataCompra());
             }
         });
-        return listaVendas;
+        return listaVendasFinalizadas;
     }
 
     public ArrayList<Vendas> getListaVendas() {

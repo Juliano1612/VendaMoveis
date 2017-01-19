@@ -19,7 +19,6 @@ import GerenciamentoDeFuncionarios.Funcionario;
 import GerenciamentoDeFuncionarios.JPanelCadastroFuncionario;
 import GerenciamentoDeFuncionarios.JPanelListaFuncionario;
 import java.awt.CardLayout;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
