@@ -58,14 +58,20 @@ public class ControlaVenda {
     }
 
     public VendaFinalizada novaVendaFinalizada(VendaFechada vendaFechada) {
+        ArrayList<ProdVenda> prodsVenda = new ControlaProdVenda().getProdsVenda(vendaFechada.getVendaId());
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        VendaFinalizada vendaFinalizada = new VendaFinalizada(vendaFechada.getVendaId() + "2", vendaFechada.getCliente(), vendaFechada.getFuncionario(), vendaFechada.getDataCompra(), vendaFechada.getValorTotal(), vendaFechada.getNumParcelas(), vendaFechada.getFormaPagamento(), 2);
+        Vendas vendaFinalizada = new Vendas(vendaFechada.getVendaId() + "2", vendaFechada.getCliente(), vendaFechada.getFuncionario(), vendaFechada.getDataCompra(), vendaFechada.getValorTotal(), vendaFechada.getNumParcelas(), vendaFechada.getFormaPagamento());
+        for (ProdVenda pv : prodsVenda) {
+            pv.setVendas((Vendas) vendaFinalizada);
+            s.saveOrUpdate(pv);
+        }
         s.save(vendaFinalizada);
-        s.delete(vendaFechada);
+        s.delete(vendaFechadaToVenda(vendaFechada));
         s.getTransaction().commit();
-        return vendaFinalizada;
+        return new VendaFinalizada(vendaFechada.getVendaId() + "2", vendaFechada.getCliente(), vendaFechada.getFuncionario(), vendaFechada.getDataCompra(), vendaFechada.getValorTotal(), vendaFechada.getNumParcelas(), vendaFechada.getFormaPagamento(), 2);
     }
+    
 
     public int estadoVenda(String idVenda) { // 0 - aberta   1 - fechada  2 - finalizada  -1 - não existe  -2 - erro
 
@@ -110,6 +116,11 @@ public class ControlaVenda {
         return new Vendas(vendaAberta.getVendaId(), vendaAberta.getFuncionario(), 0);
     }
 
+    private Vendas vendaFechadaToVenda(VendaFechada vendaFechada) {
+        
+        return new Vendas(vendaFechada.getVendaId(), vendaFechada.getCliente(), vendaFechada.getFuncionario(), vendaFechada.getDataCompra(), vendaFechada.getValorTotal(), vendaFechada.getNumParcelas(), vendaFechada.getFormaPagamento(), vendaFechada.getStatusVenda());
+    }
+    
     public VendaAberta vendaToVendaAberta(Vendas venda) {
 
         VendaAberta vendaAberta = new VendaAberta(venda.getVendaId(), venda.getFuncionario(), 0);
@@ -205,4 +216,5 @@ public class ControlaVenda {
 //        });
         return listaVendas;
     }
+
 }

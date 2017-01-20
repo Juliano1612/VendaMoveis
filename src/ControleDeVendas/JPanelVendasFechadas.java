@@ -148,43 +148,43 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
         jButtonGerarBoletoPagamento.setText("Gerar Boleto para Pagamento");
 
         jTableProdsVenda.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nome", "Valor Unitário", "Quantidade", "Valor Total"
-            }
+                new Object[][]{
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null}
+                },
+                new String[]{
+                    "ID", "Nome", "Valor Unitário", "Quantidade", "Valor Total"
+                }
         ) {
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean[]{
                 false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jTableProdsVenda.getTableHeader().setReorderingAllowed(false);
@@ -200,150 +200,155 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
 
         jButtonConfirmarPagamento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonConfirmarPagamento.setText("Confirmar Pagamento");
+        jButtonConfirmarPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarPagamentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jInternalFrameVendaFechadaLayout = new javax.swing.GroupLayout(jInternalFrameVendaFechada.getContentPane());
         jInternalFrameVendaFechada.getContentPane().setLayout(jInternalFrameVendaFechadaLayout);
         jInternalFrameVendaFechadaLayout.setHorizontalGroup(
-            jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
-                        .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelQuantidadeParcelas)
-                            .addComponent(jLabelNomeFunc)
-                            .addComponent(jLabelIDVenda)
-                            .addComponent(jLabelNomeCli)
-                            .addComponent(jLabelDataVenda)
-                            .addComponent(jLabelFormaPagamento))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
-                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextFieldNumeroParcelas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldFormaPagamento, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldDataVenda)
-                                    .addComponent(jTextFieldNomeCli)
-                                    .addComponent(jTextFieldNomeFunc))
-                                .addGap(18, 18, 18)
+                jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
                                 .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelIDFunc, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelIDCli, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelValorTotal, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelVencimentoPagamento, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldValorTotal)
-                                    .addComponent(jTextFieldIDFunc)
-                                    .addComponent(jTextFieldIDCli)
-                                    .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
-                                        .addComponent(jTextFieldVencPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addComponent(jTextFieldIDVenda))
-                        .addGap(42, 42, 42))
-                    .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
-                        .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
-                                .addComponent(jButtonGerarBoletoPagamento)
-                                .addGap(35, 35, 35)
-                                .addComponent(jButtonConfirmarPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(364, 364, 364)
-                                .addComponent(jButtonFecharInternal)))
-                        .addGap(0, 27, Short.MAX_VALUE))))
+                                        .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
+                                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jLabelQuantidadeParcelas)
+                                                        .addComponent(jLabelNomeFunc)
+                                                        .addComponent(jLabelIDVenda)
+                                                        .addComponent(jLabelNomeCli)
+                                                        .addComponent(jLabelDataVenda)
+                                                        .addComponent(jLabelFormaPagamento))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
+                                                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                                        .addComponent(jTextFieldNumeroParcelas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                                                                        .addComponent(jTextFieldFormaPagamento, javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jTextFieldDataVenda)
+                                                                        .addComponent(jTextFieldNomeCli)
+                                                                        .addComponent(jTextFieldNomeFunc))
+                                                                .addGap(18, 18, 18)
+                                                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabelIDFunc, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(jLabelIDCli, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(jLabelValorTotal, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(jLabelVencimentoPagamento, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                                .addGap(18, 18, 18)
+                                                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jTextFieldValorTotal)
+                                                                        .addComponent(jTextFieldIDFunc)
+                                                                        .addComponent(jTextFieldIDCli)
+                                                                        .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
+                                                                                .addComponent(jTextFieldVencPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                                        .addComponent(jTextFieldIDVenda))
+                                                .addGap(42, 42, 42))
+                                        .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
+                                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
+                                                                .addComponent(jButtonGerarBoletoPagamento)
+                                                                .addGap(35, 35, 35)
+                                                                .addComponent(jButtonConfirmarPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(364, 364, 364)
+                                                                .addComponent(jButtonFecharInternal)))
+                                                .addGap(0, 27, Short.MAX_VALUE))))
         );
         jInternalFrameVendaFechadaLayout.setVerticalGroup(
-            jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelIDVenda)
-                    .addComponent(jTextFieldIDVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNomeFunc)
-                    .addComponent(jLabelIDFunc)
-                    .addComponent(jTextFieldNomeFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldIDFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNomeCli)
-                    .addComponent(jLabelIDCli)
-                    .addComponent(jTextFieldIDCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDataVenda)
-                    .addComponent(jLabelValorTotal)
-                    .addComponent(jTextFieldValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelFormaPagamento)
-                    .addComponent(jLabelVencimentoPagamento)
-                    .addComponent(jTextFieldVencPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelQuantidadeParcelas)
-                    .addComponent(jTextFieldNumeroParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonGerarBoletoPagamento)
-                    .addComponent(jButtonFecharInternal)
-                    .addComponent(jButtonConfirmarPagamento))
-                .addContainerGap())
+                jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jInternalFrameVendaFechadaLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabelIDVenda)
+                                        .addComponent(jTextFieldIDVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(25, 25, 25)
+                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabelNomeFunc)
+                                        .addComponent(jLabelIDFunc)
+                                        .addComponent(jTextFieldNomeFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldIDFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(33, 33, 33)
+                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabelNomeCli)
+                                        .addComponent(jLabelIDCli)
+                                        .addComponent(jTextFieldIDCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldNomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(32, 32, 32)
+                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabelDataVenda)
+                                        .addComponent(jLabelValorTotal)
+                                        .addComponent(jTextFieldValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(32, 32, 32)
+                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabelFormaPagamento)
+                                        .addComponent(jLabelVencimentoPagamento)
+                                        .addComponent(jTextFieldVencPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(33, 33, 33)
+                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabelQuantidadeParcelas)
+                                        .addComponent(jTextFieldNumeroParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jInternalFrameVendaFechadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButtonGerarBoletoPagamento)
+                                        .addComponent(jButtonFecharInternal)
+                                        .addComponent(jButtonConfirmarPagamento))
+                                .addContainerGap())
         );
 
         add(jInternalFrameVendaFechada, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 920, 560));
 
         jTableVendasFechadas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Data", "Cliente", "Funcionário", "ValorTotal"
-            }
+                new Object[][]{
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null}
+                },
+                new String[]{
+                    "ID", "Data", "Cliente", "Funcionário", "ValorTotal"
+                }
         ) {
-            Class[] types = new Class [] {
+            Class[] types = new Class[]{
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean[]{
                 false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jTableVendasFechadas.getTableHeader().setReorderingAllowed(false);
@@ -365,7 +370,7 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
         add(jButtonPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(878, 42, -1, -1));
 
         jComboBoxFiltroPesquisa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBoxFiltroPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome do Cliente", "Nome do Vendedor", "ID" }));
+        jComboBoxFiltroPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Nome do Cliente", "Nome do Vendedor", "ID"}));
         add(jComboBoxFiltroPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 43, -1, -1));
 
         jButtonConsultarVenda.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -381,7 +386,6 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         //BOTÃO DE PESQUISAR PRODUTOS    
 
-        
         switch (jComboBoxFiltroPesquisa.getSelectedIndex()) {
             case 0:
                 if (jTextFieldCampoPesquisa.getText().equals("Pesquisar venda")) {
@@ -449,7 +453,11 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Selecione um produto para saber mais detalhes do produto.");
         } else {
             venda = new ControlaVenda().vendaToVendaFechada(new ControlaVenda().getVenda((String) jTableVendasFechadas.getValueAt(indiceProd, 0)));
-
+            if (!venda.getFormaPagamento().equals("Boleto")) {
+                jButtonGerarBoletoPagamento.setVisible(false);
+            } else {
+                jButtonGerarBoletoPagamento.setVisible(true);
+            }
             jTextFieldIDVenda.setText(venda.getVendaId());
             jTextFieldIDFunc.setText(func.getIdFunc());
             jTextFieldNomeFunc.setText(func.getNome());
@@ -476,12 +484,28 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonConsultarVendaActionPerformed
 
+    private void jButtonConfirmarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarPagamentoActionPerformed
+        // TODO add your handling code here:
+        int n = JOptionPane.showConfirmDialog(
+                null,
+                "Essa operação não pode ser revertida. Deseja continuar?",
+                "Confirmar Opção",
+                JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+
+            new ControlaVenda().novaVendaFinalizada(venda);
+
+            JOptionPane.showMessageDialog(null, "A venda foi finalizada!");
+            jButtonPesquisarActionPerformed(evt);
+            jInternalFrameVendaFechada.setVisible(false);
+        }
+    }//GEN-LAST:event_jButtonConfirmarPagamentoActionPerformed
+
     private void jButtonFecharInternalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharInternalActionPerformed
         // TODO add your handling code here:
         jInternalFrameVendaFechada.setVisible(false);
         jButtonConsultarVenda.setVisible(true);
     }//GEN-LAST:event_jButtonFecharInternalActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmarPagamento;
