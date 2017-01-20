@@ -381,6 +381,7 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         //BOTÃO DE PESQUISAR PRODUTOS    
 
+        
         switch (jComboBoxFiltroPesquisa.getSelectedIndex()) {
             case 0:
                 if (jTextFieldCampoPesquisa.getText().equals("Pesquisar venda")) {
