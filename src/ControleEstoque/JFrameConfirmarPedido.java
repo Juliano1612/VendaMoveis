@@ -30,13 +30,26 @@ public class JFrameConfirmarPedido extends javax.swing.JFrame {
         initComponents();
     }
 
-    public JFrameConfirmarPedido(PedidoEstoque pedido, JPanelListaDePedidosDeReposicao panelpai)
+    public JFrameConfirmarPedido(PedidoEstoque pedido, JPanelListaDePedidosDeReposicao panelpai, boolean editavel)
     {
         initComponents();
         this.pedido = pedido;
         this.panelpai = panelpai;
         fetchListaProduto();
         updateListaProduto();
+        
+        if(editavel == false)
+        {
+            this.jButton1.setEnabled(false);
+            this.jButton2.setEnabled(false);
+            this.jTextField1.setEnabled(false);
+            this.jLabel1.setEnabled(false);
+            this.jButton1.setVisible(false);
+            this.jButton2.setVisible(false);
+            this.jTextField1.setVisible(false);
+            this.jLabel1.setVisible(false);
+            this.jButton3.setText("Voltar");
+        }
     }
     
     public void fetchListaProduto()
