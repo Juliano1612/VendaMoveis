@@ -18,6 +18,22 @@ public class ControlaCliente {
         return cliente;
     }
     
+    
+    public Cliente getCliente(String id){
+        
+        Cliente cliente = null;
+        ArrayList<Cliente> listaClientes = getListaClientes();
+        
+        for(Cliente c : listaClientes){
+            if(c.getCliId().equals(id)){
+                cliente = c;
+                break;
+            }
+        }
+        
+        return cliente;
+    }
+    
     public ArrayList<Cliente> getListaClientes() {
         Session c = HibernateUtil.getSessionFactory().getCurrentSession();
         c.beginTransaction();

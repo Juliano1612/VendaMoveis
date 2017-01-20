@@ -54,10 +54,8 @@
                               <Component id="jComboBoxNumeroParcelas" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButtonFinalizar" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jButtonConfirmarCliente" alignment="1" pref="139" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jButtonFinalizar" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jButtonConfirmarCliente" alignment="1" pref="139" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="56" max="32767" attributes="0"/>
               </Group>

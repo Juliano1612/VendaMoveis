@@ -20,6 +20,19 @@ import org.hibernate.Session;
  */
 public class ControlaVenda {
 
+    public Vendas getVenda(String idVenda) {
+
+        Vendas venda = null;
+        ArrayList<Vendas> vendas = getListaVendas();
+        for (Vendas v : vendas) {
+            if (v.getVendaId().equals(idVenda)) {
+                venda = v;
+                break;
+            }
+        }
+        return venda;
+    }
+
     public VendaAberta novaVendaAberta(String vendaId, Funcionario funcionario) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
@@ -33,21 +46,21 @@ public class ControlaVenda {
         ArrayList<ProdVenda> prodsVenda = new ControlaProdVenda().getProdsVenda(vendaAberta.getVendaId());
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Vendas vendaFechada = new Vendas(vendaAberta.getVendaId()+"1", cliente, vendaAberta.getFuncionario(), dataCompra, valorTotal, numParcelas, formaPagamento, 1);    
-        for(ProdVenda pv : prodsVenda){
+        Vendas vendaFechada = new Vendas(vendaAberta.getVendaId() + "1", cliente, vendaAberta.getFuncionario(), dataCompra, valorTotal, numParcelas, formaPagamento, 1);
+        for (ProdVenda pv : prodsVenda) {
             pv.setVendas((Vendas) vendaFechada);
             s.saveOrUpdate(pv);
         }
         s.save(vendaFechada);
         s.delete(vendaAbertaToVenda(vendaAberta));
         s.getTransaction().commit();
-        return new VendaFechada(vendaAberta.getVendaId()+"1", cliente, vendaAberta.getFuncionario(), dataCompra, valorTotal, numParcelas, formaPagamento, 1);
+        return new VendaFechada(vendaAberta.getVendaId() + "1", cliente, vendaAberta.getFuncionario(), dataCompra, valorTotal, numParcelas, formaPagamento, 1);
     }
 
     public VendaFinalizada novaVendaFinalizada(VendaFechada vendaFechada) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        VendaFinalizada vendaFinalizada = new VendaFinalizada(vendaFechada.getVendaId()+"2", vendaFechada.getCliente(), vendaFechada.getFuncionario(), vendaFechada.getDataCompra(), vendaFechada.getValorTotal(), vendaFechada.getNumParcelas(), vendaFechada.getFormaPagamento(), 2);
+        VendaFinalizada vendaFinalizada = new VendaFinalizada(vendaFechada.getVendaId() + "2", vendaFechada.getCliente(), vendaFechada.getFuncionario(), vendaFechada.getDataCompra(), vendaFechada.getValorTotal(), vendaFechada.getNumParcelas(), vendaFechada.getFormaPagamento(), 2);
         s.save(vendaFinalizada);
         s.delete(vendaFechada);
         s.getTransaction().commit();
@@ -91,8 +104,9 @@ public class ControlaVenda {
 
         return null;
     }
-    public Vendas vendaAbertaToVenda(VendaAberta vendaAberta){
-        
+
+    public Vendas vendaAbertaToVenda(VendaAberta vendaAberta) {
+
         return new Vendas(vendaAberta.getVendaId(), vendaAberta.getFuncionario(), 0);
     }
 
@@ -104,15 +118,14 @@ public class ControlaVenda {
 
     public VendaFechada vendaToVendaFechada(Vendas vendaAberta) {
 
-        VendaFechada vendaFechada = new VendaFechada(vendaAberta.getVendaId(), vendaAberta.getCliente(), vendaAberta.getFuncionario(), vendaAberta.getDataCompra(), vendaAberta.getValorTotal(), vendaAberta.getNumParcelas(), vendaAberta.getFormaPagamento() , 1);
+        VendaFechada vendaFechada = new VendaFechada(vendaAberta.getVendaId(), vendaAberta.getCliente(), vendaAberta.getFuncionario(), vendaAberta.getDataCompra(), vendaAberta.getValorTotal(), vendaAberta.getNumParcelas(), vendaAberta.getFormaPagamento(), 1);
         return vendaFechada;
     }
-    
+
     public VendaFinalizada vendaToVendaFinalizada(Vendas vendaFechada) {
-        VendaFinalizada vendaFinalizada = new VendaFinalizada(vendaFechada.getVendaId(), vendaFechada.getCliente(), vendaFechada.getFuncionario(), vendaFechada.getDataCompra(), vendaFechada.getValorTotal(), vendaFechada.getNumParcelas(), vendaFechada.getFormaPagamento() , 1);
+        VendaFinalizada vendaFinalizada = new VendaFinalizada(vendaFechada.getVendaId(), vendaFechada.getCliente(), vendaFechada.getFuncionario(), vendaFechada.getDataCompra(), vendaFechada.getValorTotal(), vendaFechada.getNumParcelas(), vendaFechada.getFormaPagamento(), 1);
         return vendaFinalizada;
     }
-
 
     public void excluiVendaAberta(Funcionario funcionario) {
 
@@ -149,7 +162,7 @@ public class ControlaVenda {
         ArrayList<Vendas> listaVendas = (ArrayList<Vendas>) c.createQuery("From Vendas Where statusVenda is 1").list();
         c.getTransaction().commit();
         ArrayList<VendaFechada> listaVendasFechadas = new ArrayList();
-        for(Vendas v : listaVendas){
+        for (Vendas v : listaVendas) {
             listaVendasFechadas.add(vendaToVendaFechada(v));
         }
         Collections.sort(listaVendasFechadas, new Comparator<VendaFechada>() {
@@ -167,7 +180,7 @@ public class ControlaVenda {
         ArrayList<Vendas> listaVendas = (ArrayList<Vendas>) c.createQuery("From Vendas Where statusVenda is 2").list();
         c.getTransaction().commit();
         ArrayList<VendaFinalizada> listaVendasFinalizadas = new ArrayList();
-        for(Vendas v : listaVendas){
+        for (Vendas v : listaVendas) {
             listaVendasFinalizadas.add(vendaToVendaFinalizada(v));
         }
         Collections.sort(listaVendasFinalizadas, new Comparator<VendaFinalizada>() {
@@ -184,12 +197,12 @@ public class ControlaVenda {
         c.beginTransaction();
         ArrayList<Vendas> listaVendas = (ArrayList<Vendas>) c.createQuery("From Vendas").list();
         c.getTransaction().commit();
-        Collections.sort(listaVendas, new Comparator<Vendas>() {
-            @Override
-            public int compare(Vendas v1, Vendas v2) {
-                return v1.getDataCompra().compareTo(v2.getDataCompra());
-            }
-        });
+//        Collections.sort(listaVendas, new Comparator<Vendas>() {
+//            @Override
+//            public int compare(Vendas v1, Vendas v2) {
+//                return v1.getDataCompra().compareTo(v2.getDataCompra());
+//            }
+//        });
         return listaVendas;
     }
 }

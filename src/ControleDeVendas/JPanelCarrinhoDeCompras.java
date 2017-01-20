@@ -426,10 +426,10 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
         if (n == JOptionPane.YES_OPTION) {
             switch (jComboBoxFormaPagamento.getSelectedIndex()) {
                 case 0:
-                    new ControlaVenda().novaVendaFechada(new ControlaVenda().getVendaAbertaFuncionario(funcionario), cliente, new Date(), valorTotal, jComboBoxNumeroParcelas.getSelectedIndex(), "Boleto");
+                    new ControlaVenda().novaVendaFechada(new ControlaVenda().getVendaAbertaFuncionario(funcionario), cliente, new Date(), valorTotal, jComboBoxNumeroParcelas.getSelectedIndex()+1, "Boleto");
                     break;
                 case 1:
-                    new ControlaVenda().novaVendaFechada(new ControlaVenda().getVendaAbertaFuncionario(funcionario), cliente, new Date(), valorTotal, jComboBoxNumeroParcelas.getSelectedIndex(), "Cartão");
+                    new ControlaVenda().novaVendaFechada(new ControlaVenda().getVendaAbertaFuncionario(funcionario), cliente, new Date(), valorTotal, jComboBoxNumeroParcelas.getSelectedIndex()+1, "Cartão");
                     break;
             }
             

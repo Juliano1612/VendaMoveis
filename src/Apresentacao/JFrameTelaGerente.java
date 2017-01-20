@@ -10,6 +10,7 @@ import ControleDeAcesso.JFrameTelaLogin;
 import ControleDeAcesso.JPanelMinhaConta;
 import ControleDeVendas.ControlaVenda;
 import ControleDeVendas.JPanelCarrinhoDeCompras;
+import ControleDeVendas.JPanelVendasFechadas;
 import ControleDeVendas.VendaAberta;
 import ControleEstoque.JPanelListaDePedidosDeReposicao;
 import ControleEstoque.JPanelPedidoReposicaoEstoque;
@@ -410,6 +411,9 @@ public class JFrameTelaGerente extends javax.swing.JFrame {
 
     private void jMenuConsultarVendaFechadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarVendaFechadaActionPerformed
         // TODO add your handling code here:
+        JPanel jPanelBuscarVendasFechadas = new JPanelVendasFechadas();
+        jPanelFundo.add(jPanelBuscarVendasFechadas);
+        card.next(jPanelFundo);
     }//GEN-LAST:event_jMenuConsultarVendaFechadaActionPerformed
 
     private void jMenuConsultarVendaFinalizadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarVendaFinalizadaActionPerformed
