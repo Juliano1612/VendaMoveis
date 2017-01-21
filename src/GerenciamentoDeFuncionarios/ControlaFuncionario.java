@@ -34,6 +34,20 @@ public class ControlaFuncionario {
             return false;
         }
     }
+    
+    public Funcionario getFuncionario(String cpf){
+        
+        Funcionario func = null;
+        
+        ArrayList<Funcionario> listaFunc = getListaFuncionarios();
+        for(Funcionario f : listaFunc){
+            if(f.getIdFunc().equals(cpf)){
+                func = f;
+                break;
+            }
+        }
+        return func;
+    }
 
     public Funcionario criarFuncionario(String idFunc, String nome, String cpf, String rg, Date dataNascimento, String estadoCivil, String nomeConjuge, String endereco, String numero, String complemento, String cidade, String estado, String cargo, Date dataContratacao, Integer nivelAcesso, String sexo, String bairro, String cep, String telefone, Integer status) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();

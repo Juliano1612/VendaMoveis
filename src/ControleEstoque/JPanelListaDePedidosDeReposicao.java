@@ -10,6 +10,8 @@ import ControleProduto.Produto;
 import GerenciamentoDeFuncionarios.ControlaFuncionario;
 import GerenciamentoDeFuncionarios.Funcionario;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -57,22 +59,25 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
             obe[0] = p.getIdPedEst();
             
             int naoatendidos = 0;
+            int cancelados = 0;
             for(ProdPedEstoque ppe: prodpedes)
             {
                 if(ppe.getStat() == 0)
                     ++naoatendidos;
+                else if(ppe.getStat() == 3)
+                    ++cancelados;
             }
             
             if(naoatendidos == prodpedes.size())
                 obe[1] = "Não Processado";
-            else if(naoatendidos == 0)
-                obe[1] = "Efetivado";
+            else if(cancelados == prodpedes.size())
+                obe[1] = "Cancelado";
             else
-                obe[1] = "Parcial";
+                obe[1] = "Efetivado";
             
             for(Funcionario f : funcionarios)
             {
-                if(f.getCpf().equals(p.getFuncionario().getCpf()))
+                if(f.getIdFunc().equals(p.getFuncionario().getIdFunc()))
                     obe[2] = f.getNome();
             }
             
@@ -97,6 +102,28 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
         
         this.jTable1.setModel(model);
     }
+    
+    public boolean isPedidoProcessado(PedidoEstoque pe)
+    {
+        boolean ret;
+        ArrayList <ProdPedEstoque> prodpedesf;
+        
+        prodpedesf = new ControlaProdPedEstoque().getListaProdPedEstoque(pe);
+        
+        int naoatendidos = 0;
+        for(ProdPedEstoque ppe: prodpedesf)
+        {
+            if(ppe.getStat() == 0)
+                ++naoatendidos;
+        }
+
+        if(naoatendidos == prodpedesf.size())
+            ret = false;
+        else
+            ret = true;
+        
+        return ret;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,6 +139,7 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("Lista de Pedidos de Reposição de Estoque");
@@ -137,6 +165,18 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
         });
 
         jButton2.setText("Cancelar Pedido");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Consultar Pedido");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -146,43 +186,103 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(7, 7, 7))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))
-                        .addGap(40, 40, 40))))
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(134, 134, 134))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if(jTable1.getSelectedRow() == -1)
+            return;
+        
+        PedidoEstoque selecionado = pedidos.get(jTable1.getSelectedRow());
+        
+        if(!isPedidoProcessado(selecionado))
+        {
+            new JFrameConfirmarPedido(selecionado, this, true).setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Erro: Esse pedido já foi efetivado/cancelado. Escolha outro pedido.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(jTable1.getSelectedRow() == -1)
+            return;
+        
+        PedidoEstoque selecionado = pedidos.get(jTable1.getSelectedRow());
+        
+        if(!isPedidoProcessado(selecionado))
+        {
+            Date dataAtend = new Date();
+            selecionado.setDataAtend(dataAtend);
+            boolean persistiu = new ControlaPedidoEstoque().persistePedidoEstoque(selecionado);
+            boolean deuerro = !persistiu;
+            
+            ControlaProdPedEstoque ctrlppe = new ControlaProdPedEstoque();
+            ArrayList <ProdPedEstoque> ppelist = ctrlppe.getListaProdPedEstoque(selecionado);
+            for(ProdPedEstoque ppe : ppelist)
+            {
+                ppe.setStat(3); //Cancelado
+                persistiu = ctrlppe.persisteProdPedEstoque(ppe);
+                if(!persistiu)
+                    deuerro = true;
+            }
+            
+            if(!deuerro){
+                JOptionPane.showMessageDialog(null, "Pedido Cancelado!");
+                this.updatePedidosEstoque();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Erro ao cancelar pedido!");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Erro: Esse pedido já foi efetivado/cancelado. Escolha outro pedido.");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(jTable1.getSelectedRow() == -1)
+            return;
+        
+        PedidoEstoque selecionado = pedidos.get(jTable1.getSelectedRow());
+        new JFrameConfirmarPedido(selecionado, this, false).setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

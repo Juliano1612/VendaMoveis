@@ -56,8 +56,7 @@ public class ControlaProdPedEstoque {
     }
     
     public ArrayList<ProdPedEstoque> getListaProdPedEstoque(PedidoEstoque pedido) {
-        String transacao = "From ProdPedEstoque Where idPedEst=";
-        transacao += pedido.getIdPedEst();
+        String transacao = "From ProdPedEstoque";
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         ArrayList<ProdPedEstoque> listaProdPed = (ArrayList<ProdPedEstoque>) s.createQuery(transacao).list();
@@ -68,6 +67,15 @@ public class ControlaProdPedEstoque {
                 return o1.getStat().compareTo(o2.getStat());
             }
         });
+        
+        ArrayList ppearemover = new ArrayList<>();
+        for(ProdPedEstoque ppe : listaProdPed)
+        {
+            if(!ppe.getPedidoEstoque().getIdPedEst().equals(pedido.getIdPedEst()))
+                ppearemover.add(ppe);
+        }
+        listaProdPed.removeAll(ppearemover);
+        
         return listaProdPed;
     }
 

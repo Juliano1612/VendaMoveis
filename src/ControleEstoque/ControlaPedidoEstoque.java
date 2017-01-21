@@ -35,12 +35,12 @@ public class ControlaPedidoEstoque {
             return false;
         }
         
-        for(Object ppes : pedido.getProdPedEstoques())
+/*        for(Object ppes : pedido.getProdPedEstoques())
         {
             ProdPedEstoque ppe = (ProdPedEstoque) ppes;
             
             if( (new ControlaProdPedEstoque().persisteProdPedEstoque(ppe)) == false) return false;
-        }
+        }*/
         return true;
     }
 
@@ -61,7 +61,7 @@ public class ControlaPedidoEstoque {
         Collections.sort(listaPedido, new Comparator<PedidoEstoque>() {
             @Override
             public int compare(PedidoEstoque o1, PedidoEstoque o2) {
-                return o1.getDataPed().compareTo(o2.getDataPed());
+                return (- o1.getDataPed().compareTo(o2.getDataPed()));
             }
         });
         return listaPedido;

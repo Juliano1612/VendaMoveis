@@ -10,6 +10,7 @@ import org.hibernate.Session;
  * @author ander
  */
 public class ControlaProduto {
+    
     public boolean persisteProduto(Produto produto, String nomeProd, Integer Quantidade, String descricao, Float precoVenda, Float precoCusto){
         produto.setNomeProd(nomeProd);
         produto.setQuantidadeEstoque(Quantidade);
@@ -28,6 +29,14 @@ public class ControlaProduto {
         }
     }
         
+    
+    public void atualizaProduto(Produto produto){
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        s.saveOrUpdate(produto);
+        s.getTransaction().commit();
+    }
+    
     public Produto cadastraProduto(String prodId, String nomeProd, Integer quantidadeEstoque, String descricao, Float precoVenda, Float precoCusto, Float altura, Float largura, Float profundidade, String marca){
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
@@ -75,5 +84,16 @@ public class ControlaProduto {
             }
         });
         return listaProdutos;
-    }  
+    }
+     
+    public Produto getProduto(String idProd){
+        ArrayList<Produto> listaProd = getListaProdutos();
+        for(Produto p : listaProd){
+            if(p.getProdId().equals(idProd)){
+                return p;
+            }
+        }
+        
+        return null;
+    }
 }
