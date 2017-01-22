@@ -68,7 +68,9 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
                     ++cancelados;
             }
             
-            if(naoatendidos == prodpedes.size())
+            if(prodpedes.size() == 0)
+                obe[1] = "Pedido Vazio";
+            else if(naoatendidos == prodpedes.size())
                 obe[1] = "Não Processado";
             else if(cancelados == prodpedes.size())
                 obe[1] = "Cancelado";
@@ -109,6 +111,8 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
         ArrayList <ProdPedEstoque> prodpedesf;
         
         prodpedesf = new ControlaProdPedEstoque().getListaProdPedEstoque(pe);
+        if (prodpedesf.size() == 0)
+            return true;
         
         int naoatendidos = 0;
         for(ProdPedEstoque ppe: prodpedesf)
@@ -123,6 +127,34 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
             ret = true;
         
         return ret;
+    }
+    
+    public int quantTotalItens(PedidoEstoque pe)
+    {
+        ArrayList <ProdPedEstoque> prodpedesf;
+        
+        prodpedesf = new ControlaProdPedEstoque().getListaProdPedEstoque(pe);
+        
+        int quantidade = 0;
+        for(ProdPedEstoque ppe: prodpedesf)
+        {
+            quantidade += ppe.getQuantidade();
+        }
+        return quantidade;
+    }
+    
+    public int quantTotalItensAtendidos(PedidoEstoque pe)
+    {
+        ArrayList <ProdPedEstoque> prodpedesf;
+        
+        prodpedesf = new ControlaProdPedEstoque().getListaProdPedEstoque(pe);
+        
+        int quantidade = 0;
+        for(ProdPedEstoque ppe: prodpedesf)
+        {
+            quantidade += ppe.getQuantidadePedAtend();
+        }
+        return quantidade;        
     }
 
     /**
