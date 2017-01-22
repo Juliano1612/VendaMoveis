@@ -66,6 +66,23 @@ public class ControlaPedidoEstoque {
         });
         return listaPedido;
     }
+    
+    public PedidoEstoque getPedidoEstoque(String idPedEst)
+    {
+        PedidoEstoque ret;
+        
+        ArrayList<PedidoEstoque> listaPedido = getListaPedidoEstoque();
+        HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+        for (PedidoEstoque p : listaPedido) {
+            if (p.getIdPedEst().equals(idPedEst)) {
+                ret = p;
+                HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+                return p;
+            }
+        }
+        HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+        return null;
+    }
 
     public boolean pedidoEstoqueCadastrado(String idPedEst) {
         ArrayList<PedidoEstoque> listaPedido = getListaPedidoEstoque();
