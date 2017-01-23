@@ -146,6 +146,11 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
 
         jButtonGerarBoletoPagamento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonGerarBoletoPagamento.setText("Gerar Boleto para Pagamento");
+		jButtonGerarBoletoPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGerarBoletoPagamentoActionPerformed(evt);
+            }
+        });
 
         jTableProdsVenda.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
@@ -506,6 +511,11 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
         jInternalFrameVendaFechada.setVisible(false);
         jButtonConsultarVenda.setVisible(true);
     }//GEN-LAST:event_jButtonFecharInternalActionPerformed
+
+    private void jButtonGerarBoletoPagamentoActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmarPagamento;
