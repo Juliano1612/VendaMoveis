@@ -97,4 +97,56 @@ public class ControlaPedidoEstoque {
         HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         return false;
     }
+    
+    public boolean isPedidoProcessado(PedidoEstoque pe)
+    {
+        boolean ret;
+        ArrayList <ProdPedEstoque> prodpedesf;
+        
+        prodpedesf = new ControlaProdPedEstoque().getListaProdPedEstoque(pe);
+        if (prodpedesf.size() == 0)
+            return true;
+        
+        int naoatendidos = 0;
+        for(ProdPedEstoque ppe: prodpedesf)
+        {
+            if(ppe.getStat() == 0)
+                ++naoatendidos;
+        }
+
+        if(naoatendidos == prodpedesf.size())
+            ret = false;
+        else
+            ret = true;
+        
+        return ret;
+    }
+    
+    public int quantTotalItens(PedidoEstoque pe)
+    {
+        ArrayList <ProdPedEstoque> prodpedesf;
+        
+        prodpedesf = new ControlaProdPedEstoque().getListaProdPedEstoque(pe);
+        
+        int quantidade = 0;
+        for(ProdPedEstoque ppe: prodpedesf)
+        {
+            quantidade += ppe.getQuantidade();
+        }
+        return quantidade;
+    }
+    
+    public int quantTotalItensAtendidos(PedidoEstoque pe)
+    {
+        ArrayList <ProdPedEstoque> prodpedesf;
+        
+        prodpedesf = new ControlaProdPedEstoque().getListaProdPedEstoque(pe);
+        
+        int quantidade = 0;
+        for(ProdPedEstoque ppe: prodpedesf)
+        {
+            quantidade += ppe.getQuantidadePedAtend();
+        }
+        return quantidade;        
+    }
 }
