@@ -11,7 +11,6 @@ import GeradorDeId.GeraId;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import javafx.stage.FileChooser;
 import javax.swing.Icon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
