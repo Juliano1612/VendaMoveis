@@ -36,6 +36,10 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
 
     public JPanelCarrinhoDeCompras(Funcionario func, String idVendaAberta) {
         initComponents();
+
+        jButtonHelp.setContentAreaFilled(false);
+        jButtonHelp.setBorderPainted(false);
+
         jInternalFrameConfirmaCompra.setVisible(false);
         jComboBoxFormaPagamento.setEnabled(false);
         jComboBoxNumeroParcelas.setEnabled(false);
@@ -90,6 +94,7 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
         jButtonRemoverSelecionados = new javax.swing.JButton();
         jLabelTituloCarrinho = new javax.swing.JLabel();
         jButtonConfirmarCompra = new javax.swing.JButton();
+        jButtonHelp = new javax.swing.JButton();
 
         setLayout(null);
 
@@ -204,9 +209,8 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
                         .addGroup(jInternalFrameConfirmaCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBoxFormaPagamento, 0, 102, Short.MAX_VALUE)
                             .addComponent(jComboBoxNumeroParcelas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jInternalFrameConfirmaCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButtonFinalizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonConfirmarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))
+                    .addComponent(jButtonFinalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonConfirmarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         jInternalFrameConfirmaCompraLayout.setVerticalGroup(
@@ -326,6 +330,15 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
         });
         add(jButtonConfirmarCompra);
         jButtonConfirmarCompra.setBounds(796, 544, 194, 45);
+
+        jButtonHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/help24x24.png"))); // NOI18N
+        jButtonHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHelpActionPerformed(evt);
+            }
+        });
+        add(jButtonHelp);
+        jButtonHelp.setBounds(950, 10, 40, 40);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRemoverSelecionadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverSelecionadosActionPerformed
@@ -426,45 +439,59 @@ public class JPanelCarrinhoDeCompras extends javax.swing.JPanel {
         if (n == JOptionPane.YES_OPTION) {
             switch (jComboBoxFormaPagamento.getSelectedIndex()) {
                 case 0:
-                    new ControlaVenda().novaVendaFechada(new ControlaVenda().getVendaAbertaFuncionario(funcionario), cliente, new Date(), valorTotal, jComboBoxNumeroParcelas.getSelectedIndex()+1, "Boleto");
+                    new ControlaVenda().novaVendaFechada(new ControlaVenda().getVendaAbertaFuncionario(funcionario), cliente, new Date(), valorTotal, jComboBoxNumeroParcelas.getSelectedIndex() + 1, "Boleto");
                     break;
                 case 1:
-                    new ControlaVenda().novaVendaFechada(new ControlaVenda().getVendaAbertaFuncionario(funcionario), cliente, new Date(), valorTotal, jComboBoxNumeroParcelas.getSelectedIndex()+1, "Cartão");
+                    new ControlaVenda().novaVendaFechada(new ControlaVenda().getVendaAbertaFuncionario(funcionario), cliente, new Date(), valorTotal, jComboBoxNumeroParcelas.getSelectedIndex() + 1, "Cartão");
                     break;
             }
-            
+
             idVenda = funcionario.getIdFunc() + new Date().getTime();
             new ControlaVenda().novaVendaAberta(idVenda, funcionario);
             JOptionPane.showMessageDialog(null, "A venda anterior foi fechada  e uma nova venda foi inicializada!");
             tableModel = (DefaultTableModel) jTableCarrinho.getModel();
 
-        tableModel.setNumRows(0);
+            tableModel.setNumRows(0);
 
-        prodsVenda = new ControlaProdVenda().getProdsVenda(idVenda);
-        ControlaProduto controlaProduto = new ControlaProduto();
-        Produto produto;
+            prodsVenda = new ControlaProdVenda().getProdsVenda(idVenda);
+            ControlaProduto controlaProduto = new ControlaProduto();
+            Produto produto;
 
-        for (ProdVenda pv : prodsVenda) {
-            Hibernate.initialize(pv.getProduto().getProdId());
-            produto = controlaProduto.getProduto(pv.getProduto().getProdId());
-            listaProds.add(produto);
-            tableModel.addRow(new Object[]{produto.getProdId(), produto.getNomeProd(), pv.getValorUnitario(), pv.getQuantidade(), "" + (pv.getQuantidade() * pv.getValorUnitario()), false});
-            valorTotal += pv.getQuantidade() * pv.getValorUnitario();
-        }
+            for (ProdVenda pv : prodsVenda) {
+                Hibernate.initialize(pv.getProduto().getProdId());
+                produto = controlaProduto.getProduto(pv.getProduto().getProdId());
+                listaProds.add(produto);
+                tableModel.addRow(new Object[]{produto.getProdId(), produto.getNomeProd(), pv.getValorUnitario(), pv.getQuantidade(), "" + (pv.getQuantidade() * pv.getValorUnitario()), false});
+                valorTotal += pv.getQuantidade() * pv.getValorUnitario();
+            }
 
-        if (!prodsVenda.isEmpty()) {
-            jLabelValorTotal.setText("Valor Total = R$ " + valorTotal);
-        }
-        jInternalFrameConfirmaCompra.setVisible(false);
+            if (!prodsVenda.isEmpty()) {
+                jLabelValorTotal.setText("Valor Total = R$ " + valorTotal);
+            }
+            jInternalFrameConfirmaCompra.setVisible(false);
         }
 
     }//GEN-LAST:event_jButtonFinalizarActionPerformed
+
+    private void jButtonHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHelpActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "\tBem vindo ao carrinho de compras da RedeBras!\n"
+                + "\n-Adicionando Produtos\n\n"
+                + "Para adicionar produtos ao seu carrinho, basta clicar na aba Produtos e selecionar a opção consulta de produtos. Estando na consulta, "
+                + "\nselecione o item desejado e clica no botão \"Adicionar ao Carrinho\"."+ " Feito isso o sistema irá perguntar qual a quantidade desejada."
+                + "\nInformando uma quantidade válida e confirmando a opção, o item será adicionado corretamente ao carrinho!\nVocê pode repetir a operação "
+                + "\nquantas vezes quiser e, quando tiver acabado, pode consultar os itens adicionados aqui no carrinho.\n"
+                + "\n-Removendo Produtos\n\n"
+                + "Para excluir itens basta entrar aqui no carrinho, selecionar os que deseja excluir e clicar em \"Remover Selecionados\"."
+                + "\nPronto, os itens foram excluídos da sua compra!");
+    }//GEN-LAST:event_jButtonHelpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmarCliente;
     private javax.swing.JButton jButtonConfirmarCompra;
     private javax.swing.JButton jButtonFinalizar;
+    private javax.swing.JButton jButtonHelp;
     private javax.swing.JButton jButtonListar;
     private javax.swing.JButton jButtonRemoverSelecionados;
     private javax.swing.JComboBox<String> jComboBoxFormaPagamento;

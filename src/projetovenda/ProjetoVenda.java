@@ -26,8 +26,6 @@ public class ProjetoVenda {
         JFrameTelaLogin jFrameTelaLogin = new JFrameTelaLogin();
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         
-        
-
     }
 
 }

@@ -27,6 +27,12 @@ public class ControlaProdVenda {
         s.getTransaction().commit();
     }
 
+    public boolean persisteProdVenda(ProdVenda pv) {
+
+        return !(pv.getQuantidade() <= 0 || pv.getValorUnitario() <= 0 || pv.getProduto() == null);
+
+    }
+
     public ArrayList<ProdVenda> getProdsVenda(String idVenda) {
         ArrayList<ProdVenda> minhaVenda = new ArrayList();
         Session c = HibernateUtil.getSessionFactory().getCurrentSession();
