@@ -66,6 +66,23 @@ public class ControlaPedidoEstoque {
         });
         return listaPedido;
     }
+    
+    public PedidoEstoque getPedidoEstoque(String idPedEst)
+    {
+        PedidoEstoque ret;
+        
+        ArrayList<PedidoEstoque> listaPedido = getListaPedidoEstoque();
+        HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+        for (PedidoEstoque p : listaPedido) {
+            if (p.getIdPedEst().equals(idPedEst)) {
+                ret = p;
+                HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+                return p;
+            }
+        }
+        HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+        return null;
+    }
 
     public boolean pedidoEstoqueCadastrado(String idPedEst) {
         ArrayList<PedidoEstoque> listaPedido = getListaPedidoEstoque();
@@ -79,5 +96,57 @@ public class ControlaPedidoEstoque {
         }
         HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         return false;
+    }
+    
+    public boolean isPedidoProcessado(PedidoEstoque pe)
+    {
+        boolean ret;
+        ArrayList <ProdPedEstoque> prodpedesf;
+        
+        prodpedesf = new ControlaProdPedEstoque().getListaProdPedEstoque(pe);
+        if (prodpedesf.size() == 0)
+            return true;
+        
+        int naoatendidos = 0;
+        for(ProdPedEstoque ppe: prodpedesf)
+        {
+            if(ppe.getStat() == 0)
+                ++naoatendidos;
+        }
+
+        if(naoatendidos == prodpedesf.size())
+            ret = false;
+        else
+            ret = true;
+        
+        return ret;
+    }
+    
+    public int quantTotalItens(PedidoEstoque pe)
+    {
+        ArrayList <ProdPedEstoque> prodpedesf;
+        
+        prodpedesf = new ControlaProdPedEstoque().getListaProdPedEstoque(pe);
+        
+        int quantidade = 0;
+        for(ProdPedEstoque ppe: prodpedesf)
+        {
+            quantidade += ppe.getQuantidade();
+        }
+        return quantidade;
+    }
+    
+    public int quantTotalItensAtendidos(PedidoEstoque pe)
+    {
+        ArrayList <ProdPedEstoque> prodpedesf;
+        
+        prodpedesf = new ControlaProdPedEstoque().getListaProdPedEstoque(pe);
+        
+        int quantidade = 0;
+        for(ProdPedEstoque ppe: prodpedesf)
+        {
+            quantidade += ppe.getQuantidadePedAtend();
+        }
+        return quantidade;        
     }
 }

@@ -2,6 +2,10 @@ package ControleBoleto;
 
 import ControleCliente.Cliente;
 import ControleDeVendas.Parcela;
+import ControleDeVendas.Vendas;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -24,31 +28,28 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class GeradorBoleto {
+
     private static final String url = "jdbc:mysql://projetovendas.no-ip.org:3306/Vendas?zeroDateTimeBehavior=convertToNull";
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String login = "Sistema";
     private static final String pwd = "sistema975";
-    
-    public void main(Cliente c, Parcela p) throws JRException, SQLException, ClassNotFoundException {
+
+    public void main(Cliente c, Vendas v) throws JRException, SQLException, ClassNotFoundException {
         Cliente cliente;
         cliente = c;
-        Parcela parcela;
-        parcela = p;
+        Vendas vendas;
+        vendas = v;
+
         List lista = new ArrayList();
-        
-        p.getParcelaId();
-        p.getValorTotal();
-        
+
         c.getNome();
         c.getEndereco();
-        
+
         lista.add(c);
-        lista.add(p);
-        
-        JasperReport report = JasperCompileManager.compileReport("boleto.jrxml");
-        JasperPrint print = JasperFillManager.fillReport(report, null,new JRBeanCollectionDataSource(lista));
-        JasperExportManager.exportReportToPdfFile(print,"C:\\Windows\\Temp\\boleto.pdf");
-        System.out.println("Relatório gerado.");
+        lista.add(v);
+
+        JasperReport report = JasperCompileManager.compileReport("boleto.jasper");
+        JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
+        JasperExportManager.exportReportToPdfFile(print, "C:\\Windows\\Temp\\boleto.pdf");
     }
-   
 }

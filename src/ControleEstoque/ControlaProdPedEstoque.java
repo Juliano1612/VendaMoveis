@@ -20,6 +20,8 @@ import org.hibernate.Session;
 public class ControlaProdPedEstoque {
 
     public boolean persisteProdPedEstoque(ProdPedEstoque prodpedest) {
+        if(prodpedest.getQuantidade() <= 0 || prodpedest.getQuantidade() > 99)
+            return false;
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         try {

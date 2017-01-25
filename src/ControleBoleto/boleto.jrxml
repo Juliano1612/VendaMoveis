@@ -1,11 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-01-18T21:05:40 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Boleto2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3498f537-1bea-49be-8dbb-67dcbc4c19bf">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<queryString language="SQL">
-		<![CDATA[]]>
+	<property name="ireport.zoom" value="2.8531167061100104"/>
+	<property name="ireport.x" value="381"/>
+	<property name="ireport.y" value="368"/>
+	<queryString>
+		<![CDATA[SELECT
+     *
+FROM
+     `Cliente` Cliente,
+     `Parcela` Parcela]]>
 	</queryString>
+	<field name="cli_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Sobrenome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CPF" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RG" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Data_nascimento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Endereco" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Numero" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Complemento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Cidade" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Tel_fixo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Tel_movel" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nome_mae" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nome_pai" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Sexo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bairro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado_civil" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="parcela_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="venda_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="parcela" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="parcela_paga" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valor_total" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_pago" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="juros" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="data_parcela" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -66,7 +152,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFF212"/>
 				</box>
-				<textFieldExpression><![CDATA[QUALQUER BANCO ATÉ O VENCIMENTO]]></textFieldExpression>
+				<textFieldExpression><![CDATA[  "QUALQUER BANCO ATÉ O VENCIMENTO"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="40" width="120" height="20" forecolor="#284DB0" uuid="171335a9-91c7-4de1-871f-c553e7461fa4"/>
@@ -90,7 +176,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFF212"/>
 				</box>
-				<textFieldExpression><![CDATA[RedeBras]]></textFieldExpression>
+				<textFieldExpression><![CDATA[  "RedeBras"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="78" width="100" height="20" forecolor="#284DB0" uuid="b45f820b-12ae-4c7e-8690-300e2d19d47d"/>
@@ -113,7 +199,7 @@
 					<leftPen lineWidth="1.5" lineColor="#FFF212"/>
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("DD/MM/YYYY").format($F{dataemitido})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="100" y="78" width="70" height="20" forecolor="#284DB0" uuid="6d44a5a7-44fb-43fe-a26e-54c1b217a7fa"/>
@@ -136,7 +222,7 @@
 					<leftPen lineWidth="1.5" lineColor="#FFF212"/>
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{ndocumento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{parcela_ID}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="170" y="78" width="71" height="20" forecolor="#284DB0" uuid="d15da008-e0a9-47f9-82ba-e81185d17910"/>
@@ -159,7 +245,7 @@
 					<leftPen lineWidth="1.5" lineColor="#FFF212"/>
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[DM]]></textFieldExpression>
+				<textFieldExpression><![CDATA[  "DM"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="241" y="98" width="71" height="18" uuid="eb7e8107-61be-4c03-b41d-984e95664300"/>
@@ -168,7 +254,7 @@
 					<leftPen lineWidth="1.5" lineColor="#FFF212"/>
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[N]]></textFieldExpression>
+				<textFieldExpression><![CDATA[  "N"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="241" y="78" width="71" height="20" forecolor="#284DB0" uuid="413ac1df-03f0-4ad1-b4c4-9a93e33dc596"/>
@@ -205,6 +291,7 @@
 					<leftPen lineWidth="1.5" lineColor="#FFF212"/>
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="411" y="2" width="144" height="20" forecolor="#284DB0" backcolor="rgba(255, 242, 18, 0.35686275)" uuid="ad60cd2f-40c1-4793-8b5f-6327e3f005a2"/>
@@ -228,7 +315,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFF212"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{dataVencimento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[  $F{data_parcela}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="411" y="40" width="144" height="20" forecolor="#284DB0" uuid="120a8bd5-4c29-451f-8fce-106ed37e8832"/>
@@ -252,7 +339,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFF212"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{codigocedente}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="411" y="78" width="144" height="20" forecolor="#284DB0" uuid="0f8de1fb-2ca5-4001-853b-77f74ddcfba4"/>
@@ -276,7 +363,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFF212"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{nossonumero}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="411" y="136" width="144" height="18" uuid="5206ae66-3c78-4b95-a194-af9281658e79"/>
@@ -287,7 +374,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFF212"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{valordocumento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[  $F{valor_total}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="411" y="116" width="144" height="20" forecolor="#284DB0" uuid="d4e46b8d-f580-41ef-b755-b5e6df9db532"/>
@@ -323,6 +410,7 @@
 					<leftPen lineWidth="1.5" lineColor="#FFF212"/>
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="100" y="136" width="90" height="18" uuid="313923bb-a4a7-4048-b94c-c8ecb35274df"/>
@@ -331,7 +419,7 @@
 					<leftPen lineWidth="1.5" lineColor="#FFF212"/>
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{carteira}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="100" y="116" width="90" height="20" forecolor="#284DB0" uuid="f8d49678-c2f4-4c04-88e5-45e8b0df65a5"/>
@@ -355,7 +443,7 @@
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[R$]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R$"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="190" y="116" width="71" height="20" forecolor="#284DB0" uuid="2314abe5-c235-4051-b1d2-1fd27a290956"/>
@@ -393,7 +481,7 @@
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="332" y="116" width="78" height="20" forecolor="#284DB0" uuid="38924884-41a4-4c22-a63a-1a17411203d1"/>
@@ -417,6 +505,7 @@
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="411" y="154" width="144" height="20" forecolor="#284DB0" uuid="3e402dbe-3306-4117-9a17-ec075f817733"/>
@@ -440,6 +529,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFF212"/>
 				</box>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="411" y="212" width="144" height="18" uuid="3078d513-40d0-4c9e-9815-98ec4f7f284b"/>
@@ -450,6 +540,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFF212"/>
 				</box>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="411" y="192" width="144" height="20" forecolor="#284DB0" uuid="44cf7f33-d40c-4032-865c-1ce1eff29249"/>
@@ -473,6 +564,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFF212"/>
 				</box>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="411" y="230" width="144" height="20" forecolor="#284DB0" uuid="e1496527-ad9d-454d-a447-997df89631f9"/>
@@ -496,6 +588,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFF212"/>
 				</box>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="411" y="268" width="144" height="20" forecolor="#284DB0" uuid="1a77abb1-9ac1-49c8-828b-2db2182d2bc6"/>
@@ -519,6 +612,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFF212"/>
 				</box>
+				<textFieldExpression><![CDATA[  $F{valor_total}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="411" y="306" width="144" height="20" forecolor="#284DB0" backcolor="rgba(255, 242, 18, 0.35686275)" uuid="7153f431-7ded-4402-8791-5795407ada86"/>
@@ -548,7 +642,7 @@
 			</staticText>
 			<textField>
 				<reportElement x="0" y="190" width="410" height="135" uuid="775259c0-d84b-4aad-b000-0f8cbce2a8e4"/>
-				<textFieldExpression><![CDATA[$F{intrucoes}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Não aceitar após o vencimento"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="347" width="100" height="20" forecolor="#284DB0" uuid="eb729c45-8d86-4cb1-9c9c-fe443d3d29b9"/>
@@ -571,16 +665,28 @@
 					<leftPen lineWidth="1.5" lineColor="#FFF212"/>
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="385" width="100" height="18" uuid="732ab250-6726-4153-9e36-f91b78d08ec0"/>
+				<reportElement x="0" y="385" width="241" height="18" uuid="732ab250-6726-4153-9e36-f91b78d08ec0"/>
 				<box>
 					<pen lineColor="#FFF212"/>
 					<leftPen lineWidth="1.5" lineColor="#FFF212"/>
 					<bottomPen lineWidth="1.0" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Endereco} + "," + $F{Numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="403" width="100" height="20" uuid="c81f5746-b2a3-42a5-a352-2f5c6efd58ad"/>
+				<textFieldExpression><![CDATA[$F{Cidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="403" width="100" height="20" uuid="4c3ab425-864b-48e6-b738-18436d76186e"/>
+				<textFieldExpression><![CDATA[$F{Estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="365" width="100" height="20" uuid="171b89e3-a303-4944-8d59-e566b7029516"/>
+				<textFieldExpression><![CDATA["RG: " + $F{RG}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -589,9 +695,7 @@
 			<componentElement>
 				<reportElement x="0" y="0" width="348" height="30" uuid="d77a8f8f-a66d-4208-9873-b443ae273f9f"/>
 				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="EAN128" drawText="false" checksumRequired="false">
-					<jr:codeExpression><![CDATA[05009401448
--
-05009401448-1]]></jr:codeExpression>
+					<jr:codeExpression><![CDATA["00198.45285 72568.633605 00002.217115 7 5942 0000070868"]]></jr:codeExpression>
 				</jr:barbecue>
 			</componentElement>
 		</band>

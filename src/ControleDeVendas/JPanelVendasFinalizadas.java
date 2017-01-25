@@ -10,8 +10,10 @@ import ControleCliente.ControlaCliente;
 import ControleNotaFiscal.ControleNotaFiscal;
 import ControleProduto.ControlaProduto;
 import ControleProduto.Produto;
+import ControleDeVendas.ProdVenda;
 import GerenciamentoDeFuncionarios.ControlaFuncionario;
 import GerenciamentoDeFuncionarios.Funcionario;
+import Relatorios.JFrameNotaFiscal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -36,6 +38,7 @@ public class JPanelVendasFinalizadas extends javax.swing.JPanel {
     Funcionario func;
     Cliente cli;
     VendaFinalizada venda;
+    ProdVenda prodVenda;
     ArrayList<ProdVenda> prodsVenda;
     DefaultTableModel tableModel;
     
@@ -493,6 +496,7 @@ public class JPanelVendasFinalizadas extends javax.swing.JPanel {
                 produto = controlaProduto.getProduto(pv.getProduto().getProdId());
                 tableModel.addRow(new Object[]{produto.getProdId(), produto.getNomeProd(), pv.getValorUnitario(), pv.getQuantidade(), "" + (pv.getQuantidade() * pv.getValorUnitario()), false});
             }
+            System.out.println();
 
         }
     }//GEN-LAST:event_jButtonConsultarActionPerformed
@@ -504,15 +508,8 @@ public class JPanelVendasFinalizadas extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonFecharInternalActionPerformed
 
     private void jButtonGerarNotaFiscalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarNotaFiscalActionPerformed
-        try {
-            ControleNotaFiscal notaFiscal = new ControleNotaFiscal( cli, func);
-        } catch (JRException ex) {
-            Logger.getLogger(JPanelVendasFinalizadas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(JPanelVendasFinalizadas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JPanelVendasFinalizadas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         JFrameNotaFiscal notaFiscal = new JFrameNotaFiscal( cli, func, venda);
+
     }//GEN-LAST:event_jButtonGerarNotaFiscalActionPerformed
 
     private void jTextFieldIDVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIDVendaActionPerformed

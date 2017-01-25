@@ -68,7 +68,9 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
                     ++cancelados;
             }
             
-            if(naoatendidos == prodpedes.size())
+            if(prodpedes.size() == 0)
+                obe[1] = "Pedido Vazio";
+            else if(naoatendidos == prodpedes.size())
                 obe[1] = "Não Processado";
             else if(cancelados == prodpedes.size())
                 obe[1] = "Cancelado";
@@ -101,28 +103,6 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
         }
         
         this.jTable1.setModel(model);
-    }
-    
-    public boolean isPedidoProcessado(PedidoEstoque pe)
-    {
-        boolean ret;
-        ArrayList <ProdPedEstoque> prodpedesf;
-        
-        prodpedesf = new ControlaProdPedEstoque().getListaProdPedEstoque(pe);
-        
-        int naoatendidos = 0;
-        for(ProdPedEstoque ppe: prodpedesf)
-        {
-            if(ppe.getStat() == 0)
-                ++naoatendidos;
-        }
-
-        if(naoatendidos == prodpedesf.size())
-            ret = false;
-        else
-            ret = true;
-        
-        return ret;
     }
 
     /**
@@ -222,7 +202,7 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
         
         PedidoEstoque selecionado = pedidos.get(jTable1.getSelectedRow());
         
-        if(!isPedidoProcessado(selecionado))
+        if(!(new ControlaPedidoEstoque().isPedidoProcessado(selecionado)))
         {
             new JFrameConfirmarPedido(selecionado, this, true).setVisible(true);
         }
@@ -237,12 +217,13 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
             return;
         
         PedidoEstoque selecionado = pedidos.get(jTable1.getSelectedRow());
+        ControlaPedidoEstoque cntrlpe = new ControlaPedidoEstoque();
         
-        if(!isPedidoProcessado(selecionado))
+        if(!cntrlpe.isPedidoProcessado(selecionado))
         {
             Date dataAtend = new Date();
             selecionado.setDataAtend(dataAtend);
-            boolean persistiu = new ControlaPedidoEstoque().persistePedidoEstoque(selecionado);
+            boolean persistiu = cntrlpe.persistePedidoEstoque(selecionado);
             boolean deuerro = !persistiu;
             
             ControlaProdPedEstoque ctrlppe = new ControlaProdPedEstoque();

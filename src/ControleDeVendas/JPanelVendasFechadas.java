@@ -11,7 +11,12 @@ import ControleProduto.ControlaProduto;
 import ControleProduto.Produto;
 import GerenciamentoDeFuncionarios.ControlaFuncionario;
 import GerenciamentoDeFuncionarios.Funcionario;
+import Relatorios.Boleto;
+import Relatorios.JFrameBoleto;
+import com.itextpdf.text.BadElementException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Hibernate;
@@ -146,6 +151,11 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
 
         jButtonGerarBoletoPagamento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonGerarBoletoPagamento.setText("Gerar Boleto para Pagamento");
+		jButtonGerarBoletoPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGerarBoletoPagamentoActionPerformed(evt);
+            }
+        });
 
         jTableProdsVenda.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
@@ -506,6 +516,11 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
         jInternalFrameVendaFechada.setVisible(false);
         jButtonConsultarVenda.setVisible(true);
     }//GEN-LAST:event_jButtonFecharInternalActionPerformed
+
+    private void jButtonGerarBoletoPagamentoActionPerformed(java.awt.event.ActionEvent evt){
+        
+        JFrameBoleto boleto = new JFrameBoleto(cli, venda);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmarPagamento;

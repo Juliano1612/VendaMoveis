@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JDialog" name="jDialog1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+    <Container class="javax.swing.JDialog" name="jDialog2">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+  </NonVisualComponents>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <Component id="jLabel1" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Component id="jFormattedTextField2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+              <Component id="jFormattedTextField2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="176" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Informa&#xe7;&#xf5;es para gera&#xe7;&#xe3;o do boleto e nota fiscal"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Para gerar um boleto, ser&#xe1; necess&#xe1;rio realizar a busca pelo n&#xfa;mero da venda. Atrav&#xe9;s da busca do n&#xfa;mero, ser&#xe1; poss&#xed;vel gerar o boleto para a realiza&#xe7;&#xe3;o do pagamento.  &#xc9; poss&#xed;vel tamb&#xe9;m confirmar o pagamento do boleto atrav&#xe9;s da busca do n&#xfa;mero da venda, mas aten&#xe7;&#xe3;o vendedor, ap&#xf3;s a realiza&#xe7;&#xe3;o da confirma&#xe7;&#xe3;o do pagamento, n&#xe3;o &#xe9; mais poss&#xed;vel desfazer a op&#xe7;&#xe3;o, portanto certifique-se de que os dados est&#xe3;o corretos.  A gera&#xe7;&#xe3;o da nota fiscal s&#xf3; ser&#xe1; liberada ap&#xf3;s a confirma&#xe7;&#xe3;o do pagamento, sendo via boleto ou cart&#xe3;o, e nele conter&#xe1; todas as informa&#xe7;&#xf5;es da compra realizada. Para gerar a nota fiscal, ser&#xe1; necess&#xe1;rio realizar uma busca pelo nome do cliente e selecionar a compra realizada por ele. Caso j&#xe1; tenha sido confirmado o pagamento, ser&#xe1; liberado a op&#xe7;&#xe3;o para gerar a nota fiscal, caso contr&#xe1;rio, ser&#xe1; necess&#xe1;rio confirmar o pagamento ou gerar um boleto para que o cliente possa realizar o pagamento. Somente ap&#xf3;s a confirma&#xe7;&#xe3;o do pagamento que ser&#xe1; liberado a gera&#xe7;&#xe3;o da nota fiscal.  "/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextField2ActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>
