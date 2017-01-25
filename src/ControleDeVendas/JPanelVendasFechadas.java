@@ -516,16 +516,11 @@ public class JPanelVendasFechadas extends javax.swing.JPanel {
         jInternalFrameVendaFechada.setVisible(false);
         jButtonConsultarVenda.setVisible(true);
     }//GEN-LAST:event_jButtonFecharInternalActionPerformed
-
-<<<<<<< HEAD
-    private void jButtonGerarBoletoPagamentoActionPerformed(java.awt.event.ActionEvent evt){
-        
-        JFrameBoleto boleto = new JFrameBoleto(cli, venda);
-=======
+    
     private void jButtonGerarBoletoPagamentoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
 
->>>>>>> 2b8d9fc2f9012966f61a19e028cd721d7c5d66bc
+        JFrameBoleto boleto = new JFrameBoleto(cli, venda);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

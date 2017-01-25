@@ -79,6 +79,7 @@ public class JPanelVendasFinalizadas extends javax.swing.JPanel {
         jTextFieldIDCliente = new javax.swing.JTextField();
         jTextFieldIDFuncionario = new javax.swing.JTextField();
         jButtonGerarNotaFiscal = new javax.swing.JButton();
+        jButtonAjuda = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableVendasFinalizadas = new javax.swing.JTable();
         jComboBoxFiltroPesquisa = new javax.swing.JComboBox<String>();
@@ -215,59 +216,69 @@ public class JPanelVendasFinalizadas extends javax.swing.JPanel {
             }
         });
 
+        jButtonAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/interrogacao.png"))); // NOI18N
+        jButtonAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAjudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jInternalFrameConsultaVendaFinalizadaLayout = new javax.swing.GroupLayout(jInternalFrameConsultaVendaFinalizada.getContentPane());
         jInternalFrameConsultaVendaFinalizada.getContentPane().setLayout(jInternalFrameConsultaVendaFinalizadaLayout);
         jInternalFrameConsultaVendaFinalizadaLayout.setHorizontalGroup(
             jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
                 .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 834, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
                         .addContainerGap(51, Short.MAX_VALUE)
                         .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelIDVenda)
+                            .addComponent(jLabelFormaPagto)
+                            .addComponent(jLabelDataVenda)
+                            .addComponent(jLabelNomeCli)
+                            .addComponent(jLabelNomeFunc))
+                        .addGap(18, 18, 18)
+                        .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
+                                .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextFieldFormaPagamento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldDataVenda)
+                                    .addComponent(jTextFieldNomeCli)
+                                    .addComponent(jTextFieldNomeFunc))
+                                .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabelIDFuncionario))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
+                                                .addGap(40, 40, 40)
+                                                .addComponent(jLabelIDCliente)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
+                                            .addGap(51, 51, 51)
+                                            .addComponent(jLabelValorTotal)))
+                                    .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabelQuantidadeParcelas)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldIDCliente)
+                                    .addComponent(jTextFieldIDFuncionario)
+                                    .addComponent(jTextFieldQuantidadeParcelas)))
+                            .addComponent(jTextFieldIDVenda)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
+                                .addComponent(jButtonAjuda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonGerarNotaFiscal, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(126, 126, 126)
                                 .addComponent(jButtonFecharInternal))
                             .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
-                                .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelIDVenda)
-                                    .addComponent(jLabelFormaPagto)
-                                    .addComponent(jLabelDataVenda)
-                                    .addComponent(jLabelNomeCli)
-                                    .addComponent(jLabelNomeFunc))
-                                .addGap(18, 18, 18)
-                                .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
-                                        .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jTextFieldFormaPagamento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                                            .addComponent(jTextFieldDataVenda)
-                                            .addComponent(jTextFieldNomeCli)
-                                            .addComponent(jTextFieldNomeFunc))
-                                        .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLabelIDFuncionario))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
-                                                        .addGap(40, 40, 40)
-                                                        .addComponent(jLabelIDCliente)))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
-                                                    .addGap(51, 51, 51)
-                                                    .addComponent(jLabelValorTotal)))
-                                            .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabelQuantidadeParcelas)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextFieldValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                            .addComponent(jTextFieldIDCliente)
-                                            .addComponent(jTextFieldIDFuncionario)
-                                            .addComponent(jTextFieldQuantidadeParcelas)))
-                                    .addComponent(jTextFieldIDVenda))))))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 834, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jInternalFrameConsultaVendaFinalizadaLayout.setVerticalGroup(
@@ -305,12 +316,14 @@ public class JPanelVendasFinalizadas extends javax.swing.JPanel {
                     .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabelQuantidadeParcelas)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonFecharInternal)
-                    .addComponent(jButtonGerarNotaFiscal))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrameConsultaVendaFinalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonFecharInternal)
+                        .addComponent(jButtonGerarNotaFiscal))
+                    .addComponent(jButtonAjuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -508,16 +521,33 @@ public class JPanelVendasFinalizadas extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonFecharInternalActionPerformed
 
     private void jButtonGerarNotaFiscalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarNotaFiscalActionPerformed
-         JFrameNotaFiscal notaFiscal = new JFrameNotaFiscal( cli, func, venda);
-
+         jButtonGerarNotaFiscal.setToolTipText("Para poder gerar a nota fiscal, o pedido deverá estar finalizado. Clique em '?' para maiores informações." ); 
+        JFrameNotaFiscal notaFiscal = new JFrameNotaFiscal( cli, func, venda);
     }//GEN-LAST:event_jButtonGerarNotaFiscalActionPerformed
 
     private void jTextFieldIDVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIDVendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldIDVendaActionPerformed
 
+    private void jButtonAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjudaActionPerformed
+        JOptionPane.showMessageDialog(null,
+                    "Para gerar um boleto, será necessário realizar a busca pelo número da venda. Através da busca\n" +
+                    "do número, será possível gerar o boleto para a realização do pagamento.\n" +
+                    "É possível também confirmar o pagamento do boleto através da busca do número da venda, \n" +
+                    "mas atenção vendedor, após a realização da confirmação do pagamento, não é mais possível\n" +
+                    "desfazer a opção, portanto certifique-se de que os dados estão corretos.\n" +
+                    "A geração da nota fiscal só será liberada após a confirmação do pagamento, sendo via boleto \n" +
+                    "ou cartão, e nele conterá todas as informações da compra realizada. Para gerar a nota fiscal,\n" + 
+                    "será necessário realizar uma busca pelo nome do cliente e selecionar a compra realizada por\n" + 
+                    "ele. Caso já tenha sido confirmado o pagamento, será liberado a opção para gerar a nota fiscal,\n" +
+                    "caso contrário, será necessário confirmar o pagamento ou gerar um boleto para que o cliente\n" + 
+                    "possa realizar o pagamento. Somente após a confirmação do pagamento que será liberado a\n" + 
+                    "geração da nota fiscal.", "Ajuda", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_jButtonAjudaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAjuda;
     private javax.swing.JButton jButtonConsultar;
     private javax.swing.JButton jButtonFecharInternal;
     private javax.swing.JButton jButtonGerarNotaFiscal;

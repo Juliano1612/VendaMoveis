@@ -133,7 +133,7 @@ public class JFrameNotaFiscal extends javax.swing.JFrame {
         Date data = new Date();
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
         Document doc = new Document();
-        String NotaFiscal = vendas.getVendaId() + " " + new Date().getTime() + ".pdf";
+        String NotaFiscal = vendas.getVendaId() + new Date().getTime() + ".pdf";
         try {
             PdfWriter.getInstance(doc, new FileOutputStream(NotaFiscal));
             doc.open();
@@ -159,7 +159,7 @@ public class JFrameNotaFiscal extends javax.swing.JFrame {
                 produto = controlaProduto.getProduto(pv.getProduto().getProdId());
                 System.out.println(produto.getNomeProd());
                 System.out.println();
-                doc.add(new Paragraph(produto.getProdId() + "   " + produto.getNomeProd() +  "         " + pv.getQuantidade() + "     " + pv.getValorUnitario()));
+                doc.add(new Paragraph(produto.getProdId() + "   " + produto.getNomeProd() +  "                       " + pv.getQuantidade() + "     " + pv.getValorUnitario()));
             }
             doc.add(new Paragraph("\n\nValor total da compra: R$" + vendas.getValorTotal()));
         } catch (DocumentException | FileNotFoundException ex) {
