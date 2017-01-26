@@ -120,6 +120,7 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("Lista de Pedidos de Reposição de Estoque");
@@ -158,6 +159,13 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setText("Ajuda");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,21 +175,24 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(7, 7, 7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap())))
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -191,7 +202,7 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -259,11 +270,44 @@ public class JPanelListaDePedidosDeReposicao extends javax.swing.JPanel {
         new JFrameConfirmarPedido(selecionado, this, false).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JOptionPane.showMessageDialog(null, "Pedido de Reposição de Estoque (PRE)\n\n"
+        + "Um PRE é criado por um funcionário quando se percebe a necessidade de\n"
+        + "se repor algum produto em estoque. O funcionário solicitante deve ter\n"
+        + " o nível de acesso de almoxarife para registrar um pedido. Esse será\n"
+        + "confirmado pelo gerente, o usuário responsável por fazer compras para\n"
+        + "reposição de estoque.\n"
+
+        + "Para efetivar um PRE cadastrado no sistema, é necessário que o\n"
+        + "usuário utual tenha o nível de acesso de gerente, no mínimo.\n"
+        + "Uma vez logado no sistema, esse usuário precisa realizar os seguintes\n"
+        + " procedimentos:\n\n"
+
+        + "\t1 - Abrir o menu 'Pedidos', localizado na parte superior da tela\n"
+        + "principal\n"
+        + "\t2 - Escolher o item de submenu 'Buscar'\n"
+        + "\t3 - Selecionar um pedido de reposição na tabela. Para efetivar um\n"
+        + "pedido, é necessário que seu 'Status' seja 'Não Processado'. Pedidos\n"
+        + "cancelados e efetivados não podem ser alterados\n"
+        + "\t4 - Acionar o botão 'Efetivar Pedido'\n"
+        + "\t5 - Determinar a quantidade de itens comprados para cada um dos\n"
+        + "produtos relacionados no PRE. Isso é feito da seguinte forma:\n"
+	+ "\t\t5a - Selecione um produto na lista\n"
+	+ "\t\t5b - Insira a quantidade na caixa de texto à direita\n"
+	+ "\t\t5c - Acione o botão 'Modificar'\n"
+        + "\t\tA quantidade atendida não pode ser maior que a quantidade\n"
+        + "solicitada no PRE. Um vez que os valores de quantidade estiverem\n"
+        + "todos preenchidos, deve-se acionar o botão 'Aplicar Alterações'\n"
+        + "\t6 - Executados os passos acima, o pedido em questão deverá aparecer\n"
+        + "como 'Efetivado' na lista de PRE);");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
