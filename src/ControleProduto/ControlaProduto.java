@@ -9,9 +9,10 @@ import org.hibernate.Session;
  *
  * @author ander
  */
-public class ControlaProduto {
+public class ControlaProduto{
     
     public boolean persisteProduto(Produto produto, String nomeProd, Integer Quantidade, String descricao, Float precoVenda, Float precoCusto){
+        
         produto.setNomeProd(nomeProd);
         produto.setQuantidadeEstoque(Quantidade);
         produto.setDescricao(descricao);
@@ -21,6 +22,21 @@ public class ControlaProduto {
         s.beginTransaction();
         try {
             s.saveOrUpdate(produto);
+            s.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            s.getTransaction().commit();
+            return false;
+        }
+    }
+    
+    public boolean persisteProdTest(Produto prodtest) {
+        if(prodtest.getPrecoCusto() <= prodtest.getPrecoVenda() || prodtest.getPrecoCusto() < 0.0f || prodtest.getPrecoVenda() < 0.0f)
+            return false;
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        try {
+            s.saveOrUpdate(prodtest);
             s.getTransaction().commit();
             return true;
         } catch (Exception e) {

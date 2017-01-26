@@ -11,7 +11,6 @@ import ControleProduto.ControlaProduto;
 import ControleProduto.Produto;
 import GerenciamentoDeFuncionarios.ControlaFuncionario;
 import GerenciamentoDeFuncionarios.Funcionario;
-import Relatorios.Boleto;
 import Relatorios.JFrameBoleto;
 import com.itextpdf.text.BadElementException;
 import java.util.ArrayList;

@@ -27,7 +27,9 @@ public class Produto  implements java.io.Serializable {
 
     public Produto() {
     }
-
+    public Produto(String prodId) {
+        this.prodId = prodId;
+    }
 	
     public Produto(String prodId, String nomeProd, int quantidadeEstoque) {
         this.prodId = prodId;
